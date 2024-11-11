@@ -2,9 +2,9 @@ let dadosMedio = [];
 let dadosProfissional = [];
 let dadosTecnico = [];
 let modalDialog = document.querySelector('dialog');
-// let editarModalMedio;
-// let editarModalTecnico;
-// let editarModalProfissional;
+let editarModalMedio;
+let editarModalTecnico;
+let editarModalProfissional;
 let tipoCurriculo = {};
 
 
@@ -162,17 +162,17 @@ function exibirDadosCurriculo(dados) {
 function medio() {
     exibirDadosCurriculo(dadosMedio);
     tipoCurriculo = dadosMedio.tipo;
-    // editarModalMedio = true;
+    editarModalMedio = true;
 }
 function tecnico() {
     exibirDadosCurriculo(dadosTecnico);
     tipoCurriculo = dadosTecnico.tipo;
-    // editarModalTecnico = true;
+    editarModalTecnico = true;
 }
 function profissional() {
     exibirDadosCurriculo(dadosProfissional);
     tipoCurriculo = dadosProfissional.tipo;
-    // editarModalProfissional = true;
+    editarModalProfissional = true;
     
 }
 
@@ -208,13 +208,13 @@ function exibirEditarCurriculo() {
     modalDialog.showModal();
 
     if (editarModalMedio) {        
-        // editarModalMedio = false;        
+        editarModalMedio = false;        
         editarModalCurriculo(dadosMedio);
     } else if (editarModalTecnico) {        
-        // editarModalTecnico = false;        
+        editarModalTecnico = false;        
         editarModalCurriculo(dadosTecnico);
     } else if (editarModalProfissional) {        
-        // editarModalProfissional = false;        
+        editarModalProfissional = false;        
         editarModalCurriculo(dadosProfissional);
     }
    
