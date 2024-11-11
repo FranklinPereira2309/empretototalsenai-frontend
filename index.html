@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprego Total - O seu portal de oportunidades</title>
+    <link rel="icon" href="imagens/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <a href="index.html">
+                <img src="/imagens/logo.png" alt="Logo do Emprego Total">
+            </a>
+            <div>
+                <h1>Emprego <span class="cinza">Total</span></h1>
+                <h4>O seu portal de oportunidades</h4>
+            </div>
+        </div>
+
+        <nav>
+            <div id="area-menu">
+                <ul>
+                    <li><a href="/html/anuncio-empresa.html" class="anuncio">Anunciar vaga</a></li>
+                    <li><a href="/html/cad-curriculo.html" class="cadastro-cv">Cadastrar CV</a></li>
+                    <li id="login-button"><a href="/html/login-page.html">Entrar</a></li>
+                </ul>
+            </div>
+            <div id="btn-area">
+                <div class="area-pesquisa">
+                    <form action="#">
+                        <!-- <input type="search" placeholder="Buscar por profissional"> -->
+                    </form>
+                </div>
+                <div>
+                    <button onclick="mostrarMenu()" class="botao-menu">Menu</button>
+                    <div class="menu" id="menu">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#">Buscar Empregos</a></li>
+                            <li><a class="link-logado" href="/html/anuncio-empresa.html">Anunciar vaga</a></li>
+                            <li><a class="link-logado" href="/html/cad-curriculo.html">Cadastrar CV</a></li>
+                            <li><a href="/html/cursos.html">Cursos</a></li>
+                            <li><a href="/html/curriculos.html">Currículos</a></li>
+                            <li><a href="/html/sobre-nos-page.html">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="usuarioLogado">
+            <div>
+                <h5>Área do Usuário:</h5>
+                <span id="emailLogado"></span>
+            </div>
+            <button onclick="mostrarMenuUsuario()" class="botao-menu-usuario">Perfil</button>
+            <div class="menu-usuario" id="menu-usuario">
+                <!-- <div id="session-timer">Tempo restante da sessão: <span id="time-remaining">--:--</span></div> -->
+                <ul>
+                    <li><a href="/html/cad-dados-pessoais.html">Dados pessoais</a></li>
+                    <li><a href="#">Cancelar assinatura</a></li>
+                    <li><a href="#">Cadastro e assinatura</a></li>
+                    <li><a href="#" id="sair" onclick="deslogarImediatamente()">Sair</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="filters">
+            <select id="profissional">
+                <option value="" hidden>Área profissional</option>
+                <option value="tecnologia">Tecnologia</option>
+                <option value="saude">Saúde</option>
+                <option value="educacao">Educação</option>
+                <option value="comercio">Comercio</option>
+                <option value="industria">Indústria</option>
+                <option value="todos">Todos</option>
+            </select>
+            <select id="modelo">
+                <option value="" hidden>Modelo de trabalho</option>
+                <option value="presencial">Presencial</option>
+                <option value="remoto">Remoto</option>
+                <option value="hibrido">Híbrido</option>
+                <option value="todos">Todos</option>
+            </select>
+            <select id="data">
+                <option value="" hidden>Data de publicação</option>
+                <option value="semana">Última semana</option>
+                <option value="mes">Último mês</option>
+                <option value="todos">Todos</option>
+            </select>
+            <select id="contrato">
+                <option value="" hidden>Tipo de contrato</option>
+                <option value="clt">CLT</option>
+                <option value="pj">PJ</option>
+                <option value="estagio">Estágio</option>
+                <option value="temporario">Temporário</option>
+                <option value="todos">Todos</option>
+            </select>
+            <select id="pcd">
+                <option value="" hidden>PCD</option>
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+                <option value="todos">Todos</option>
+            </select>
+            <select id="salario">
+                <option value="" hidden>Salário</option>
+                <option value="mil">Até R$ 1.000</option>
+                <option value="miladois">R$ 1.000 - R$ 2.000</option>
+                <option value="acimadois">Acima de R$ 2.000</option>
+                <option value="todos">Todos</option>
+            </select>
+            <select id="limparFiltros">
+                <option value="" hidden>Limpar Filtros</option>
+                <option value="limpar">Limpar</option>
+            </select>
+            
+        </div>
+
+        <div id="jobs-container"><h3 id="curriculosNaoHa" style="display: none;">Não há Curriculos Cadastrados no Momento!</h3></div>
+        <div id="pagination-container" class="pagination"></div>
+        
+        <section id="dialogo">
+            <dialog id="dialogNovaVaga">
+                <div class="modal-content">
+                    <span class="close" onclick="fecharModalIndex()">X</span>
+                    <h1><strong>Cadastrar Curriculo na Vaga?</strong></h1>
+                    <br>
+                    <div id="modal-container-index"></div>
+                    <br>
+                    <button id="salvarCurriculo" style="padding: 10px; margin-right: 5px;border-radius: 8px;" disabled onclick="salvarCurriculoVaga()">Cadastrar</button>
+                    <button style="padding: 10px; border-radius: 8px;" onclick="fecharModalIndex()">Cancelar</button>
+                </div>
+                <p id="alertaCadastradoIndex"></p>
+            </dialog>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2024, Emprego Total; Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/filtros.js"></script>
+</body>
+
+</html>

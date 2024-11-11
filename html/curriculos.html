@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprego Total - Currículos</title>
+    <link rel="icon" href="/imagens/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/curriculos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <a href="/index.html">
+                <img src="/imagens/logo.png" alt="Logo do Emprego Total">
+            </a>
+            <div>
+                <h1>Emprego <span class="cinza">Total</span></h1>
+                <h4>O seu portal de oportunidades</h4>
+            </div>
+        </div>
+        
+        <nav>
+            <div id="area-menu">
+                <ul>
+                    <li><a href="/html/anuncio-empresa.html" class="anuncio">Anunciar vaga</a></li>
+                    <li><a href="/html/cad-curriculo.html" class="cadastro-cv">Cadastrar CV</a></li>
+                    <li id="login-button"><a href="/html/login-page.html">Entrar</a></li>
+                </ul>
+            </div>
+            <div id="btn-area">
+                <div class="area-pesquisa">
+                    <form action="#">
+                        <input type="search" placeholder="Buscar por profissional">
+                    </form>
+                </div>
+                <div>
+                    <button onclick="mostrarMenu()" class="botao-menu">Menu</button>
+                    <div class="menu" id="menu">
+                        <ul>
+                            <li><a href="/index.html">Home</a></li>
+                            <li><a href="#">Buscar Empregos</a></li>
+                            <li><a class="link-logado" href="/html/anuncio-empresa.html">Anunciar vaga</a></li>
+                            <li><a class="link-logado" href="/html/cad-curriculo.html">Cadastrar CV</a></li>
+                            <li><a href="/html/cursos.html">Cursos</a></li>
+                            <li><a href="/html/curriculos.html">Currículos</a></li>
+                            <li><a href="/html/sobre-nos-page.html">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="usuarioLogado">
+            <div class="teste">
+                <h5>Área do Usuário:</h5>
+                <span id="emailLogado"></span>
+            </div>
+            <button onclick="mostrarMenuUsuario()" class="botao-menu-usuario">Perfil</button>
+            <div class="menu-usuario" id="menu-usuario">
+                <!-- <div id="session-timer">Tempo restante da sessão: <span id="time-remaining">--:--</span></div> -->
+                <ul>
+                    <li><a href="/html/cad-dados-pessoais.html">Dados pessoais</a></li>
+                    <li><a href="#">Cancelar assinatura</a></li>
+                    <li><a href="#">Cadastro e assinatura</a></li>
+                    <li><a href="#" id="sair" onclick="deslogarImediatamente()">Sair</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2 id="tipoCurriculo">Tipos de Currículo</h2>
+            <nav>
+                <ul>
+                    <li><a id="medio" href="#" onclick="medio()">Currículo Médio</a></li>
+                    <li><a id="tecnico" href="#" onclick="tecnico()">Currículo Técnico</a></li>
+                    <li><a id="profissional" href="#" onclick="profissional()">Currículo Profissional</a></li>
+                    <li><a href="/html/dashboard-usuario.html">Dashboard</a></li>
+                    <li><a href="/html/cad-curriculo.html">Cadastrar Curriculo</a></li>
+                </ul>
+            </nav>
+        </aside>
+    
+        <main>
+            <section id="dialogo">
+                <dialog>
+                    <div class="modal-content">
+                        <span class="close" onclick="closeButtonModal()">X</span>
+                        <h1><strong>Editar Currículo</strong></h1>
+                        <div id="modal-container"></div>
+                        <button onclick="editarCurriculo()">Salvar</button>
+                    </div>
+                </dialog>
+            </section>
+    
+            <section class="content">
+                <h1>Visualização do Currículo</h1>
+                <div class="container-button">
+                    <button class="imprimir" style="display:none;" onclick="imprimirCurriculo()">Imprimir Curriculo</button>
+                    <button class="editar" style="display:none;" onclick="exibirEditarCurriculo()">Editar Curriculo</button>
+                    <button class="excluir" style="display:none;" onclick="deletarCurriculo()">Excluir Curriculo</button>
+                </div>
+                <article id="resume-data" class="card">
+                    Selecione um tipo de currículo para visualizar.
+                </article>
+            </section>
+        </main>
+    </div>
+    
+    <script src="/js/visualizarCurriculo.js"></script>
+    <script src="/js/curriculo.js"></script>
+    <script src="/js/script.js"></script>
+
+</body>
+
+</html>

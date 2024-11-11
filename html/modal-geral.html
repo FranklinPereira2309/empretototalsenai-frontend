@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Modal</title>
+    <link rel="stylesheet" href="/css/visualizar-curriculo.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+
+    
+    
+    <section id="dialogo">
+        <dialog>
+            <div class="modal-content">
+                <span class="close" onclick="closeButtonModal()">X</span>
+                <h1><strong>Editar Currículo</strong></h1>
+                <div id="modal-container"></div>
+                <button>Salvar</button>
+            </div>
+        </dialog>
+    </section>
+
+
+    <script>
+        
+        function exibirDialogGeral(text) {
+            
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
