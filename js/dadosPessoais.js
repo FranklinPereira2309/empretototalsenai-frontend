@@ -271,18 +271,24 @@ function consultarViaCepApi() {
     let cep = document.querySelector('#cep').value;
     let novoCep = cep.replace(/\D/g, ''); 
 
-    fetch(`viacep.com.br/ws/${novoCep}/json/`)
-        .then(resp => resp.json())
-        .then(data => {
-            
-            document.querySelector('#logradouro').value = data.logradouro || '';
-            document.querySelector('#bairro').value = data.bairro || '';
-            document.querySelector('#cidade').value = data.localidade || '';
-            document.querySelector('#estado').value = data.uf || '';
-        })
-        .catch(error => {
-            console.error('Erro ao consultar o CEP:', error.message);            
-        });
+    if(window.confirm('Consultar Cep?')) {
+        fetch(`viacep.com.br/ws/${novoCep}/json/`)
+            .then(resp => resp.json())
+            .then(data => {
+                
+                document.querySelector('#logradouro').value = data.logradouro || '';
+                document.querySelector('#bairro').value = data.bairro || '';
+                document.querySelector('#cidade').value = data.localidade || '';
+                document.querySelector('#estado').value = data.uf || '';
+            })
+            .catch(error => {
+                console.error('Erro ao consultar o CEP:', error.message);            
+            });
+
+    }else {
+        return
+    }
+
 }
 
 function aplicarMascara(valor, mascara) {
