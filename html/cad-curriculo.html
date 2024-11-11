@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprego Total - O seu portal de oportunidades</title>
+    <link rel="icon" href="/imagens/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/cad-curriculo.css">
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <a href="/index.html">
+                <img src="/imagens/logo.png" alt="Logo do Emprego Total">
+            </a>
+            <div>
+                <h1>Emprego <span class="cinza">Total</span></h1>
+                <h4>O seu portal de oportunidades</h4>
+            </div>
+        </div>
+        
+        <nav>
+            <div id="area-menu">
+                <ul>
+                    <li><a href="/html/anuncio-empresa.html" class="anuncio">Anunciar vaga</a></li>
+                    <li><a href="/html/cad-curriculo.html" class="cadastro-cv">Cadastrar CV</a></li>
+                    <li id="login-button"><a href="/html/login-page.html">Entrar</a></li>
+                </ul>
+            </div>
+            <div id="btn-area">
+                <div class="area-pesquisa">
+                    <form action="#">
+                        <input type="search" placeholder="Buscar por profissional">
+                    </form>
+                </div>
+                <div>
+                    <button onclick="mostrarMenu()" class="botao-menu">Menu</button>
+                    <div class="menu" id="menu">
+                        <ul>
+                            <li><a href="/index.html">Home</a></li>
+                            <li><a href="#">Buscar Empregos</a></li>
+                            <li><a class="link-logado" href="/html/anuncio-empresa.html">Anunciar vaga</a></li>
+                            <li><a class="link-logado" href="/html/cad-curriculo.html">Cadastrar CV</a></li>
+                            <li><a href="/html/cursos.html">Cursos</a></li>
+                            <li><a href="/html/curriculos.html">Currículos</a></li>
+                            <li><a href="/html/sobre-nos-page.html">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="usuarioLogado">
+            <div class="teste">
+                <h5>Área do Usuário:</h5>
+                <span id="emailLogado"></span>
+            </div>
+            <button onclick="mostrarMenuUsuario()" class="botao-menu-usuario">Perfil</button>
+            <div class="menu-usuario" id="menu-usuario">
+                <!-- <div id="session-timer">Tempo restante da sessão: <span id="time-remaining">--:--</span></div> -->
+                <ul>
+                    <li><a href="/html/cad-dados-pessoais.html">Dados pessoais</a></li>
+                    <li><a href="#">Cancelar assinatura</a></li>
+                    <li><a href="#">Cadastro e assinatura</a></li>
+                    <li><a href="#" id="sair" onclick="deslogarImediatamente()">Sair</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2 id="tipoCurriculo">Menu de Opções</h2>
+            <nav>
+                <ul>
+                   <li><a href="/html/dashboard-usuario.html">Dashboard</a></li>
+                </ul>
+            </nav>
+        </aside>
+    
+
+        <main>
+            <div class="form-container">
+                <h1>Formulário de Currículo</h1>
+                <form id="formCurriculo">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="EX.: João Silva">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="EX.: email@email.com.br">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="EX.: 11 955558888">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endereco">Endereço</label>
+                        <input type="text" id="endereco" name="endereco" placeholder="EX.: Avenida Ipiranga">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="formacao">Formação Acadêmica</label>
+                        <textarea id="formacao" name="formacao" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="formacao">Objetivo</label>
+                        <textarea id="objetivo" name="objetivo" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experiencia">Experiência Profissional</label>
+                        <textarea id="experiencia" name="experiencia" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="habilidades">Habilidades</label>
+                        <textarea id="habilidades" name="habilidades" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="idiomas">Idiomas</label>
+                        <textarea name="idiomas" id="idiomas" rows="3" placeholder="EX.: Inglês intermediário, Italiano básico"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="referencias">Referências</label>
+                        <textarea name="referencias" id="referencias" rows="4" ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo-formacao">Curriculo</label>
+                        <select id="tipo-formacao">
+                            <option hidden value="">Tipo Curriculo</option>
+                            <option value="medio">Médio</option>
+                            <option value="tecnico">Técnico</option>
+                            <option value="profissional">Profissional</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="btnCurriculo" onclick="cadastrarCurriculo()">Enviar Currículo</button>
+                    </div>
+                </form>
+            </div>
+            
+        </main>
+    </div>
+
+    <footer>
+        <p>Copyright &copy; 2024, Emprego Total; Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/curriculo.js"></script>
+</body>
+
+</html>

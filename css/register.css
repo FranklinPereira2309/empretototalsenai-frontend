@@ -1,0 +1,99 @@
+@import url(header.css);
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    background-color: #f6f6f6;
+}
+
+header {
+    justify-content: start;
+}
+
+h1 {
+    font-size: 1.7em;
+    text-align: left;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+#register {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+    text-align: left;
+    box-shadow: 0 0 5px #cacaca;
+}
+
+.area-form {
+    width: 100%;
+
+}
+
+.area-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+}
+
+button{
+    color: #fff;
+    margin-top: 10px;
+    padding: 20px;
+    font-weight: 700;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cadastrar, .cancelar {
+    transition: background 0.1s;
+}
+
+.cadastrar {
+    background-color: #0085ff;
+}
+.cadastrar:hover {
+    background-color: #0065d2;
+}
+
+.cancelar {
+    background-color: #e74444;
+}
+.cancelar:hover {
+    background-color: #d63333;
+}
+
+#cadastro {
+    text-align: center;
+    margin-top: 45px;
+    font-size: 1.1em;
+}
+
+p a {
+    text-decoration: none;
+    color: #3e81d8;
+}

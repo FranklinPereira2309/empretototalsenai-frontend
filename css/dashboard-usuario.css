@@ -1,0 +1,222 @@
+@import url(header.css);
+@import url(/main.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    color: #333;
+}
+
+.container {
+    display: flex;
+}
+
+.jobs {
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    width: 100%;
+    min-height: 100vh;
+    flex: 1;
+}
+
+.content {
+    width: 100%;
+    padding: 20px;
+    height: auto;
+}
+
+#vagas-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#vagas-container h2 {
+    margin-top: 20px;
+}
+
+#dialogo h1,
+.content h1,
+h2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 6px;
+}
+
+#dialogo h1,
+.content h1 {
+    text-align: center;
+}
+
+#tipoCurriculo {
+    font-size: 1.3em;
+    text-align: center;
+    padding: 5px;
+    border-bottom: 2px solid #082251;
+}
+
+p,
+ul {
+    margin-bottom: 10px;
+}
+
+.sidebar {
+    height: auto;
+    width: 250px;
+    background-color: #1F4B99;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar a {
+    display: block;
+    width: 170px;
+    padding: 15px;
+    border: 1px solid #4A81E0;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.sidebar a:hover {
+    background-color: #4A81E0;
+    color: white;
+}
+
+.sidebar nav {
+    width: 100%;
+}
+
+.sidebar nav ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+#dialogo {
+    text-align: center;
+    font-size: 1.1em;
+}
+
+dialog {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    padding: 20px;
+    border: none;
+    border-radius: 25px;
+    width: 30%;
+    height: 65%;
+}
+
+.modal-content {
+    margin-top: 20px;
+    background-color: white;
+    width: 100%;
+}
+
+#modal-container-usuario {
+    margin-top: 15px;
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 5px;
+}
+
+.input-area label {
+    display: inline-block;
+    width: 30%;
+}
+
+.input-area textarea {
+    width: 60%;
+    padding: 3px;
+    resize: none;
+    font-size: 1.2em;
+}
+
+.close {
+    color: red;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: darkred;
+}
+
+.container-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#dialogo button,
+.content button {
+    background-color: #4CAF50;
+    font-size: 1em;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.content button {
+    margin-bottom: 20px;
+    margin: 15px;
+}
+
+#dialogo button {
+    border-radius: 5px;
+    width: 95%;
+    margin: 25px 0 0 0;
+}
+
+#dialogo button:hover,
+.content button:hover {
+    background-color: #45a049;
+}
+
+#vagas-usuarios-container  {
+    position: relative;
+}
+
+.img-pcd-usuario {
+    width: 50px;
+    height: 50px;
+}
+
+
+.img-div-usuario {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

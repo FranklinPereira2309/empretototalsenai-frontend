@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprego Total - Currículos</title>
+    <link rel="icon" href="/imagens/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/dashboard-empresa.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <a href="/index.html">
+                <img src="/imagens/logo.png" alt="Logo do Emprego Total">
+            </a>
+            <div>
+                <h1>Emprego <span class="cinza">Total</span></h1>
+                <h4>O seu portal de oportunidades</h4>
+            </div>
+        </div>
+        
+        <nav>
+            
+            <div id="btn-area">
+                <div class="area-pesquisa">
+                    <form action="#">
+                        <input type="search" placeholder="Buscar por profissional">
+                    </form>
+                </div>                
+            </div>
+        </nav>
+
+        <div id="usuarioLogado">
+            <div class="teste">
+                <h5>Área do Usuário:</h5>
+                <span id="emailLogado"></span>
+            </div>
+            <button onclick="mostrarMenuUsuario()" class="botao-menu-usuario">Exit</button>
+            <div class="menu-usuario" id="menu-usuario">
+                
+                <ul>
+                    <li><a href="#" id="sair" onclick="deslogarImediatamente()">Ok... Sair</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2 id="tipoCurriculo">Menu de Opções</h2>
+            <nav>
+                <ul>
+                    <li><a id="vagaCad" onclick="visualizarVagas()">Visualizar Vagas Cadastradas</a></li>
+                    <li><a id="cadNovaVaga" href="/html/cad-vagas.html" >Cadastrar uma Nova Vaga</a></li>
+                    <li><a id="buscarProfissional" href="#" onclick="selecionarTipoCurriculo()">Buscar Profissionais</a></li>
+                    <li><a id="buscarUsuarioCurriculo" href="#" onclick="visualizarTodosUsuariosCurriculos()">Quem se Cadastrou em uma Vaga</a></li>
+                    <li><a id="buscarTodosCurriculosSelecionados" href="#" onclick="consultarTodosCurriculosSelecionados()">Candidatos Selecionados</a></li>
+                </ul>
+            </nav>
+        </aside>
+    
+        <main>
+            <section id="novaVaga">
+                <dialog id="dialogNovaVaga">
+                    <div class="modal-content">
+                        <span class="close" onclick="fecharModalNovaVaga()">X</span>
+                        <h1><strong>Cadastrar Nova Vaga</strong></h1>
+                        <div id="modal-container"></div>
+                        <button onclick="editarCurriculo()">Salvar</button>
+                    </div>
+                </dialog>
+            </section>
+            <section id="editarVaga">
+                <dialog id="dialogEditarVaga">
+                    <div class="modal-content-vagas">
+                        <span class="close" onclick="fecharModalEditaVagas()">X</span>
+                        <h1><strong>Editar Vaga</strong></h1>
+                        <div id="modal-container-vagas"></div>                        
+                        <button onclick="salvarEditarVaga()">Salvar</button>                                               
+                    </div>
+                </dialog>
+            </section>
+            <section id="visualizarCurriculo">
+                <dialog id="dialogVisualizarCurriculo">
+                    <div class="modal-content-vagas">
+                        <span class="close" onclick="fecharDialogSelecionarCurriculo()">X</span>
+                        <h1><strong>Visualizar Vaga</strong></h1>
+                        <div id="modal-container-visualizar-curriculo"></div>                        
+                        <button onclick="visualizarCurriculoTipoParams()">Exibir Curriculos</button>                                               
+                    </div>
+                </dialog>
+            </section>
+        
+        
+            <section class="content">
+                <h1 id="titulo_dash_empresa">Dashboard: Empresa Fantasia</h1>
+                <div class="container-button">
+                    <button class="download" style="display:none;" onclick="downloadPDF()">Baixar Curriculo</button>
+                    <button class="compartilhar" style="display:none;" onclick="copiarLink()">Compartilhar Curriculo</button>
+                    <button class="editar" style="display:none;" onclick="exibirEditarCurriculo()">Editar Curriculo</button>
+                    <button class="excluir" style="display:none;" onclick="deletarCurriculo()">Excluir Curriculo</button>
+                </div>
+                <div class="container-filters">
+                    <div class="filters" style="display: none;">
+                        <select id="profissional">
+                            <option value="area" hidden>Área</option>
+                            <option value="tecnologia">Tecnologia</option>
+                            <option value="saude">Saúde</option>
+                            <option value="educacao">Educação</option>
+                            <option value="comercio">Comercio</option>
+                            <option value="industria">Indústria</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="modelo">
+                            <option value="trabalho" hidden>Trabalho</option>
+                            <option value="presencial">Presencial</option>
+                            <option value="remoto">Remoto</option>
+                            <option value="hibrido">Híbrido</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="data">
+                            <option value="publicacao" hidden>Publicação</option>
+                            <option value="semana">Última semana</option>
+                            <option value="mes">Último mês</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="contrato">
+                            <option value="contrato" hidden>Contrato</option>
+                            <option value="clt">CLT</option>
+                            <option value="pj">PJ</option>
+                            <option value="estagio">Estágio</option>
+                            <option value="temporario">Temporário</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="pcd">
+                            <option value="pcd" hidden>PCD</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="salario">
+                            <option value="salario" hidden>Salário</option>
+                            <option value="mil">Até R$ 1.000</option>
+                            <option value="miladois">R$ 1.000 - R$ 2.000</option>
+                            <option value="acimadois">Acima de R$ 2.000</option>
+                            <option value="todos">Todos</option>
+                        </select>                   
+                        
+                    </div> 
+
+                </div>
+                <article id="vagas-container-empresa" class="card">
+                    Selecione uma opção para visualizar os dados.
+                </article> 
+            </section>
+                          
+        </main>
+    </div>
+    
+    
+    
+    <script src="/js/script.js"></script>
+    <script src="/js/dashboard-empresa.js"></script>
+
+</body>
+
+</html>

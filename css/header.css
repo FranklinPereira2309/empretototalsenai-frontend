@@ -1,0 +1,225 @@
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #3572EF;
+    color: #fff;
+    font-size: 1em;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+header h1 {
+    margin: 0;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+}
+
+#logo img {
+    width: 55px;
+    height: 50px;
+}
+
+h1, h4 {
+    margin: 0;
+}
+
+#logo > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.cinza {
+    color: #2d2d2d;
+}
+
+ul {
+    list-style: none;
+}
+
+nav {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #fff;
+    padding: 6px 15px;
+    font-size: 0.9em;
+    font-weight: 400;
+}
+
+nav a:hover {
+    background-color: #fff;
+    color: #3572EF;
+}
+
+.anuncio {
+    border: 2px solid #0000ff;
+    border-radius: 5px;
+}
+.anuncio:hover {
+    background-color: #050C9C;
+    color: #6b70cc;
+}
+
+.cadastro-cv {
+    border: 1px solid #c13535;
+    background-color: #ea6767;
+    border-radius: 5px;
+}
+.cadastro-cv:hover {
+    background-color: #C80036;
+    color: #ff9bb6;
+}
+
+#btn-area {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 20px;
+}
+
+.area-pesquisa input {
+    width: 480px;
+    padding: 0.5em 2.7em;
+    line-height: 1.3em;
+    font-size: 1em;
+    background: #fff url(/imagens/ph--magnifying-glass.png) no-repeat left;
+    background-size: 25px;
+    background-position: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.area-pesquisa button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.botao-menu,
+.botao-menu-empresa {
+    border: none;
+    cursor: pointer;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    width: 82px;
+    background: url(/imagens/material-symbols-light--menu.png) no-repeat center right;
+    background-size: 30px;
+}
+
+.menu, .menuEmpresa {
+    display: none;
+    width: 200px;
+    background-color: #1a236e;
+    border-radius: 5px;
+    padding: 15px;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 5px;
+    box-shadow: 0 0 5px #000;
+    z-index: 1;
+}
+.menu ul,
+.menuEmpresa ul {
+    display: block;
+    position: relative;
+    left: 5px;
+}
+
+.menu li,
+.menuEmpresa li {
+    margin: 0.5rem 0;
+}
+
+.menu li a,
+.menuEmpresa li a{
+    text-align: center;
+    display: block;
+    width: 160px;
+}
+
+#usuarioLogado,
+#empresaLogada {
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-usuario,
+.menu-empresa.anuncio {
+    display: none;
+    width: 200px;
+    background-color: #1a236e;
+    border-radius: 5px;
+    padding: 15px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 60px;
+    box-shadow: 0 0 5px #000;
+    z-index: 1;
+}
+
+.menu-usuario ul,
+.menu-empresa ul {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.menu-usuario li,
+.menu-empresa li {
+    margin: 0.5rem 0;
+}
+
+.menu-usuario a,
+.menu-empresa a {
+    text-align: center;
+    display: block;
+    width: 160px;
+    color: #fff;
+    padding: 6px 15px;
+    font-size: 0.9em;
+    font-weight: 400;
+}
+.menu-usuario a:hover,
+.menu-empresa a:hover {
+    background-color: #fff;
+    color: #3572EF;
+}
+
+.botao-menu-usuario,
+.botao-menu-empresas {
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1em;
+    padding: 10px;
+    width: 68px;
+    background: url(/imagens/seta-para-baixo.png) no-repeat center right;
+    background-size: 15px;
+    text-align: left;
+}

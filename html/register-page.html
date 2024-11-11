@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="icon" href="/imagens/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <a href="/index.html">
+                <img src="/imagens/logo.png" alt="Logo do Emprego Total">
+            </a>
+            <div>
+                <h1>Emprego <span class="cinza">Total</span></h1>
+                <h4>O seu portal de oportunidades</h4>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="register">
+            <h1>Cadastre-se - Portal do Usuário</h1>
+            <div class="area-form">
+                <form id="registroForm">
+                    <input type="text" id="nome" placeholder="Nome" >
+                    <input type="email" id="email" placeholder="E-mail" >
+                    <input type="text" id="cpf" placeholder="Ex: 903.001.515-20" oninput="mascaraCPF(event)" maxlength="14" >
+                    <input type="password" id="senha" placeholder="Senha" >
+                    <button onclick="cadastrarLogin()" class="cadastrar">Cadastrar</button>     
+                    <button class="cancelar"
+                        onclick="window.location.href='../index.html'">Cancelar</button>
+                </form>
+            </div>
+            <div id="cadastro">
+                <p>Já tem uma conta? <a href="login-page.html">Login</a></p>
+            </div>
+        </section>
+    </main>
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

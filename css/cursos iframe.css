@@ -1,0 +1,57 @@
+main {
+    max-width: 860px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #cacaca;
+}
+
+.course {
+    border: 1px solid #ccc;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #efeded;
+    border-radius: 5px;
+}
+
+.course h2 {
+    margin: 0;
+}
+
+.course p {
+    margin: 5px 0 15px;
+}
+
+.course button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.course button:hover {
+    background-color: #0056b3;
+}
+
+.course iframe {
+    width: 100%;
+    height: 430px;
+    margin-top: 10px;
+    display: none;
+}
+
+#session-timer {
+    /* position: fixed;
+    top: 15px;
+    left: 77%; */
+    /* transform: translateX(-50%); */
+    padding: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
