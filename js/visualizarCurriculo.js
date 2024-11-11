@@ -134,7 +134,7 @@ function exibirDadosCurriculo(dados) {
     div.innerHTML = `
                 <h1>${dados.nome} - Tipo do Curriculo (${novoTipo})</h1>
                 <p><strong>Email:</strong> ${dados.email}</p>
-                <p><strong>Telefone:</strong> ${formatarTelefone(dados.telefone)}</p>
+                <p><strong>Telefone:</strong> ${formatarCelularPraExibir(dados.telefone)}</p>
                 <p><strong>Endereço:</strong> ${dados.endereco}</p>
                 <h6><strong>Data do Cadastro:</strong> ${dadosFormatados}</h6>
 
@@ -402,14 +402,33 @@ function editarModalCurriculo(dados) {
     modalContainer.appendChild(div);
 }
 
-function formatarTelefone(telefone) {
-    if (telefone.length === 11) {
-        return `(${telefone.slice(0, 2)}) ${telefone.slice(2, 7)}-${telefone.slice(7)}`;
-    } else if (telefone.length === 10) {
-        return `(${telefone.slice(0, 2)}) 9${telefone.slice(3, 7)}-${telefone.slice(6)}`;
+// function formatarTelefone(telefone) {
+//     if (telefone.length === 11) {
+//         return `(${telefone.slice(0, 2)}) ${telefone.slice(2, 7)}-${telefone.slice(7)}`;
+//     } else if (telefone.length === 10) {
+//         return `(${telefone.slice(0, 2)}) 9${telefone.slice(3, 7)}-${telefone.slice(6)}`;
 
-    } else {
-        return 'null';
-    }
+//     } else {
+//         return 'null';
+//     }
+// }
 
+function aplicarMascara(valor, mascara) {
+    let i = 0;
+    const valorFormatado = valor.replace(/\D/g, ''); 
+    return mascara.replace(/#/g, _ => valorFormatado[i++] || '');
+}
+
+
+
+function mascaraTelefone(event) {
+    const campo = event.target;
+    campo.value = aplicarMascara(campo.value, '(##) #####-####');
+}
+
+function formatarCelularPraExibir(celular) {
+    return aplicarMascara(celular, '(##) #####-####');
+}
+function formatarCepPraExibir(celular) {
+    return aplicarMascara(celular, '##.###-###');
 }

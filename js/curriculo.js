@@ -83,9 +83,8 @@ function cadastrarCurriculo() {
         }
 
         const token = localStorage.getItem('token');
-        const _email = localStorage.getItem('email');
         const id_usuario = localStorage.getItem('id');
-        const expiracaoToken = localStorage.getItem('expiracaoToken');
+        
         const novoCurriculo = {
             nome: nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase(),
             email: email.toLowerCase(),
