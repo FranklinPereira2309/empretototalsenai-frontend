@@ -89,9 +89,9 @@ function cadastrarUsuario() {
     const _email = localStorage.getItem('email');
     const id_usuario = localStorage.getItem('id');
     const expiracaoToken = localStorage.getItem('expiracaoToken');
-   
+
     const novoUsuario = {
-        nome_completo:  nome_completo.charAt(0).toUpperCase() + nome_completo.slice(1).toLowerCase(),
+        nome_completo: nome_completo.charAt(0).toUpperCase() + nome_completo.slice(1).toLowerCase(),
         email: email.toLowerCase(),
         telefone: telefone.replace(/\D/g, ''),
         cep,
@@ -251,7 +251,7 @@ function formarCampoData(data) {
 function exibirDadosApi(dados) {
     let dataFormata = formarCampoData(dados);
 
-    
+
 
     document.querySelector('#nome_completo').value = dados.nome_completo;
     document.querySelector('#email').value = dados.email;
@@ -267,27 +267,45 @@ function exibirDadosApi(dados) {
     document.querySelector('#genero').value = dados.genero;
 }
 
-function consultarViaCepApi() {
+function consultarCepApi() {
     let cep = document.querySelector('#cep').value;
-    let novoCep = cep.replace(/\D/g, ''); 
+    let novoCep = cep.replace(/\D/g, '');
 
-    fetch(`viacep.com.br/ws/${novoCep}/json/`)
+    if (window.confirm('Consultar Cep?')) {
+        viaCepApi(novoCep);
+
+    } else {
+        return
+    }
+}
+
+
+
+function viaCepApi(cep) {
+    const url = `https://empregototal.onrender.com/via_cep_api/${cep}`;
+    fetch(url, {
+        method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }            
+
+    })
         .then(resp => resp.json())
         .then(data => {
-            
             document.querySelector('#logradouro').value = data.logradouro || '';
             document.querySelector('#bairro').value = data.bairro || '';
             document.querySelector('#cidade').value = data.localidade || '';
             document.querySelector('#estado').value = data.uf || '';
+            
         })
         .catch(error => {
-            console.error('Erro ao consultar o CEP:', error.message);            
+            console.error('Erro ao consultar o CEP:', error.message);
         });
 }
 
 function aplicarMascara(valor, mascara) {
     let i = 0;
-    const valorFormatado = valor.replace(/\D/g, ''); 
+    const valorFormatado = valor.replace(/\D/g, '');
     return mascara.replace(/#/g, _ => valorFormatado[i++] || '');
 }
 
