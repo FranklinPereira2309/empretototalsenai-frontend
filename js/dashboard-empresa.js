@@ -208,7 +208,7 @@ function exibirVagasEmpresa(vagas) {
     if (vagas.length === 0) {
         filters.style.display = 'none';
         
-        vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma Vaga encontrada!</h1>';
+        vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma Vaga Cadastrada!</h1>';
         return;
     }
     vagasContainer.innerHTML = '';
