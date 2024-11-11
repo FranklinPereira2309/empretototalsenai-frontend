@@ -89,7 +89,7 @@ function cadastrarCurriculo() {
         const novoCurriculo = {
             nome: nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase(),
             email: email.toLowerCase(),
-            telefone,
+            telefone: telefone.replace(/\D/g, ''),
             endereco,
             formacao,
             objetivo,

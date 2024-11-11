@@ -258,10 +258,10 @@ function editarCurriculo() {
     
 
     const dadosAtualizados = {
-       
-        nome,
-        email,
-        telefone,
+
+        nome: nome_completo.charAt(0).toUpperCase() + nome_completo.slice(1).toLowerCase(),
+        email: email.toLowerCase(),
+        telefone: telefone.replace(/\D/g, ''),
         endereco,
         objetivo,
         formacao,
@@ -368,7 +368,7 @@ function editarModalCurriculo(dados) {
         </div>
         <div class="input-area">
             <label for="telefone">Telefone:</label>
-            <textarea rows=${1} cols=${40} id="telefone">${dados.telefone}</textarea>
+            <textarea rows=${1} cols=${40} id="telefone">${formatarCelularPraExibir(dados.telefone)}</textarea>
         </div>
         <div class="input-area">
             <label for="endereco">Endereço:</label>
@@ -400,4 +400,9 @@ function editarModalCurriculo(dados) {
         </div>
     `
     modalContainer.appendChild(div);
+}
+
+
+function formatarCelularPraExibir(celular) {
+    return aplicarMascara(celular, '(##) #####-####');
 }
