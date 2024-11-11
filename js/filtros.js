@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
             const vagaHTML = `
             <h3>${vaga.titulo}</h3>
-            <p><strong>Empresa:</strong> ${vaga.cargo}</p>
+            <p><strong>Empresa:</strong> ${vaga.nome_empresa}</p>
             <p><strong>Localização:</strong> ${vaga.localizacao}</p>
             <p><strong>Descrição:</strong> ${vaga.descricao}</p>
             <p><strong>Requisitos:</strong> ${vaga.habilidades}</p>
