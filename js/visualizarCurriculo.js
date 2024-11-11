@@ -134,7 +134,7 @@ function exibirDadosCurriculo(dados) {
     div.innerHTML = `
                 <h1>${dados.nome} - Tipo do Curriculo (${novoTipo})</h1>
                 <p><strong>Email:</strong> ${dados.email}</p>
-                <p><strong>Telefone:</strong> ${dados.telefone}</p>
+                <p><strong>Telefone:</strong> ${formatarTelefone(dados.telefone)}</p>
                 <p><strong>Endereço:</strong> ${dados.endereco}</p>
                 <h6><strong>Data do Cadastro:</strong> ${dadosFormatados}</h6>
 
@@ -400,4 +400,16 @@ function editarModalCurriculo(dados) {
         </div>
     `
     modalContainer.appendChild(div);
+}
+
+function formatarTelefone(telefone) {
+    if (telefone.length === 11) {
+        return `(${telefone.slice(0, 2)}) ${telefone.slice(2, 7)}-${telefone.slice(7)}`;
+    } else if (telefone.length === 10) {
+        return `(${telefone.slice(0, 2)}) 9${telefone.slice(3, 7)}-${telefone.slice(6)}`;
+
+    } else {
+        return 'null';
+    }
+
 }
