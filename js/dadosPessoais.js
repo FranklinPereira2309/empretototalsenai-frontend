@@ -352,6 +352,10 @@ function mascaraCPF(event) {
     const campo = event.target;
     campo.value = aplicarMascara(campo.value, '###.###.###-##');
 }
+function mascaraCEP(event) {
+    const campo = event.target;
+    campo.value = aplicarMascara(campo.value, '##.###-###');
+}
 
 
 function mascaraCNPJ(event) {
