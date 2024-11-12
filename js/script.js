@@ -70,7 +70,7 @@ function showPreview(id, videoId) {
         frame.style.display = 'none';
     });
     iframe.style.display = 'block';
-    iframe.src = 'www.youtube.com/embed/' + videoId;
+    iframe.src = 'https://www.youtube.com/embed/' + videoId;
 }
 
 function login() {
