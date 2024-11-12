@@ -186,10 +186,10 @@ function atualizarUsuario() {
         const token = localStorage.getItem('token');
 
         const usuarioAtualizado = {
-            nome_completo,
-            email,
-            telefone,
-            cep,
+            nome_completo: nome_completo.charAt(0).toUpperCase() + nome_completo.slice(1).toLowerCase(),
+            email: email.toLowerCase(),
+            telefone: telefone.replace(/\D/g, ''),
+            cep: cep.replace(/\D/g, '',),
             logradouro,
             numero,
             bairro,
@@ -210,7 +210,13 @@ function atualizarUsuario() {
                 },
                 body: JSON.stringify(usuarioAtualizado)
             })
-                .then(response => response.json())
+                .then(response => {
+                    if(response.status === 201 ) {
+                        window.alert('Usuário atualizado com Sucesso!');
+                    }
+                    return response.json();
+                        
+                } )
                 .then(data => {
 
                     const erro = data.erro;
@@ -222,10 +228,7 @@ function atualizarUsuario() {
                     }
                     if (mensagem) {
                         return window.alert(mensagem);
-                    }
-
-                    window.alert('Usuário Atualizado com Sucesso.');
-
+                    }                    
 
                 })
                 .catch((error) => {
@@ -285,9 +288,9 @@ function viaCepApi(cep) {
     const url = `https://empregototal.onrender.com/via_cep_api/${cep}`;
     fetch(url, {
         method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }            
+        headers: {
+            'Content-Type': 'application/json'
+        }
 
     })
         .then(resp => resp.json())
@@ -296,7 +299,7 @@ function viaCepApi(cep) {
             document.querySelector('#bairro').value = data.bairro || '';
             document.querySelector('#cidade').value = data.localidade || '';
             document.querySelector('#estado').value = data.uf || '';
-            
+
         })
         .catch(error => {
             console.error('Erro ao consultar o CEP:', error.message);
