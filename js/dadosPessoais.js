@@ -293,16 +293,25 @@ function viaCepApi(cep) {
         }
 
     })
-        .then(resp => resp.json())
+        .then(resp => {
+            if(resp.status === 400) {
+                window.alert('Erro ao digitar o Cep, verifique sua digitação!');
+            }
+            if(resp.status === 404) {
+                window.alert('Cep NÃO encontrado!');
+            }
+
+            return  resp.json();
+        })
         .then(data => {
-            const erro = data.erro;
-            const mensagem = data.mensagem;
-            if(erro) {
-                return window.alert(erro);
-            }
-            if(mensagem) {
-                return window.alert(mensagem)
-            }
+            // const erro = data.erro;
+            // const mensagem = data.mensagem;
+            // if(erro) {
+            //     return window.alert(erro);
+            // }
+            // if(mensagem) {
+            //     return window.alert(mensagem)
+            // }
 
             document.querySelector('#logradouro').value = data.logradouro || '';
             document.querySelector('#bairro').value = data.bairro || '';
