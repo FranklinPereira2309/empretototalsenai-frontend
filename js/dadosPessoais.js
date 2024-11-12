@@ -94,7 +94,7 @@ function cadastrarUsuario() {
         nome_completo: nome_completo.charAt(0).toUpperCase() + nome_completo.slice(1).toLowerCase(),
         email: email.toLowerCase(),
         telefone: telefone.replace(/\D/g, ''),
-        cep,
+        cep: cep.replace(/\D/g, '',),
         logradouro,
         cidade,
         estado,
