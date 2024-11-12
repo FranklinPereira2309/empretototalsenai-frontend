@@ -295,6 +295,15 @@ function viaCepApi(cep) {
     })
         .then(resp => resp.json())
         .then(data => {
+            const erro = data.erro;
+            const mensagem = data.mensagem;
+            if(erro) {
+                return window.alert(erro);
+            }
+            if(mensagem) {
+                return window.alert(mensagem)
+            }
+
             document.querySelector('#logradouro').value = data.logradouro || '';
             document.querySelector('#bairro').value = data.bairro || '';
             document.querySelector('#cidade').value = data.localidade || '';
@@ -321,8 +330,8 @@ function mascaraTelefone(event) {
 function formatarCelularPraExibir(celular) {
     return aplicarMascara(celular, '(##) #####-####');
 }
-function formatarCepPraExibir(celular) {
-    return aplicarMascara(celular, '##.###-###');
+function formatarCepPraExibir(cep) {
+    return aplicarMascara(cep, '##.###-###');
 }
 
 
