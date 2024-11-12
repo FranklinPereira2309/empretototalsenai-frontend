@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
       
     if(!token) {
         window.alert('Sessão expirada ou você foi deslogado.');
-        if(window.confirm('Logar como Usuário? [ok] - Logar como Empreda? [cancelar]')) {
+        if(window.confirm('Logar como Usuário? [ok] - Logar como Empresa? [cancelar]')) {
             return window.location.href = '/html/login-page.html'; 
             
         }else {
