@@ -345,7 +345,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
     } else {
-        window.alert('Aréa Restrita para Usuários!');
         return window.location.href = '/html/acesso-negado-empresa.html';
     }
 })
