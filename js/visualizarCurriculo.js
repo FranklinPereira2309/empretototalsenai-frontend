@@ -259,7 +259,7 @@ function editarCurriculo() {
 
     const dadosAtualizados = {
 
-        nome: nome_completo.charAt(0).toUpperCase() + nome_completo.slice(1).toLowerCase(),
+        nome: nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase(),
         email: email.toLowerCase(),
         telefone: telefone.replace(/\D/g, ''),
         endereco,
