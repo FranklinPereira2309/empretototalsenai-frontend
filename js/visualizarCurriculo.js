@@ -406,3 +406,17 @@ function editarModalCurriculo(dados) {
 function formatarCelularPraExibir(celular) {
     return aplicarMascara(celular, '(##) #####-####');
 }
+
+document.addEventListener('DOMContentLoaded', (e) => {
+      
+    if(!token) {
+        window.alert('Sessão expirada ou você foi deslogado.');
+        if(window.confirm('Logar como Usuário? [ok] - Logar como Empreda? [cancelar]')) {
+            return window.location.href = '/html/login-page.html'; 
+            
+        }else {
+            return window.location.href = '/html/login-page-enterprise.html'; 
+            
+        }
+    }
+})

@@ -393,17 +393,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
     const identificacao = localStorage.getItem('identificacao');
 
-    if(!token) {
-        window.alert('Sessão expirada ou você foi deslogado.');
-        if(window.confirm('Logar como Usuário? [ok] - Logar como Empreda? [cancelar]')) {
-            return window.location.href = '/html/login-page.html'; 
-            
-        }else {
-            return window.location.href = '/html/login-page-enterprise.html'; 
-            
-        }
-    }
-
+   
     function timeStorage() {
         if(Number(identificacao.length) === 14) {
             window.location.href = '/html/login-page-enterprise.html';
