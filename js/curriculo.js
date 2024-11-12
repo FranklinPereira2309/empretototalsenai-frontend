@@ -172,7 +172,7 @@ function verificarExistenciaCurriculo() {
 
                 if (mensagem) {
                     
-                    return window.alert(mensagem);
+                    // return window.alert(mensagem);
 
                 }
                 dadosApi = data;
@@ -271,32 +271,7 @@ function mostrarMenuUsuario() {
 
 }
 
-function mostrarMenu() {
-    const btnMenu = document.querySelector('.botao-menu');
-    const menu = document.querySelector('#menu');
-    const menuUsuario = document.getElementById('menu-usuario');
 
-    const identificacao = localStorage.getItem('identificacao');
-
-    window.onclick = function (event) {
-        if (event.target === btnMenu) {
-            menuUsuario.style.display = 'none';
-            return;
-        }
-
-        menu.style.display = 'none';
-
-    }
-
-    if (menu.style.display === 'block') {
-        menu.style.display = 'none';
-    } else {
-        menu.style.display = 'block';
-    }
-
-
-
-}
 
 function deslogarImediatamente() {
     localStorage.clear();
