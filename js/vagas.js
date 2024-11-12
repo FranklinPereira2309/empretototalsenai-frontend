@@ -7,13 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return window.location.href = '/html/acesso-negado.html';
     }
 
-
     if (Number(identificacao.length) === 14) {
 
         nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
     } else {
         window.alert('Aréa Restrita para Empresas!');
-        return window.location.href = '/html/dashboard-usuario.html';
+        return window.location.href = '/html/acesso-negado-usuario.html';
     }
 
 })
