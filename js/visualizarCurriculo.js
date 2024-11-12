@@ -407,11 +407,19 @@ function formatarCelularPraExibir(celular) {
     return aplicarMascara(celular, '(##) #####-####');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded', () => {
+//     const identificacao = localStorage.getItem('identificacao');
+//     if (!token) {
+//         return window.location.href = '/html/acesso-negado.html';
 
-    if (!token) {
-        return window.location.href = '/html/acesso-negado.html';
+//     }
 
-    }
+//     if (Number(identificacao.length) === 11) {
 
-})
+//         nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
+//     } else {
+//         window.alert('Aréa Restrita para Candidatos!');
+//         return window.location.href = '/html/dashboard-empresa.html';
+//     }
+
+// })
