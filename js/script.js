@@ -393,6 +393,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
     const identificacao = localStorage.getItem('identificacao');
 
+    if(!token) {
+        window.alert('O Usuário deve está Logado no Sitema para este recurso!');
+        return window.location.href = 'index.html'; 
+    }
 
     function timeStorage() {
         if(Number(identificacao.length) === 14) {
