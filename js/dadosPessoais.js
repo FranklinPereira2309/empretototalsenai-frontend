@@ -294,11 +294,14 @@ function viaCepApi(cep) {
 
     })
         .then(resp => {
-            if(resp.status === 400) {
-                window.alert('Erro ao digitar o Cep, verifique sua digitação!');
+            if(resp.status === 500) {
+                window.alert('Erro ao digitar o Cep, verifique o CEP digitado!');
             }
             if(resp.status === 404) {
                 window.alert('Cep NÃO encontrado!');
+            }
+            if(resp.status === 400) {
+                window.alert('Cep errado, verifique o CEP digitado!');
             }
 
             return  resp.json();
