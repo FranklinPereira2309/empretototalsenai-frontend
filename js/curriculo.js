@@ -215,3 +215,153 @@ function validandoLinksCamposCurriculos(dados) {
     
 }
 
+
+function mostrarMenu() {
+    const btnMenu = document.querySelector('.botao-menu');
+    const menu = document.querySelector('#menu');
+    const menuUsuario = document.getElementById('menu-usuario');
+
+    const identificacao = localStorage.getItem('identificacao');
+
+    window.onclick = function (event) {
+        if (event.target === btnMenu) {
+            menuUsuario.style.display = 'none';
+            return;
+        }
+
+        menu.style.display = 'none';
+
+    }
+
+    if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'block';
+    }
+
+
+
+}
+
+function mostrarMenuUsuario() {
+    const menuUsuario = document.getElementById('menu-usuario');
+    const btnMenuUsuario = document.querySelector('.botao-menu-usuario');
+    const menu = document.querySelector('#menu');
+
+    const identificacao = localStorage.getItem('identificacao');
+
+
+    window.onclick = function (event) {
+        if (event.target === btnMenuUsuario) {
+            menu.style.display = 'none';
+            return;
+        }
+
+        menuUsuario.style.display = 'none';
+    }
+
+
+    if (menuUsuario.style.display === 'block') {
+        menuUsuario.style.display = 'none';
+    } else {
+        menuUsuario.style.display = 'block';
+    }
+
+
+
+}
+
+function mostrarMenu() {
+    const btnMenu = document.querySelector('.botao-menu');
+    const menu = document.querySelector('#menu');
+    const menuUsuario = document.getElementById('menu-usuario');
+
+    const identificacao = localStorage.getItem('identificacao');
+
+    window.onclick = function (event) {
+        if (event.target === btnMenu) {
+            menuUsuario.style.display = 'none';
+            return;
+        }
+
+        menu.style.display = 'none';
+
+    }
+
+    if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'block';
+    }
+
+
+
+}
+
+function deslogarImediatamente() {
+    localStorage.clear();
+
+    return window.location.href = '../index.html';
+
+}
+
+function capitalizePalavas(str) {
+    return str.split(' ').map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
+}
+
+function aplicarMascara(valor, mascara) {
+    let i = 0;
+    const valorFormatado = valor.replace(/\D/g, '');
+    return mascara.replace(/#/g, _ => valorFormatado[i++] || '');
+}
+
+
+function mascaraCPF(event) {
+    const campo = event.target;
+    campo.value = aplicarMascara(campo.value, '###.###.###-##');
+}
+
+
+function mascaraCNPJ(event) {
+    const campo = event.target;
+    campo.value = aplicarMascara(campo.value, '##.###.###/####-##');
+}
+
+
+{
+    let divUsuarioLogado = document.querySelector('#usuarioLogado');
+    let textoUsuarioLogado = document.querySelector('#emailLogado');
+    let loginButton = document.querySelector('#area-menu');
+    let areaPesquisa = document.querySelector('.area-pesquisa');
+    let linksLogado = document.querySelectorAll('.link-logado');
+
+    linksLogado.forEach(link => {
+        link.style.display = 'none';
+    });
+
+    divUsuarioLogado.style.display = 'none';
+
+    const _email = localStorage.getItem('email');
+    const id_usuario = localStorage.getItem('id');
+
+    if (id_usuario) {
+        divUsuarioLogado.style.display = 'flex';
+        textoUsuarioLogado.innerHTML = _email;
+        linksLogado.forEach(link => {
+            link.style.display = 'block';
+        });
+        loginButton.style.display = 'none';
+    } else {
+        areaPesquisa.style.display = 'none';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        return window.location.href = '/html/acesso-negado.html';
+
+    }
+})

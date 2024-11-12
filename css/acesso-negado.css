@@ -1,0 +1,49 @@
+@import url(header.css);
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    background-color: #f6f6f6;
+}
+
+header {
+    justify-content: start;
+}
+
+
+.container-acesso-negado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+span {
+    font-size: 36px;
+    font-weight: bold;
+
+}
+
+button {
+
+    background-color: #4A81E0;
+    font-size: 1em;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 15px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #4CAF50;
+}
