@@ -212,8 +212,9 @@ function atualizarUsuario() {
             })
                 .then(response => {
                     if(response.status === 201 ) {
-                        window.alert('Usuário atualizado com Sucesso!');
+                        return window.alert('Usuário atualizado com Sucesso!');
                     }
+                    window.location.href = '/html/cad-dados-pessoais.html';
                     return response.json();
                         
                 } )
@@ -295,13 +296,13 @@ function viaCepApi(cep) {
     })
         .then(resp => {
             if(resp.status === 500) {
-                window.alert('Erro ao digitar o Cep, verifique o CEP digitado!');
+                return window.alert('Erro ao digitar o Cep, verifique o CEP digitado!');
             }
             if(resp.status === 404) {
-                window.alert('Cep NÃO encontrado!');
+                return window.alert('Cep NÃO encontrado!');
             }
             if(resp.status === 400) {
-                window.alert('Cep errado, verifique o CEP digitado!');
+                return window.alert('Cep errado, verifique o CEP digitado!');
             }
 
             return  resp.json();
