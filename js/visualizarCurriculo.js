@@ -40,9 +40,11 @@ if (token) {
                 document.querySelector('#tecnico').style.display = 'none';
                 document.querySelector('#profissional').style.display = 'none';
                 document.querySelector('#tipoCurriculo').textContent = 'Não Disponível';
+                document.querySelector('#resume-data').innerHTML = '';
+                document.querySelector('#resume-data').innerHTML = `<p>Nenhum Curriculo Cadastrado!</p>`;;
+                
 
-                return window.alert(mensagem);
-
+                
             } else {
                 dadosApi = data;
 
