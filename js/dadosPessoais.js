@@ -1,5 +1,22 @@
 let dadosApi;
 
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    const identificacao = localStorage.getItem('identificacao');
+
+    if (!token) {
+        return window.location.href = '/html/acesso-negado.html';
+
+    }
+    if (Number(identificacao.length) === 11) {
+
+        nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
+    } else {
+        window.alert('Aréa Restrita para Usuários!');
+        return window.location.href = '/html/dashboard-empresa.html';
+    }
+})
+
 function consultarUsuariosCompletos() {
 
     const token = localStorage.getItem('token');
@@ -361,6 +378,34 @@ function mascaraCEP(event) {
 function mascaraCNPJ(event) {
     const campo = event.target;
     campo.value = aplicarMascara(campo.value, '##.###.###/####-##');
+}
+
+{
+    let divUsuarioLogado = document.querySelector('#usuarioLogado');
+    let textoUsuarioLogado = document.querySelector('#emailLogado');
+    let loginButton = document.querySelector('#area-menu');
+    let areaPesquisa = document.querySelector('.area-pesquisa');
+    let linksLogado = document.querySelectorAll('.link-logado');
+
+    linksLogado.forEach(link => {
+        link.style.display = 'none';
+    });
+
+    divUsuarioLogado.style.display = 'none';
+
+    const _email = localStorage.getItem('email');
+    const id_usuario = localStorage.getItem('id');
+
+    if (id_usuario) {
+        divUsuarioLogado.style.display = 'flex';
+        textoUsuarioLogado.innerHTML = _email;
+        linksLogado.forEach(link => {
+            link.style.display = 'block';
+        });
+        loginButton.style.display = 'none';
+    } else {
+        areaPesquisa.style.display = 'none';
+    }
 }
 
 
