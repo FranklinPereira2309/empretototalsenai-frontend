@@ -1,3 +1,3 @@
 function portalUsuario() {
-    return window.location.href = `/html/dashboard-empresa.html`;
+    return window.location.href = `/html/dashboard-usuario.html`;
 }
