@@ -212,9 +212,9 @@ function atualizarUsuario() {
             })
                 .then(response => {
                     if(response.status === 201 ) {
+                        window.location.href = '/html/cad-dados-pessoais.html';
                         return window.alert('Usuário atualizado com Sucesso!');
                     }
-                    window.location.href = '/html/cad-dados-pessoais.html';
                     return response.json();
                         
                 } )
