@@ -20,7 +20,11 @@ header {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #fff;
+    background-color: #f9f9f9;
+}
+
+.container-acesso-negado img {
+    mix-blend-mode: darken;
 }
 
 span {
