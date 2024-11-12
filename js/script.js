@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     const identificacao = localStorage.getItem('identificacao');
 
     if(!token) {
-        window.alert('O Usuário deve está Logado no Sitema para este recurso!');
+        window.alert('Sessão expirada ou você foi deslogado.');
         return window.location.href = '/index.html'; 
     }
 
