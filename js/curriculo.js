@@ -360,6 +360,15 @@ function mascaraCNPJ(event) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
+    const identificacao = localStorage.getItem('identificacao');
+
+    if (Number(identificacao.length) === 14) {
+
+        nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
+    } else {
+        window.alert('Aréa Restrita para Usuários!');
+        return window.location.href = '/html/dashboard-empresa.html';
+    }
     if (!token) {
         return window.location.href = '/html/acesso-negado.html';
 
