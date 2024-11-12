@@ -18,6 +18,12 @@ const dialogVisualizarCurriculo = document.querySelector('#dialogVisualizarCurri
 document.addEventListener('DOMContentLoaded', () => {
     let titulo = document.querySelector('#titulo_dash_empresa');
     const nome = localStorage.getItem('nome');
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+        return window.location.href = '/html/acesso-negado.html';
+
+    }
 
     const identificacao = localStorage.getItem('identificacao');
 

@@ -45,7 +45,7 @@ if (token) {
 
             } else {
                 dadosApi = data;
-                                
+
                 validandoLinksCurriculos(dadosApi);
 
                 if (dadosApi.cMedio) {
@@ -94,13 +94,13 @@ function exibirDadosCurriculo(dados) {
     const aMedio = document.querySelector('#medio')
     const aTecnico = document.querySelector('#tecnico');
     const aProfissional = document.querySelector('#profissional');
-        
+
     let tipo = dados.tipo;
     let novoTipo = '';
-    tipo === 'medio'?  novoTipo = 'Médio' : '';
-    tipo === 'tecnico'?  novoTipo ='Técnico' : '';
-    tipo === 'profissional'?  novoTipo = 'Profissional' : '';
-    
+    tipo === 'medio' ? novoTipo = 'Médio' : '';
+    tipo === 'tecnico' ? novoTipo = 'Técnico' : '';
+    tipo === 'profissional' ? novoTipo = 'Profissional' : '';
+
     document.querySelector('.imprimir').style.display = 'block';
     document.querySelector('.editar').style.display = 'block';
     document.querySelector('.excluir').style.display = 'block';
@@ -130,7 +130,7 @@ function exibirDadosCurriculo(dados) {
 
     let dadosFormatados = formarCampoData(dados);
 
-   
+
     div.innerHTML = `
                 <h1>${dados.nome} - Tipo do Curriculo (${novoTipo})</h1>
                 <p><strong>Email:</strong> ${dados.email}</p>
@@ -173,12 +173,12 @@ function profissional() {
     exibirDadosCurriculo(dadosProfissional);
     tipoCurriculo = dadosProfissional.tipo;
     editarModalProfissional = true;
-    
+
 }
 
 function imprimirCurriculo() {
     const conteudo = document.querySelector('#resume-data').innerHTML;
-    
+
     let curriculo = tipoCurriculo;
 
     let estilo = '<style>';
@@ -188,7 +188,7 @@ function imprimirCurriculo() {
         padding-bottom: 6px;
         }`;
     estilo += '</style>';
- 
+
     const win = window.open('', '', 'height = 800px, width = 600px');
     win.document.write('<html><head>');
     win.document.write('<title>Imprimir Curriculo - Emprego Total</title>');
@@ -198,7 +198,7 @@ function imprimirCurriculo() {
     win.document.write(conteudo);
     win.document.write('</body></html>');
     win.print();
-    
+
 
 }
 
@@ -207,17 +207,17 @@ function imprimirCurriculo() {
 function exibirEditarCurriculo() {
     modalDialog.showModal();
 
-    if (editarModalMedio) {        
-        editarModalMedio = false;        
+    if (editarModalMedio) {
+        editarModalMedio = false;
         editarModalCurriculo(dadosMedio);
-    } else if (editarModalTecnico) {        
-        editarModalTecnico = false;        
+    } else if (editarModalTecnico) {
+        editarModalTecnico = false;
         editarModalCurriculo(dadosTecnico);
-    } else if (editarModalProfissional) {        
-        editarModalProfissional = false;        
+    } else if (editarModalProfissional) {
+        editarModalProfissional = false;
         editarModalCurriculo(dadosProfissional);
     }
-   
+
 }
 
 function editarCurriculo() {
@@ -232,9 +232,9 @@ function editarCurriculo() {
     const habilidades = document.querySelector('#habilidades').value;
     const idiomas = document.querySelector('#idiomas').value;
     const referencias = document.querySelector('#referencias').value;
-    
-       
-          
+
+
+
     const url = `https://empregototal.onrender.com/curriculo`;
 
     let tipo = tipoCurriculo;
@@ -255,7 +255,7 @@ function editarCurriculo() {
         !referencias) {
         return window.alert("Preencha todos os Dados!");
     }
-    
+
 
     const dadosAtualizados = {
 
@@ -271,86 +271,86 @@ function editarCurriculo() {
         referencias,
         tipo,
 
-        
-        
+
+
     }
 
-    if(token) {
+    if (token) {
         fetch(url, {
             method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(dadosAtualizados)
         })
-        .then(response => response.json())
-        .then(data => {
-            const mensagem = data.mensagem;
-            const error = data.erro;
-            
-            if(error) {
-                return window.alert(error);
+            .then(response => response.json())
+            .then(data => {
+                const mensagem = data.mensagem;
+                const error = data.erro;
 
-            }else if(mensagem) {
-                window.alert(mensagem);
-            
-            }
-            
-            modalDialog.close();
+                if (error) {
+                    return window.alert(error);
 
-            window.location.href = '/html/curriculos.html';
-        })
-        .catch(error => {
-            console.log('Erro: ', error);
-            
-        })
+                } else if (mensagem) {
+                    window.alert(mensagem);
+
+                }
+
+                modalDialog.close();
+
+                window.location.href = '/html/curriculos.html';
+            })
+            .catch(error => {
+                console.log('Erro: ', error);
+
+            })
 
     }
 
 }
 
 function deletarCurriculo() {
-    const tipo = tipoCurriculo;   
-    const id = localStorage.getItem('id');    
+    const tipo = tipoCurriculo;
+    const id = localStorage.getItem('id');
     const token = localStorage.getItem('token');
-        
+
     const url = `https://empregototal.onrender.com/curriculo/${id}/${tipo}`;
 
 
-    
-    if(window.confirm('Deseja Excluir?')){
 
-        if(token) {
+    if (window.confirm('Deseja Excluir?')) {
+
+        if (token) {
             fetch(url, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                
+
             })
-            .then(response => response.json())
-            .then(data => {
-                const mensagem = data.mensagem;
-                window.alert(mensagem);
-                window.location.href = '/html/curriculos.html';
-            })
-            .catch(error => {
-                console.log('Erro: ', error);
-                
-            })
-    
+                .then(response => response.json())
+                .then(data => {
+                    const mensagem = data.mensagem;
+                    window.alert(mensagem);
+                    window.location.href = '/html/curriculos.html';
+                })
+                .catch(error => {
+                    console.log('Erro: ', error);
+
+                })
+
         }
-    }else {
+    } else {
         return
     }
-    
+
 }
 
 
 function editarModalCurriculo(dados) {
-    
+
 
     const modalContainer = document.querySelector('#modal-container');
     const div = document.createElement('div');
@@ -407,16 +407,11 @@ function formatarCelularPraExibir(celular) {
     return aplicarMascara(celular, '(##) #####-####');
 }
 
-document.addEventListener('DOMContentLoaded', (e) => {
-      
-    if(!token) {
-        window.alert('Sessão expirada ou você foi deslogado.');
-        if(window.confirm('Logar como Usuário? [ok] - Logar como Empresa? [cancelar]')) {
-            return window.location.href = '/html/login-page.html'; 
-            
-        }else {
-            return window.location.href = '/html/login-page-enterprise.html'; 
-            
-        }
+document.addEventListener('DOMContentLoaded', () => {
+
+    if (!token) {
+        return window.location.href = '/html/acesso-negado.html';
+
     }
+
 })
