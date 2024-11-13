@@ -1013,14 +1013,13 @@ function selecionarTipoCurriculo() {
         `
 
     selectSelecionarTipoCurriculo.innerHTML += `
-        <option value="tecnico">técnico</option>
+        <option value="tecnico">Técnico</option>
         `
-
 
     selectSelecionarTipoCurriculo.innerHTML += `
         <option value="profissional">Profissional</option>
         `
-    tipoSelecionarTipoCurriculo = selectSelecionarTipoCurriculo.value;
+    // tipoSelecionarTipoCurriculo = selectSelecionarTipoCurriculo.value;
 
     div.appendChild(selectSelecionarTipoCurriculo);
     modalVisualizarCurriculos.appendChild(div);
