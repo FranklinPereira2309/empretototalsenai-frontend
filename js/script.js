@@ -214,17 +214,12 @@ function adicionarLocalStorage(data, tempo) {
 }
 
 function exibirConfirmarSenha() {
-    const repetirSenha = document.querySelector('#re-senha').value;
-    const senha = document.querySelector('#senha').value;
-    const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha')
-    let senhaConfirmada;
+    
+    
+    
     repetirSenha.style.display = 'block';
     
-    if(senha === repetirSenha) {
-        senhaConfirmada = senha;
-    }else {
-        erroConfirmaSenha.style.display = 'block';
-    }
+    
 
 
     return senhaConfirmada
@@ -242,6 +237,8 @@ function cadastrarLogin() {
     const cpf = document.querySelector('#cpf').value;
     const senha = document.querySelector('#senha').value;
     const repetirSenha = document.querySelector('#re-senha').value;
+    const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha');
+    let senhaConfirmada;
 
     if (!nome || !email || !senha || !repetirSenha || !cpf) {
         return window.alert("Preencha todos os Campos!");
@@ -251,11 +248,13 @@ function cadastrarLogin() {
         event.preventDefault();
     });
 
-    let senhaConfirmada = exibirConfirmarSenha();
-
-    if(!senhaConfirmada) {
-        return document.querySelector('#erroConfirmaSenha').style.display = 'block';
+    if(senha === repetirSenha) {
+        senhaConfirmada = senha;
+    }else {
+        return erroConfirmaSenha.style.display = 'block';
     }
+
+   
 
     const novoLogin = {
         nome: nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase(),
