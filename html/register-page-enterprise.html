@@ -30,7 +30,9 @@
                     <input type="text" id="nome" placeholder="Nome" >
                     <input type="email" id="email" placeholder="E-mail" >
                     <input type="text" id="cnpj" placeholder="Ex: 55.550.527/0001-22" oninput="mascaraCNPJ(event)" maxlength="18">
-                    <input type="password" id="senha" placeholder="Senha" >
+                    <input type="password" id="senha" oninput="omitirSpan()" placeholder="Senha" >
+                    <input type="password" id="re-senha" oninput="omitirSpan()" placeholder="Repetir a Senha" >
+                    <span id="erroConfirmaSenha" style="display: none;">A senha digitada não é a mesma!</span>
                     <button onclick="cadastrarLoginEmpresa()" class="cadastrar">Cadastrar</button>     
                     <button class="cancelar"
                         onclick="window.location.href='../index.html'">Cancelar</button>

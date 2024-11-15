@@ -213,17 +213,6 @@ function adicionarLocalStorage(data, tempo) {
 
 }
 
-function exibirConfirmarSenha() {
-    
-    
-    
-    repetirSenha.style.display = 'block';
-    
-    
-
-
-    return senhaConfirmada
-}
 
 function omitirSpan() {
     const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha')
@@ -301,8 +290,11 @@ function cadastrarLoginEmpresa() {
     let email = document.querySelector('#email').value;
     let cnpj = document.querySelector('#cnpj').value;
     let senha = document.querySelector('#senha').value;
+    const repetirSenha = document.querySelector('#re-senha').value;
+    const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha');
+    let senhaConfirmada;
 
-    if (!nome || !email || !senha || !cnpj) {
+    if (!nome || !email || !senha || !repetirSenha || !cnpj) {
         return window.alert("Preencha todos os Campos!");
     }
 
@@ -312,11 +304,17 @@ function cadastrarLoginEmpresa() {
 
     let novoNome = capitalizePalavas(nome);
 
+    if(senha === repetirSenha) {
+        senhaConfirmada = senha;
+    }else {
+        return erroConfirmaSenha.style.display = 'block';
+    }
+
     const novoLogin = {
         nome: novoNome,
         email: email.toLowerCase(),
         cnpj: cnpj.replace(/\D/g, ''),
-        senha: senha
+        senha: senhaConfirmada
     };
 
     const url = 'https://empregototal.onrender.com/empresa';
@@ -343,6 +341,7 @@ function cadastrarLoginEmpresa() {
             document.querySelector('#email').value = '';
             document.querySelector('#cnpj').value = '';
             document.querySelector('#senha').value = '';
+            document.querySelector('#re-senha').value = '';
 
             window.alert('Usuário registrado com sucesso!');
         })
