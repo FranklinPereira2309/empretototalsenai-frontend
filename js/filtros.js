@@ -490,52 +490,50 @@ document.addEventListener('DOMContentLoaded', (e) => {
         return salarioNumerico;
     }
 });
-function consultarBuscarIdVaga() {
-    const token = localStorage.getItem('token');
-    const url = `https://empregototal.onrender.com/curriculos_vagas`;
+// function consultarBuscarIdVaga() {
+//     const token = localStorage.getItem('token');
+//     const url = `https://empregototal.onrender.com/curriculos_vagas`;
 
 
-    fetch(url, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            const erro = data.erro;
-            const mensagem = data.mensagem;
+//     fetch(url, {
+//         method: 'GET',
+//         headers: {
+//             'Authorization': `Bearer ${token}`,
+//             'Content-Type': 'application/json'
+//         }
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             const erro = data.erro;
+//             const mensagem = data.mensagem;
 
-            if (erro) {
-                return window.alert(erro);
-            }
-            if (mensagem) {
-                return window.alert(mensagem);
-            }
+//             if (erro) {
+//                 return window.alert(erro);
+//             }
+//             if (mensagem) {
+//                 return window.alert(mensagem);
+//             }
 
-            data.forEach((dados) => {
-                vagasConcorrendoCurriculos.push(dados.vaga_id);
-            });
-
-
-        })
-        .catch(erro => {
-            console.log(erro);
-
-        })
+//             data.forEach((dados) => {
+//                 vagasConcorrendoCurriculos.push(dados.vaga_id);
+//             });
 
 
+//         })
+//         .catch(erro => {
+//             console.log(erro);
+
+//         })
 
 
-}
+// }
 
 const token = localStorage.getItem('token');
 
-if (token) {
+// if (token) {
 
-    consultarBuscarIdVaga();
-}
+//     consultarBuscarIdVaga();
+// }
 
 
 
