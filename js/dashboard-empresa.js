@@ -857,10 +857,12 @@ function exibirCurriculoTipoParams(curriculos) {
 
 function consultarTodosCurriculosSelecionados() {
     const url = `https://empregototal.onrender.com/curriculos_geral_selecionados`;
+    const token = localStorage.getItem('token');
 
     fetch(url, {
         method: 'GET',
         headers: {
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         }
     })
