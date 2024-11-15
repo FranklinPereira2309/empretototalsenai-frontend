@@ -213,14 +213,37 @@ function adicionarLocalStorage(data, tempo) {
 
 }
 
+function exibirConfirmarSenha() {
+    const repetirSenha = document.querySelector('#re-senha').value;
+    const senha = document.querySelector('#senha').value;
+    const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha')
+    let senhaConfirmada;
+    repetirSenha.disabled = false;
+    
+    if(senha === repetirSenha) {
+        senhaConfirmada = senha;
+    }else {
+        erroConfirmaSenha.disabled = false;
+    }
+
+
+    return senhaConfirmada
+}
+
+function omitirSpan() {
+    const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha')
+
+    erroConfirmaSenha.disabled = true;
+}
 
 function cadastrarLogin() {
-    let nome = document.querySelector('#nome').value;
-    let email = document.querySelector('#email').value;
-    let cpf = document.querySelector('#cpf').value;
-    let senha = document.querySelector('#senha').value;
+    const nome = document.querySelector('#nome').value;
+    const email = document.querySelector('#email').value;
+    const cpf = document.querySelector('#cpf').value;
+    const senha = document.querySelector('#senha').value;
+    const repetirSenha = document.querySelector('#re-senha').value;
 
-    if (!nome || !email || !senha || !cpf) {
+    if (!nome || !email || !senha || !repetirSenha || !cpf) {
         return window.alert("Preencha todos os Campos!");
     }
 
@@ -228,11 +251,17 @@ function cadastrarLogin() {
         event.preventDefault();
     });
 
+    let senhaConfirmada = exibirConfirmarSenha();
+
+    if(!senhaConfirmada) {
+        return document.querySelector('#erroConfirmaSenha').disabled = false;
+    }
+
     const novoLogin = {
         nome: nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase(),
         email: email.toLowerCase(),
         cpf: cpf.replace(/\D/g, ''),
-        senha: senha
+        senha: senhaConfirmada
     };
 
     const url = 'https://empregototal.onrender.com/usuario';
