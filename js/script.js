@@ -287,6 +287,7 @@ function cadastrarLogin() {
             document.querySelector('#email').value = '';
             document.querySelector('#cpf').value = '';
             document.querySelector('#senha').value = '';
+            document.querySelector('#re-senha').value = '';
 
             window.alert('Usuário registrado com sucesso!');
 
