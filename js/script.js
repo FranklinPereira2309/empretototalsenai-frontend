@@ -218,12 +218,12 @@ function exibirConfirmarSenha() {
     const senha = document.querySelector('#senha').value;
     const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha')
     let senhaConfirmada;
-    repetirSenha.disabled = false;
+    repetirSenha.style.display = 'block';
     
     if(senha === repetirSenha) {
         senhaConfirmada = senha;
     }else {
-        erroConfirmaSenha.disabled = false;
+        erroConfirmaSenha.style.display = 'block';
     }
 
 
@@ -233,7 +233,7 @@ function exibirConfirmarSenha() {
 function omitirSpan() {
     const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha')
 
-    erroConfirmaSenha.disabled = true;
+    erroConfirmaSenha.style.display = 'none';
 }
 
 function cadastrarLogin() {
@@ -254,7 +254,7 @@ function cadastrarLogin() {
     let senhaConfirmada = exibirConfirmarSenha();
 
     if(!senhaConfirmada) {
-        return document.querySelector('#erroConfirmaSenha').disabled = false;
+        return document.querySelector('#erroConfirmaSenha').style.display = 'block';
     }
 
     const novoLogin = {
