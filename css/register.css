@@ -27,6 +27,10 @@ main {
     height: 85vh;
 }
 
+#erroConfirmaSenha {
+    color: red;
+}
+
 #register {
     border: 1px solid #ccc;
     border-radius: 10px;
