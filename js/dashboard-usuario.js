@@ -72,7 +72,7 @@ function verificarExistenciaCurriculo() {
     
     if (token) {
 
-        const url = 'http://localhost:3003/curriculos';
+        const url = 'https://empregototal.onrender.com/curriculos';
         fetch(url, {
             method: 'GET',
             headers: {
@@ -106,7 +106,7 @@ function salvarCurriculoVaga() {
     const idVaga = localStorage.getItem('idVaga');
     const idCurriculo = localStorage.getItem('idCurriculo');
 
-    const url = `http://localhost:3003/vagas_curriculos`;
+    const url = `https://empregototal.onrender.com/vagas_curriculos`;
     const token = localStorage.getItem('token');
 
     const dados = {
@@ -239,7 +239,7 @@ function telaConfirmacaoCadCurriculo(curriculo) {
 
 
 function buscarTodasAsVagasLogado() {
-    const url = `http://localhost:3003/todas_as_vagas_logado`;
+    const url = `https://empregototal.onrender.com/todas_as_vagas_logado`;
 
     const token = localStorage.getItem('token');
 
@@ -271,7 +271,7 @@ function buscarTodasAsVagasLogado() {
         })
 }
 function buscarTodasAsVagas() {
-    const url = `http://localhost:3003/todas_as_vagas`;
+    const url = `https://empregototal.onrender.com/todas_as_vagas`;
 
     fetch(url, {
         method: 'GET',
@@ -301,7 +301,7 @@ function buscarTodasAsVagas() {
 
 function consultarCurriculosVagas() {
     const token = localStorage.getItem('token');
-    const url = `http://localhost:3003/curriculos_vagas`;
+    const url = `https://empregototal.onrender.com/curriculos_vagas`;
 
     fetch(url, {
         method: 'GET',
@@ -449,7 +449,7 @@ function formarCampoData(dados) {
 function consultarBuscarIdVaga() {
     
     const token = localStorage.getItem('token');
-    const url = `http://localhost:3003/curriculos_vagas`;
+    const url = `https://empregototal.onrender.com/curriculos_vagas`;
 
     fetch(url, {
         method: 'GET',

@@ -85,7 +85,7 @@ document.querySelector('#jobForm').addEventListener('submit', (e) => {
     }
 
     if (token) {
-        const url = `http://localhost:3003/vagas`;
+        const url = `https://empregototal.onrender.com/vagas`;
 
 
         fetch(url, {
