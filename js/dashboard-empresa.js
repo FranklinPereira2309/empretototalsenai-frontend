@@ -42,6 +42,7 @@ vagasContainer.addEventListener('click', (e) => {
     let valorSpanIdCurriculo, elementoSpanIdCurriculo
     let elementoSpanIdAtualizarCurriculo;
     let elementoSpanIdIncluirCurriculo;
+    let elementoSpanIdDeletarCurriculo;
     let elementoSpanIncluir;
     let elementoSpanZero = '';
     let elementoSpanUm = '';
@@ -121,6 +122,21 @@ vagasContainer.addEventListener('click', (e) => {
         localStorage.setItem('idIncluirCurriculo', elementoSpanIncluir )
         
 
+    }else if (e.target.classList.contains('btnDeletarVaga')) {
+        const elementoPai = e.target.closest('.item2');
+
+        elementoSpanIdDeletarCurriculo = elementoPai.querySelectorAll('span');
+
+        if (elementoSpanIdDeletarCurriculo) {
+            elementoSpanIdDeletarCurriculo = elementoSpanIdDeletarCurriculo[0].textContent;
+            
+                    
+
+        }
+        //deletarCurriculoSelecionado();
+        localStorage.setItem('idDeletarCurriculo', elementoSpanIdDeletarCurriculo )
+        
+
     } else {
         return;
     }
@@ -142,9 +158,9 @@ function visualizarVagaSelecionada() {
     let dadosEditarVagas;
 
     idVaga = localStorage.getItem('idVagaSelecionada');
-    console.log(idVaga);
+    
 
-    const url = `https://empregototal.onrender.com/vaga/${idVaga}`;
+    const url = `http://localhost:3003/vaga/${idVaga}`;
     const token = localStorage.getItem('token');
 
     fetch(url, {
@@ -179,7 +195,7 @@ function visualizarVagaSelecionada() {
 function visualizarVagas() {
     const token = localStorage.getItem('token');
 
-    const url = 'https://empregototal.onrender.com/vagas';
+    const url = 'http://localhost:3003/vagas';
 
     fetch(url, {
         method: 'GET',
@@ -221,7 +237,7 @@ function exibirVagasEmpresa(vagas) {
 
     vagas.forEach((vaga) => {
         const btnEditar = document.createElement('button');
-        const btnExcluir = document.createElement('button');
+        const btnExcluirVaga = document.createElement('button');
         const imagem = document.createElement('img');
 
         const vagaDiv = document.createElement('div');
@@ -243,15 +259,15 @@ function exibirVagasEmpresa(vagas) {
         imagem.classList.add('img-pcd-empresa');
         vaga.pcd ? imagem.src = '/assets/pcd1.jpeg' : imagem.style.display = 'none';
         btnEditar.textContent = 'Editar';
-        btnExcluir.textContent = 'Excluir';
+        btnExcluirVaga.textContent = 'Excluir';
         btnEditar.classList.add('btn-Editar-Vaga');
-        btnExcluir.classList.add('btn-Excluir-Vaga');
+        btnExcluirVaga.classList.add('btn-Excluir-Vaga');
         btnEditar.onclick = editarVaga;
-        btnExcluir.onclick = excluirVaga;
+        btnExcluirVaga.onclick = excluirVaga;
         vagaDiv.classList.add('item');
         vagaDiv.innerHTML = vagaHTML;
         vagaDiv.appendChild(btnEditar);
-        vagaDiv.appendChild(btnExcluir);
+        vagaDiv.appendChild(btnExcluirVaga);
         vagaDiv.appendChild(imagem);
 
         vagasContainer.appendChild(vagaDiv);
@@ -432,7 +448,7 @@ function salvarEditarVaga() {
 
     const token = localStorage.getItem('token');
     const idVaga = localStorage.getItem('idVagaSelecionada');
-    const url = `https://empregototal.onrender.com/vagas/${idVaga}`;
+    const url = `http://localhost:3003/vagas/${idVaga}`;
 
     if (token) {
         fetch(url, {
@@ -495,7 +511,7 @@ function toggleAtivarCurriculo() {
                 visualizar_curriculo: visualizar_curriculo === true? false : true
             }
             
-            const url = `https://empregototal.onrender.com/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
+            const url = `http://localhost:3003/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
 
             fetch(url, {
                 method: 'PATCH',
@@ -556,7 +572,7 @@ function toggleDesativarCurriculo() {
 
         if (window.confirm('Confirma a Ação para o  Curriculo Atual?')) {
             
-            const url = `https://empregototal.onrender.com/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
+            const url = `http://localhost:3003/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
             
             fetch(url, {
                 method: 'PATCH',
@@ -602,13 +618,69 @@ function toggleDesativarCurriculo() {
     
 }
 
+function deletarCurriculoSelecionado() {
+    const token = localStorage.getItem('token');
+    
+    let intervalo = setInterval(() => {
+        
+        if (window.confirm('Deletar Definitivamente o Curriculo Atual?')) {
+            const curriculo_id = localStorage.getItem('idDeletarCurriculo');
+            const url = `http://localhost:3003/curriculo_selecionado/${curriculo_id}`;
+            
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+                
+            })
+                .then(response => {
+                    if (response.status === 201) {
+                        window.alert('Curriculo Excluido com Sucesso!');
+                        window.location.href = '/html/dashboard-empresa.html';
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const erro = data.erro;
+                    const mensagem = data.mensagem;
+
+                    if (erro) {
+                        return window.alert(erro);
+                    }
+                    if (mensagem) {
+                        return window.alert(mensagem);
+                    }
+
+                })
+                .catch(erro => {
+                    console.log(erro);
+
+                })
+            clearInterval(intervalo);
+            return;
+
+
+        } else {
+            clearInterval(intervalo);
+            return
+        }
+
+    }, 0);
+
+    return;
+
+}
+
 function selecionarCurriculo() {
     
     let intervalo = setInterval(() => {
         
         if (window.confirm('Confirma a Ação para o  Curriculo Atual?')) {
             const curriculo_id = localStorage.getItem('idIncluirCurriculo');
-            const url = `https://empregototal.onrender.com/curriculo_selecionado`;
+            const url = `http://localhost:3003/curriculo_selecionado`;
+            const token = localStorage.getItem('token');
 
             const inclusao = {
                 curriculo_id,
@@ -618,6 +690,7 @@ function selecionarCurriculo() {
             fetch(url, {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(inclusao)
@@ -658,13 +731,12 @@ function selecionarCurriculo() {
 }
 
 
-
 function deletarVagaCadastrada() {
     const token = localStorage.getItem('token');
 
     idVaga = localStorage.getItem('idVagaSelecionada');
 
-    const url = `https://empregototal.onrender.com/vagas/${idVaga}`;
+    const url = `http://localhost:3003/vagas/${idVaga}`;
 
     fetch(url, {
         method: 'DELETE',
@@ -702,8 +774,9 @@ function cadastrarCandidato() {
 
     const curriculo_id = localStorage.getItem('idCurriculoSelecionado');
     const visualizar_curriculo = true;
+    const token = localStorage.getItem('token');
 
-    const url = `https://empregototal.onrender.com/curriculo_selecionado`;
+    const url = `http://localhost:3003/curriculo_selecionado`;
 
     const curriculo = {
         curriculo_id,
@@ -717,6 +790,7 @@ function cadastrarCandidato() {
             fetch(url, {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(curriculo)
@@ -724,6 +798,7 @@ function cadastrarCandidato() {
                 .then(response => {
                     if (response.status === 201) {
                         window.alert('Curriculo adicionado com Sucesso!');
+                        window.location.href = '/html/dashboard-empresa.html';
                     }
                     return response.json();
                 })
@@ -773,7 +848,7 @@ function fecharModalNovaVaga() {
 
 function visualizarCurriculoTipoParams() {
     const tipo = localStorage.getItem('tipoCurriculoSelecionado');
-    const url = `https://empregototal.onrender.com/curriculos_tipo_params/${tipo}`;
+    const url = `http://localhost:3003/curriculos_tipo_params/${tipo}`;
 
     if (tipo === '') {
         return window.alert('O Tipo de Curriculo não foi selecionado!');
@@ -856,7 +931,7 @@ function exibirCurriculoTipoParams(curriculos) {
 }
 
 function consultarTodosCurriculosSelecionados() {
-    const url = `https://empregototal.onrender.com/curriculos_geral_selecionados`;
+    const url = `http://localhost:3003/curriculos_geral_selecionados`;
     const token = localStorage.getItem('token');
 
     fetch(url, {
@@ -903,11 +978,12 @@ function exibirTodosCurriculosSelecionados(curriculos) {
     curriculos.forEach((curriculo) => {
         const btnDescartar = document.createElement('button');
         const btnAtivar = document.createElement('button');
+        const btnDeletarSelecionar = document.createElement('button');
         const vagaDivDescartar = document.createElement('div');
         const vagaDivAtivar = document.createElement('div');
 
         function btnDescartarF() {
-            btnDescartar.textContent = 'Descartar';
+            btnDescartar.textContent = 'Inativar';
             btnDescartar.classList.add('btnDesativarVaga');
             btnDescartar.onclick = toggleDesativarCurriculo;
 
@@ -918,6 +994,11 @@ function exibirTodosCurriculosSelecionados(curriculos) {
             btnAtivar.classList.add('btnAtivarVaga');
             btnAtivar.onclick = toggleAtivarCurriculo;
 
+        }
+        function btnDeletar() {
+            btnDeletarSelecionar.textContent = 'Deletar';
+            btnDeletarSelecionar.classList.add('btnDeletarVaga');
+            btnDeletarSelecionar.onclick = deletarCurriculoSelecionado;
 
         }
 
@@ -969,9 +1050,11 @@ function exibirTodosCurriculosSelecionados(curriculos) {
                                 
                 `;
             btnAtivarF();
+            btnDeletar();
             vagaDivAtivar.classList.add('item2');
             vagaDivAtivar.innerHTML = vagaHTML;
             vagaDivAtivar.appendChild(btnAtivar);
+            vagaDivAtivar.appendChild(btnDeletarSelecionar);
             vagasContainer.appendChild(vagaDivAtivar);
         }
 
@@ -990,6 +1073,7 @@ function fecharDialogSelecionarCurriculo() {
 }
 
 function selecionarTipoCurriculo() {
+    localStorage.setItem('idCurriculoSelecionado', '');
     localStorage.setItem('tipoCurriculoSelecionado', '');
     document.querySelector('#vagas-container-empresa').innerHTML = 'Selecione uma opção para visualizar os dados.';
     document.querySelector('.filters').style.display = 'none';
@@ -1033,7 +1117,7 @@ function selecionarTipoCurriculo() {
 function visualizarTodosUsuariosCurriculos() {
     localStorage.setItem('idIncluirCurriculo', '');
     document.querySelector('.filters').style.display = 'none';
-    const url = `https://empregototal.onrender.com/vagas_usuarios_curriculos`;
+    const url = `http://localhost:3003/vagas_usuarios_curriculos`;
 
     const token = localStorage.getItem('token');
 
@@ -1074,6 +1158,7 @@ function visualizarTodosUsuariosCurriculos() {
 
 function exibirTodosUsuariosCurriculos(curriculos) {
 
+    localStorage.setItem('idDeletarCurriculo', '');
     
     
     if (curriculos.length === 0 || !curriculos) {

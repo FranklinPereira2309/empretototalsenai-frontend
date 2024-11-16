@@ -79,7 +79,7 @@ function login() {
     let password = document.querySelector('#passwordLogin').value;
     let cpf = document.querySelector('#cpfLogin').value;
 
-    const url = "https://empregototal.onrender.com/login";
+    const url = "http://localhost:3003/login";
 
     
     const login = {
@@ -138,7 +138,7 @@ function loginEmpresa() {
     let password = document.querySelector('#passwordLogin').value;
     let cnpj = document.querySelector('#cnpjLogin').value;
 
-    const url = "https://empregototal.onrender.com/loginEmpresa";
+    const url = "http://localhost:3003/loginEmpresa";
 
     
     const login = {
@@ -252,7 +252,7 @@ function cadastrarLogin() {
         senha: senhaConfirmada
     };
 
-    const url = 'https://empregototal.onrender.com/usuario';
+    const url = 'http://localhost:3003/usuario';
 
     fetch(url, {
         method: 'POST',
@@ -317,7 +317,7 @@ function cadastrarLoginEmpresa() {
         senha: senhaConfirmada
     };
 
-    const url = 'https://empregototal.onrender.com/empresa';
+    const url = 'http://localhost:3003/empresa';
 
     fetch(url, {
         method: 'POST',
@@ -433,35 +433,35 @@ document.addEventListener('DOMContentLoaded', (e) => {
         return window.alert('Sessão expirada. Você foi deslogado.');
     }
 
-    // function startSessionTimer() {
-    //     const expirationTime = localStorage.getItem('expiracaoToken');
-    //     if (!expirationTime) {
-    //         document.getElementById('session-timer').style.display = 'none';
-    //         return;
-    //     }
+    function startSessionTimer() {
+        const expirationTime = localStorage.getItem('expiracaoToken');
+        if (!expirationTime) {
+            document.getElementById('session-timer').style.display = 'none';
+            return;
+        }
 
-    //     const expirationDate = new Date(parseInt(expirationTime, 10));
-    //     const intervalId = setInterval(() => {
-    //         const now = new Date();
-    //         const timeRemaining = expirationDate - now;
+        const expirationDate = new Date(parseInt(expirationTime, 10));
+        const intervalId = setInterval(() => {
+            const now = new Date();
+            const timeRemaining = expirationDate - now;
 
-    //         if (timeRemaining <= 0) {
-    //             clearInterval(intervalId);
-    //             timeStorage();
-    //             return;
-    //         }
+            if (timeRemaining <= 0) {
+                clearInterval(intervalId);
+                timeStorage();
+                return;
+            }
 
-    //         const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //         const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-    //         const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-    //         // document.getElementById('time-remaining')
-    //         // .innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            // document.getElementById('time-remaining')
+            // .innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
-    //         document.getElementById('time-remaining').textContent = `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
-    //     }, 1000);
-    // }
-    // window.onload = startSessionTimer;
+            document.getElementById('time-remaining').textContent = `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+        }, 1000);
+    }
+    window.onload = startSessionTimer;
 });
 
 
