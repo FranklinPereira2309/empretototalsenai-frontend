@@ -27,7 +27,7 @@ function recupearLoginUsuario() {
     const email = document.querySelector('#email').value;
     const cpf = document.querySelector('#cpf').value;
 
-    const url = 'http://localhost:3003/usuario_alterar_senha_deslogado';
+    const url = 'https://empregototal.onrender.com/usuario_alterar_senha_deslogado';
 
     if (!email || !cpf || !novaSenha || !reNovaSenha) {
         return window.alert('Prencha todos os dados!');

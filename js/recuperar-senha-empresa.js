@@ -27,7 +27,7 @@ function recuperarLoginEmpresa() {
     const email= document.querySelector('#email').value;
     const cnpj = document.querySelector('#cnpj').value;
 
-    const url = 'http://localhost:3003/empresa_alterar_senha_deslogado';
+    const url = 'https://empregototal.onrender.com/empresa_alterar_senha_deslogado';
 
     if (!email || !cnpj || !novaSenha || !reNovaSenha) {
         return window.alert('Prencha todos os dados!');
