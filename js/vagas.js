@@ -85,7 +85,7 @@ document.querySelector('#jobForm').addEventListener('submit', (e) => {
     }
 
     if (token) {
-        const url = `https://empretototalsenai.netlify.app/vagas`;
+        const url = `https://empregototalsenai.netlify.app/vagas`;
 
 
         fetch(url, {

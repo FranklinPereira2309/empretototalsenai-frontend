@@ -59,7 +59,7 @@ function verificarExistenciaCurriculo() {
     const id_usuario = localStorage.getItem('id');
     if (token) {
 
-        const url = 'https://empretototalsenai.netlify.app/curriculos';
+        const url = 'https://empregototalsenai.netlify.app/curriculos';
         fetch(url, {
             method: 'GET',
             headers: {
@@ -95,7 +95,7 @@ function salvarCurriculoVaga() {
     const idVaga = localStorage.getItem('idVaga');
     const idCurriculo = localStorage.getItem('idCurriculo');
 
-    const url = `https://empretototalsenai.netlify.app/vagas_curriculos`;
+    const url = `https://empregototalsenai.netlify.app/vagas_curriculos`;
     const token = localStorage.getItem('token');
 
     const dados = {
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
     function buscarTodasAsVagas() {
-        const url = 'https://empretototalsenai.netlify.app/todas_as_vagas';
+        const url = 'https://empregototalsenai.netlify.app/todas_as_vagas';
 
         fetch(url, {
             method: 'GET',
@@ -492,7 +492,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 });
 // function consultarBuscarIdVaga() {
 //     const token = localStorage.getItem('token');
-//     const url = `https://empretototalsenai.netlify.app/curriculos_vagas`;
+//     const url = `https://empregototalsenai.netlify.app/curriculos_vagas`;
 
 
 //     fetch(url, {
