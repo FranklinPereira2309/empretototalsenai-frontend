@@ -1163,7 +1163,7 @@ function exibirTodosUsuariosCurriculos(curriculos) {
     
     if (curriculos.length === 0 || !curriculos) {
         
-        vagasContainer.innerHTML = `<h3 class="jobs" style="text-align:center">Nenhma Informação Disponível!</h3>`
+        vagasContainer.innerHTML = `<h3 class="jobs" style="text-align:center">Nenhuma Informação Disponível!</h3>`
         return;
         
     }
