@@ -10,6 +10,12 @@ const exibirCadastroDialogo = document.querySelector('dialog');
 const curriculosNaoHa = document.querySelector('#curriculosNaoHa');
 let dadosApi, tipoCurriculo, dadosFiltar;
 vagasConcorrendoCurriculos = [];
+let vagasFiltradas;
+
+document.addEventListener('DOMContentLoaded', (e) => {
+    e.preventDefault();
+    buscarTodasAsVagas();
+});
 
 function exibirModalIndex() {
     exibirCadastroDialogo.showModal();
@@ -221,27 +227,60 @@ function telaConfirmacaoCadCurriculo(curriculo) {
     exibirModalIndex();
 }
 
-document.addEventListener('DOMContentLoaded', (e) => {
 
-    let vagasFiltradas;
+function buscarTodasAsVagas() {
+    const url = 'https://empregototal2.onrender.com/todas_as_vagas';
 
-    e.preventDefault();
-
-    function exibirVagas(vagas) {
-        vagasContainer.innerHTML = '';
-        
-        if (vagas.length === 0) {
-            vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma vaga encontrada.</h1>';
-            return;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
         }
-        
-        vagas.forEach((vaga) => {
-            
-            const imagem = document.createElement('img');
-            const vagaDiv = document.createElement('div');
-            const buttonCad = document.createElement('button');
+    })
+        .then(response => {
+            if (response.status === 404) {
+                curriculosNaoHa.style.display = 'block';
+            }
+            return response.json()
+        })
+        .then(data => {
 
-            const vagaHTML = `
+            let mensagem = data.mensagem;
+            let erro = data.erro;
+
+
+            if (erro) {
+                return window.alert(erro);
+
+            }
+            if (mensagem) {
+                return window.alert(mensagem);
+            }
+            dadosFiltar = data;
+            exibirVagas(data);
+
+        })
+        .catch(erro => {
+            console.log('erro: ', erro);
+
+        })
+}
+
+function exibirVagas(vagas) {
+    vagasContainer.innerHTML = '';
+
+    if (vagas.length === 0) {
+        vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma vaga encontrada.</h1>';
+        return;
+    }
+
+    vagas.forEach((vaga) => {
+
+        const imagem = document.createElement('img');
+        const vagaDiv = document.createElement('div');
+        const buttonCad = document.createElement('button');
+
+        const vagaHTML = `
             <h3>${vaga.titulo}</h3>
             <p><strong>Empresa:</strong> ${vaga.nome_empresa}</p>
             <p><strong>Localização:</strong> ${vaga.localizacao}</p>
@@ -253,243 +292,203 @@ document.addEventListener('DOMContentLoaded', (e) => {
             <span style="display: none">${vaga.empresa_id}</span>
         `;
 
-            imagem.classList.add('img-pcd-empresa');
-            vaga.pcd ? imagem.src = '/assets/pcd1.jpeg' : imagem.style.display = 'none';
+        imagem.classList.add('img-pcd-empresa');
+        vaga.pcd ? imagem.src = '/assets/pcd1.jpeg' : imagem.style.display = 'none';
 
-            buttonCad.textContent = "Me Candidatar para Vaga";
-            buttonCad.classList.add('btn-cadastrar');
-            buttonCad.onclick = meCadastrar;
+        buttonCad.textContent = "Me Candidatar para Vaga";
+        buttonCad.classList.add('btn-cadastrar');
+        buttonCad.onclick = meCadastrar;
 
-            vagaDiv.classList.add('item');
-            vagaDiv.innerHTML = vagaHTML;
-            vagaDiv.appendChild(buttonCad);
-            vagaDiv.appendChild(imagem);
-            vagasContainer.appendChild(vagaDiv);
-        });
-    }
+        vagaDiv.classList.add('item');
+        vagaDiv.innerHTML = vagaHTML;
+        vagaDiv.appendChild(buttonCad);
+        vagaDiv.appendChild(imagem);
+        vagasContainer.appendChild(vagaDiv);
+    });
+}
 
+{
+    area.addEventListener('change', () => {
+        let opcao = area.value.toLowerCase();
+        let vagasFiltradasArea = filtrarArea(dadosFiltar, opcao);
 
-    function buscarTodasAsVagas() {
-        const url = 'https://empregototal.onrender.com/todas_as_vagas';
+        exibirVagas(vagasFiltradasArea);
+    });
 
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                if (response.status === 404) {
-                    curriculosNaoHa.style.display = 'block';
-                }
-                return response.json()
-            })
-            .then(data => {
+    modelo.addEventListener('change', () => {
+        let opcao = modelo.value.toLowerCase();
+        let vagasFiltradasModelo;
 
-                let mensagem = data.mensagem;
-                let erro = data.erro;
+        vagasFiltradasModelo = filtrarModelo(dadosFiltar, opcao);
+        exibirVagas(vagasFiltradasModelo);
 
-
-                if (erro) {
-                    return window.alert(erro);
-
-                }
-                if (mensagem) {
-                    return window.alert(mensagem);
-                }
-                dadosFiltar = data;
-                exibirVagas(data);
-
-            })
-            .catch(erro => {
-                console.log('erro: ', erro);
-
-            })
-    }
-
-    buscarTodasAsVagas();
-    {
-        area.addEventListener('change', () => {
-            let opcao = area.value.toLowerCase();
-            let vagasFiltradasArea = filtrarArea(dadosFiltar, opcao);
-
-            exibirVagas(vagasFiltradasArea);
-        });
-
-        modelo.addEventListener('change', () => {
-            let opcao = modelo.value.toLowerCase();
-            let vagasFiltradasModelo;
-
-            vagasFiltradasModelo = filtrarModelo(dadosFiltar, opcao);
+        if (vagasFiltradas) {
+            vagasFiltradasModelo = filtrarModelo(vagasFiltradasModelo, opcao);
             exibirVagas(vagasFiltradasModelo);
+        }
+    });
 
-            if (vagasFiltradas) {
-                vagasFiltradasModelo = filtrarModelo(vagasFiltradasModelo, opcao);
-                exibirVagas(vagasFiltradasModelo);
-            }
-        });
+    data.addEventListener('change', () => {
+        let opcao = data.value.toLowerCase();
+        let vagasFiltradasData;
 
-        data.addEventListener('change', () => {
-            let opcao = data.value.toLowerCase();
-            let vagasFiltradasData;
+        vagasFiltradasData = filtrarData(dadosFiltar, opcao);
+        exibirVagas(vagasFiltradasData);
 
-            vagasFiltradasData = filtrarData(dadosFiltar, opcao);
+        if (vagasFiltradas) {
+            vagasFiltradasData = filtrarData(vagasFiltradas, opcao);
             exibirVagas(vagasFiltradasData);
+        }
+    });
 
-            if (vagasFiltradas) {
-                vagasFiltradasData = filtrarData(vagasFiltradas, opcao);
-                exibirVagas(vagasFiltradasData);
-            }
-        });
+    contrato.addEventListener('change', () => {
+        let opcao = contrato.value.toLowerCase();
+        let vagasFiltradasContrato;
 
-        contrato.addEventListener('change', () => {
-            let opcao = contrato.value.toLowerCase();
-            let vagasFiltradasContrato;
+        vagasFiltradasContrato = filtrarContrato(dadosFiltar, opcao);
+        exibirVagas(vagasFiltradasContrato);
 
-            vagasFiltradasContrato = filtrarContrato(dadosFiltar, opcao);
+        if (vagasFiltradas) {
+            vagasFiltradasContrato = filtrarContrato(vagasFiltradas, opcao);
             exibirVagas(vagasFiltradasContrato);
+        }
+    });
 
-            if (vagasFiltradas) {
-                vagasFiltradasContrato = filtrarContrato(vagasFiltradas, opcao);
-                exibirVagas(vagasFiltradasContrato);
-            }
-        });
+    pcd.addEventListener('change', () => {
+        let opcao = pcd.value.toLowerCase();
+        let vagasFiltradasPcd;
 
-        pcd.addEventListener('change', () => {
-            let opcao = pcd.value.toLowerCase();
-            let vagasFiltradasPcd;
+        vagasFiltradasPcd = filtrarPcd(dadosFiltar, opcao);
+        exibirVagas(vagasFiltradasPcd);
 
-            vagasFiltradasPcd = filtrarPcd(dadosFiltar, opcao);
+        if (vagasFiltradas) {
+            vagasFiltradasPcd = filtrarPcd(vagasFiltradas, opcao);
+
             exibirVagas(vagasFiltradasPcd);
+        }
+    });
 
-            if (vagasFiltradas) {
-                vagasFiltradasPcd = filtrarPcd(vagasFiltradas, opcao);
+    salario.addEventListener('change', () => {
+        let opcao = salario.value.toLowerCase();
+        let vagasFiltradasSalario;
 
-                exibirVagas(vagasFiltradasPcd);
-            }
-        });
+        vagasFiltradasSalario = filtrarSalario(dadosFiltar, opcao);
+        exibirVagas(vagasFiltradasSalario);
 
-        salario.addEventListener('change', () => {
-            let opcao = salario.value.toLowerCase();
-            let vagasFiltradasSalario;
-
-            vagasFiltradasSalario = filtrarSalario(dadosFiltar, opcao);
+        if (vagasFiltradas) {
+            vagasFiltradasSalario = filtrarSalario(vagasFiltradas, opcao);
             exibirVagas(vagasFiltradasSalario);
+        }
+    });
 
-            if (vagasFiltradas) {
-                vagasFiltradasSalario = filtrarSalario(vagasFiltradas, opcao);
-                exibirVagas(vagasFiltradasSalario);
-            }
-        });
+    limparFiltros.addEventListener('change', () => {
+        let opcao = limparFiltros.value.toLowerCase();
 
-        limparFiltros.addEventListener('change', () => {
-            let opcao = limparFiltros.value.toLowerCase();
+        if (opcao === 'limpar') {
+            location.reload();
+        }
+    })
 
-            if (opcao === 'limpar') {
-                location.reload();
-            }
-        })
+    function filtrarArea(vagas, opcao) {
+        vagasFiltradas = vagas.filter((vaga) => vaga.setor_atuacao.toLowerCase() === opcao);
 
-        function filtrarArea(vagas, opcao) {
-            vagasFiltradas = vagas.filter((vaga) => vaga.setor_atuacao.toLowerCase() === opcao);
-
-            if (opcao === 'todos') {
-                vagasFiltradas = vagas;
-                area.selectedIndex = 0;
-            }
-
-            return vagasFiltradas;
+        if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+            area.selectedIndex = 0;
         }
 
-        function filtrarModelo(vagas, opcao) {
-            vagasFiltradas = vagas.filter((vaga) => vaga.modalidade.toLowerCase() === opcao);
-
-            if (opcao === 'todos') {
-                vagasFiltradas = vagas;
-                modelo.selectedIndex = 0;
-            }
-
-            return vagasFiltradas;
-        }
-
-        function filtrarData(vagas, opcao) {
-            let dataAtual = new Date()
-            let vagasAtualizadasData = [];
-
-            if (opcao === "semana") {
-                const ultimaSemana = new Date();
-                ultimaSemana.setDate(dataAtual.getDate() - 7);
-                vagasAtualizadasData = vagas.filter(vaga => new Date(vaga.data) <= ultimaSemana);
-            }
-            if (opcao === "mes") {
-                const ultimoMes = new Date();
-                ultimoMes.setMonth(dataAtual.getMonth() - 1);
-                vagasAtualizadasData = vagas.filter(vaga => new Date(vaga.data) <= ultimoMes);
-            }
-            if (opcao === "todos") {
-                vagasAtualizadasData = vagas;
-                data.selectedIndex = 0;
-            }
-            return vagasAtualizadasData;
-        }
-
-        function filtrarContrato(vagas, opcao) {
-            vagasFiltradas = vagas.filter((vaga) => vaga.tipo_contrato === opcao);
-
-            if (opcao === 'todos') {
-                vagasFiltradas = vagas;
-                contrato.selectedIndex = 0;
-            }
-
-            return vagasFiltradas;
-        }
-
-        function filtrarPcd(vagas, opcao) {
-            let opcaoBoolean = opcao === 'sim' ? true : false;
-            vagasFiltradas = vagas.filter((vaga) => vaga.pcd === opcaoBoolean);
-
-            if (opcao === 'todos') {
-                vagasFiltradas = vagas;
-                pcd.selectedIndex = 0;
-            }
-
-            return vagasFiltradas;
-        }
-
-        function filtrarSalario(vagas, opcao) {
-            if (opcao === 'mil') {
-                vagasFiltradas = vagas.filter((vaga) => {
-                    const salarioNumerico = extrairSalarioNumerico(vaga.salario);
-                    return salarioNumerico <= 100000;
-                });
-            } else if (opcao === 'miladois') {
-                vagasFiltradas = vagas.filter((vaga) => {
-                    const salarioNumerico = extrairSalarioNumerico(vaga.salario);
-                    return salarioNumerico >= 100100 && salarioNumerico <= 200100;
-                });
-            } else if (opcao === 'acimadois') {
-                vagasFiltradas = vagas.filter((vaga) => {
-                    const salarioNumerico = extrairSalarioNumerico(vaga.salario);
-                    return salarioNumerico > 200000;
-                });
-            } else if (opcao === 'todos') {
-                vagasFiltradas = vagas;
-                salario.selectedIndex = 0;
-            }
-
-            return vagasFiltradas;
-        }
+        return vagasFiltradas;
     }
 
-    function extrairSalarioNumerico(salario) {
-        const salarioLimpo = salario.replace(/[^\d,-]/g, '').replace(',', '.');
+    function filtrarModelo(vagas, opcao) {
+        vagasFiltradas = vagas.filter((vaga) => vaga.modalidade.toLowerCase() === opcao);
 
+        if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+            modelo.selectedIndex = 0;
+        }
 
-        const salarioNumerico = parseFloat(salarioLimpo);
-
-        return salarioNumerico;
+        return vagasFiltradas;
     }
-});
+
+    function filtrarData(vagas, opcao) {
+        let dataAtual = new Date()
+        let vagasAtualizadasData = [];
+
+        if (opcao === "semana") {
+            const ultimaSemana = new Date();
+            ultimaSemana.setDate(dataAtual.getDate() - 7);
+            vagasAtualizadasData = vagas.filter(vaga => new Date(vaga.data) <= ultimaSemana);
+        }
+        if (opcao === "mes") {
+            const ultimoMes = new Date();
+            ultimoMes.setMonth(dataAtual.getMonth() - 1);
+            vagasAtualizadasData = vagas.filter(vaga => new Date(vaga.data) <= ultimoMes);
+        }
+        if (opcao === "todos") {
+            vagasAtualizadasData = vagas;
+            data.selectedIndex = 0;
+        }
+        return vagasAtualizadasData;
+    }
+
+    function filtrarContrato(vagas, opcao) {
+        vagasFiltradas = vagas.filter((vaga) => vaga.tipo_contrato === opcao);
+
+        if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+            contrato.selectedIndex = 0;
+        }
+
+        return vagasFiltradas;
+    }
+
+    function filtrarPcd(vagas, opcao) {
+        let opcaoBoolean = opcao === 'sim' ? true : false;
+        vagasFiltradas = vagas.filter((vaga) => vaga.pcd === opcaoBoolean);
+
+        if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+            pcd.selectedIndex = 0;
+        }
+
+        return vagasFiltradas;
+    }
+
+    function filtrarSalario(vagas, opcao) {
+        if (opcao === 'mil') {
+            vagasFiltradas = vagas.filter((vaga) => {
+                const salarioNumerico = extrairSalarioNumerico(vaga.salario);
+                return salarioNumerico <= 100000;
+            });
+        } else if (opcao === 'miladois') {
+            vagasFiltradas = vagas.filter((vaga) => {
+                const salarioNumerico = extrairSalarioNumerico(vaga.salario);
+                return salarioNumerico >= 100100 && salarioNumerico <= 200100;
+            });
+        } else if (opcao === 'acimadois') {
+            vagasFiltradas = vagas.filter((vaga) => {
+                const salarioNumerico = extrairSalarioNumerico(vaga.salario);
+                return salarioNumerico > 200000;
+            });
+        } else if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+            salario.selectedIndex = 0;
+        }
+
+        return vagasFiltradas;
+    }
+}
+
+function extrairSalarioNumerico(salario) {
+    const salarioLimpo = salario.replace(/[^\d,-]/g, '').replace(',', '.');
+
+
+    const salarioNumerico = parseFloat(salarioLimpo);
+
+    return salarioNumerico;
+}
+
 function consultarBuscarIdVaga() {
     const token = localStorage.getItem('token');
     const url = `https://empregototal.onrender.com/curriculos_vagas`;
