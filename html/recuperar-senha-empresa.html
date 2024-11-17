@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="icon" href="/imagens/logo-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <a href="/index.html">
+                <img src="/imagens/logo.png" alt="Logo do Emprego Total">
+            </a>
+            <div>
+                <h1>Emprego <span class="cinza">Total</span></h1>
+                <h4>O seu portal de oportunidades</h4>
+            </div>
+        </div>
+
+        <nav>
+
+            <div id="btn-area">
+                <div class="area-pesquisa">
+                    <form action="#">
+                        <!-- <input type="search" placeholder="Buscar por profissional"> -->
+                    </form>
+                </div>
+                <div>
+                    <button onclick="mostrarMenu()" class="botao-menu">Menu</button>
+                    <div class="menu" id="menu">
+                        <ul>
+                            <li><a href="/index.html">Home</a></li>
+                            <li><a href="#">Buscar Empregos</a></li>
+                            <li><a class="link-logado" href="/html/cad-curriculo.html">Cadastrar CV</a></li>
+                            <li><a href="/html/cursos.html">Cursos</a></li>
+                            <li><a href="/html/curriculos.html">Currículos</a></li>
+                            <li><a href="/html/sobre-nos-page.html">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="usuarioLogado">
+            <div class="teste">
+                <h5>Área do Usuário:</h5>
+                <span id="emailLogado"></span>
+            </div>
+            <button onclick="mostrarMenuUsuario()" class="botao-menu-usuario">Perfil</button>
+            <div class="menu-usuario" id="menu-usuario">
+                <!-- <div id="session-timer">Tempo restante da sessão: <span id="time-remaining">--:--</span></div> -->
+                <ul>
+                    <li><a href="/html/cad-dados-pessoais.html">Dados pessoais</a></li>
+                    <li><a href="#">Cancelar assinatura</a></li>
+                    <li><a href="#">Cadastro e assinatura</a></li>
+                    <li><a href="#" id="sair" onclick="deslogarImediatamente()">Sair</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 id="tipoCurriculo">Menu de Opções</h2>
+            <nav>
+                <ul>                    
+                    <li><a  href="/html/login-page-enterprise.html">Login Empresa</a></li>                    
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            <section id="login">            
+                <h1>Recuperação Login - Empresa</h1>
+                <div class="area-form">
+                    <input type="email" placeholder="Digite seu E-mail" id="email">
+                    <input type="text" placeholder="Digite seu Cnpj" id="cnpj" oninput="mascaraCNPJ(event)" maxlength="18">    
+                    <div class="content-senha">
+                        <input type="password" oninput="corrigirInputs()" placeholder="Digite a nova senha" id="novaSenha"> 
+                        <img class="olho2" src="../assets/olho-fechado.svg"  onclick="mudarVisibilidadeNovaSenha()" alt="olho fechado">
+                    </div>
+                    <div class="content-senha">
+                        <input type="password" oninput="corrigirInputs()" placeholder="Repita a nova senha" id="re-novaSenha">
+                        <img class="olho3" src="../assets/olho-fechado.svg"  onclick="mudarVisibilidadeReNovaSenha()" alt="olho fechado">
+                    </div>
+                    <span id="erroSenhaAtualizar" style="display: none;">As senha digitadas Não são iguais!</span>
+                    <button class="alterar" onclick="recuperarLoginEmpresa()">Alterar</button>
+                    <button class="cancelar" onclick="window.location.href = '/index.html'">Cancelar</button>
+                </div>                
+            </section>
+        </main>
+    </div>    
+    <script src="/js/recuperar-senha-empresa.js"></script>
+</body>
+
+</html>
