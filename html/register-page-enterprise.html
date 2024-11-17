@@ -30,8 +30,14 @@
                     <input type="text" id="nome" placeholder="Nome" >
                     <input type="email" id="email" placeholder="E-mail" >
                     <input type="text" id="cnpj" placeholder="Ex: 55.550.527/0001-22" oninput="mascaraCNPJ(event)" maxlength="18">
-                    <input type="password" id="senha" oninput="omitirSpan()" placeholder="Senha" >
-                    <input type="password" id="re-senha" oninput="omitirSpan()" placeholder="Repetir a Senha" >
+                    <div class="content-senha">
+                        <input type="password" id="senha" oninput="omitirSpan()" placeholder="Senha" >
+                        <img src="../assets/olho-fechado.svg" alt="olho" onclick="mudarVisibilidadeSenhaCad()" class="olho1">
+                    </div>
+                    <div class="content-senha">
+                        <input type="password" id="re-senha" oninput="omitirSpan()" placeholder="Repetir a Senha" >
+                        <img src="../assets/olho-fechado.svg" alt="olho" onclick="mudarVisibilidadeReSenhaCad()" class="olho2">
+                    </div>
                     <span id="erroConfirmaSenha" style="display: none;">A senha digitada não é a mesma!</span>
                     <button onclick="cadastrarLoginEmpresa()" class="cadastrar">Cadastrar</button>     
                     <button class="cancelar"
@@ -43,7 +49,7 @@
             </div>
         </section>
     </main>
-    <script src="../js/script.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 
 </html>

@@ -3,7 +3,7 @@ let dadosApi;
 function consultarApi() {
     const token = localStorage.getItem('token');
     // const id_usuario = localStorage.getItem('id');
-    const url = 'https://empregototal.onrender.com/curriculosgeral';
+    const url = 'https://empretototalsenai.netlify.app/curriculosgeral';
 
     fetch(url, {
         method: 'GET',
@@ -102,7 +102,7 @@ function cadastrarCurriculo() {
         };
 
         if (token) {
-            const url = 'https://empregototal.onrender.com/curriculo';
+            const url = 'https://empretototalsenai.netlify.app/curriculo';
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -156,7 +156,7 @@ function verificarExistenciaCurriculo() {
 
     if (token) {
 
-        const url = 'https://empregototal.onrender.com/curriculos';
+        const url = 'https://empretototalsenai.netlify.app/curriculos';
         fetch(url, {
             method: 'GET',
             headers: {

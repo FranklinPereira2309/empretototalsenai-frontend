@@ -32,7 +32,10 @@
                 <span>Ou</span>
                 <input type="text" placeholder="Ex: 903.001.515-20" oninput="mascaraCPF(event)" maxlength="14" id="cpfLogin">
                 <span>E</span>
-                <input type="password" placeholder="Digite aqui sua senha" id="passwordLogin">
+                <div class="content-senha">
+                    <input type="password" placeholder="Digite aqui sua senha" id="passwordLogin">
+                    <img class="olho" onclick="mudarVisibilidadeSenha()" src="../assets/olho-fechado.svg" alt="olho fechado">
+                </div>
                 <button onclick="login()">Login</button>
             </div>
             <div id="cadastro">

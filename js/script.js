@@ -79,9 +79,9 @@ function login() {
     let password = document.querySelector('#passwordLogin').value;
     let cpf = document.querySelector('#cpfLogin').value;
 
-    const url = "https://empregototal.onrender.com/login";
+    const url = "https://empretototalsenai.netlify.app/login";
 
-    
+
     const login = {
         email: email.toLowerCase(),
         cpf: cpf.replace(/\D/g, ''),
@@ -109,10 +109,10 @@ function login() {
             }
 
             window.alert('Login Efetuado!');
-            
-            if(window.confirm('Deseja ir para página de Dashboard?')) {
+
+            if (window.confirm('Deseja ir para página de Dashboard?')) {
                 window.location.href = '/html/dashboard-usuario.html';
-            }else {
+            } else {
 
                 window.location.href = '/index.html';
             }
@@ -138,9 +138,9 @@ function loginEmpresa() {
     let password = document.querySelector('#passwordLogin').value;
     let cnpj = document.querySelector('#cnpjLogin').value;
 
-    const url = "https://empregototal.onrender.com/loginEmpresa";
+    const url = "https://empretototalsenai.netlify.app/loginEmpresa";
 
-    
+
     const login = {
         email: email.toLowerCase(),
         cnpj: cnpj.replace(/\D/g, ''),
@@ -216,7 +216,8 @@ function adicionarLocalStorage(data, tempo) {
 
 function omitirSpan() {
     const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha')
-
+    document.querySelector('#senha').style.border = 'none';
+    document.querySelector('#re-senha').style.border = 'none';
     erroConfirmaSenha.style.display = 'none';
 }
 
@@ -237,13 +238,15 @@ function cadastrarLogin() {
         event.preventDefault();
     });
 
-    if(senha === repetirSenha) {
+    if (senha === repetirSenha) {
         senhaConfirmada = senha;
-    }else {
+    } else {
+        document.querySelector('#senha').style.border = '1px solid red';
+        document.querySelector('#re-senha').style.border = '1px solid red';
         return erroConfirmaSenha.style.display = 'block';
     }
 
-   
+
 
     const novoLogin = {
         nome: nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase(),
@@ -252,7 +255,7 @@ function cadastrarLogin() {
         senha: senhaConfirmada
     };
 
-    const url = 'https://empregototal.onrender.com/usuario';
+    const url = 'https://empretototalsenai.netlify.app/usuario';
 
     fetch(url, {
         method: 'POST',
@@ -300,13 +303,16 @@ function cadastrarLoginEmpresa() {
 
     document.getElementById('registroForm').addEventListener('submit', function (event) {
         event.preventDefault();
-    });   
+    });
 
     let novoNome = capitalizePalavas(nome);
 
-    if(senha === repetirSenha) {
+    if (senha === repetirSenha) {
         senhaConfirmada = senha;
-    }else {
+    } else {
+        document.querySelector('#senha').style.border = '1px solid red';
+        document.querySelector('#re-senha').style.border = '1px solid red';
+
         return erroConfirmaSenha.style.display = 'block';
     }
 
@@ -317,7 +323,7 @@ function cadastrarLoginEmpresa() {
         senha: senhaConfirmada
     };
 
-    const url = 'https://empregototal.onrender.com/empresa';
+    const url = 'https://empretototalsenai.netlify.app/empresa';
 
     fetch(url, {
         method: 'POST',
@@ -401,7 +407,7 @@ function capitalizePalavas(str) {
 
 function aplicarMascara(valor, mascara) {
     let i = 0;
-    const valorFormatado = valor.replace(/\D/g, ''); 
+    const valorFormatado = valor.replace(/\D/g, '');
     return mascara.replace(/#/g, _ => valorFormatado[i++] || '');
 }
 
@@ -420,11 +426,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
     const identificacao = localStorage.getItem('identificacao');
 
-   
+
     function timeStorage() {
-        if(Number(identificacao.length) === 14) {
+        if (Number(identificacao.length) === 14) {
             window.location.href = '/html/login-page-enterprise.html';
-        }else {
+        } else {
 
             window.location.href = '/html/login-page.html';
         }
@@ -455,7 +461,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
             document.getElementById('time-remaining')
-            .innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                .innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
             document.getElementById('time-remaining').textContent = `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
         }, 1000);
@@ -463,5 +469,28 @@ document.addEventListener('DOMContentLoaded', (e) => {
     window.onload = startSessionTimer;
 });
 
+
+function mudarVisibilidadeSenha() {
+    let olho = document.querySelector('.olho');
+    let inputSenha = document.querySelector('#passwordLogin');
+    inputSenha.type = inputSenha.type === 'password' ? 'text' : 'password';
+    olho.src = inputSenha.type === 'text' ? '../assets/olho-aberto.svg' : '../assets/olho-fechado.svg'
+}
+function mudarVisibilidadeSenhaCad() {
+    let olho = document.querySelector('.olho1');
+
+    let inputSenha = document.querySelector('#senha');
+
+    inputSenha.type = inputSenha.type === 'password' ? 'text' : 'password';
+
+    olho.src = inputSenha.type === 'text' ? '../assets/olho-aberto.svg' : '../assets/olho-fechado.svg'
+
+}
+function mudarVisibilidadeReSenhaCad() {
+    let olho = document.querySelector('.olho2');
+    let inputSenha = document.querySelector('#re-senha');
+    inputSenha.type = inputSenha.type === 'password' ? 'text' : 'password';
+    olho.src = inputSenha.type === 'text' ? '../assets/olho-aberto.svg' : '../assets/olho-fechado.svg'
+}
 
 
