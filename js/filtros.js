@@ -229,7 +229,7 @@ function telaConfirmacaoCadCurriculo(curriculo) {
 
 
 function buscarTodasAsVagas() {
-    const url = '/todas_as_vagas';
+    const url = 'https://empregototal.onrender.com/todas_as_vagas';
 
     fetch(url, {
         method: 'GET',
