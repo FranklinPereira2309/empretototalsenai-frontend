@@ -7,7 +7,7 @@ const salario = document.querySelector('#salario');
 const limparFiltros = document.querySelector('#limparFiltros');
 const vagasContainer = document.querySelector('#jobs-container');
 const exibirCadastroDialogo = document.querySelector('dialog');
-const curriculosNaoHa = document.querySelector('#curriculosNaoHa');
+
 let dadosApi, tipoCurriculo, dadosFiltar;
 vagasConcorrendoCurriculos = [];
 let vagasFiltradas;
@@ -239,7 +239,8 @@ function buscarTodasAsVagas() {
     })
         .then(response => {
             if (response.status === 404) {
-                curriculosNaoHa.style.display = 'block';
+                vagasContainer.innerHTML = '';
+                vagasContainer.innerHTML = '<h3><strong>Não há Vagas Cadastradas no Momento!</strong></h3>';
             }
             return response.json()
         })
