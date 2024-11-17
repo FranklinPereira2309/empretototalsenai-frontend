@@ -20,7 +20,7 @@ function consultarUsuariosCompletos() {
 
     const token = localStorage.getItem('token');
 
-    const url = 'https://empregototalsenai.netlify.app/usuarios_completos'
+    const url = 'https://empregototal.onrender.com/usuarios_completos'
 
     fetch(url, {
         method: 'GET',
@@ -124,7 +124,7 @@ function cadastrarUsuario() {
 
     if (token) {
 
-        const url = 'https://empregototalsenai.netlify.app/usuarios_completos';
+        const url = 'https://empregototal.onrender.com/usuarios_completos';
         fetch(url, {
             method: 'POST',
             headers: {
@@ -197,7 +197,7 @@ function atualizarUsuario() {
         }
 
 
-        const url = `https://empregototalsenai.netlify.app/usuarios_completos`;
+        const url = `https://empregototal.onrender.com/usuarios_completos`;
 
         const token = localStorage.getItem('token');
 
@@ -302,7 +302,7 @@ function consultarCepApi() {
 
 
 function viaCepApi(cep) {
-    const url = `https://empregototalsenai.netlify.app/via_cep_api/${cep}`;
+    const url = `https://empregototal.onrender.com/via_cep_api/${cep}`;
     fetch(url, {
         method: 'GET',
         headers: {

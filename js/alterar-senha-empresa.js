@@ -33,7 +33,7 @@ function alterarNovaSenha() {
     const reNovaSenha = document.querySelector('#re-novaSenha');
 
     const token = localStorage.getItem('token');
-    const url = 'https://empregototalsenai.netlify.app/empresa_alterar_senha';
+    const url = 'https://empregototal.onrender.com/empresa_alterar_senha';
 
     if (!senhaAtual.value || !novaSenha.value || !reNovaSenha.value) {
         return window.alert('Prencha todos os dados!');

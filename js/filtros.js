@@ -59,7 +59,7 @@ function verificarExistenciaCurriculo() {
     const id_usuario = localStorage.getItem('id');
     if (token) {
 
-        const url = 'https://empregototalsenai.netlify.app/curriculos';
+        const url = 'https://empregototal.onrender.com/curriculos';
         fetch(url, {
             method: 'GET',
             headers: {
@@ -95,7 +95,7 @@ function salvarCurriculoVaga() {
     const idVaga = localStorage.getItem('idVaga');
     const idCurriculo = localStorage.getItem('idCurriculo');
 
-    const url = `https://empregototalsenai.netlify.app/vagas_curriculos`;
+    const url = `https://empregototal.onrender.com/vagas_curriculos`;
     const token = localStorage.getItem('token');
 
     const dados = {
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
     function buscarTodasAsVagas() {
-        const url = 'https://empregototalsenai.netlify.app/todas_as_vagas';
+        const url = 'https://empregototal.onrender.com/todas_as_vagas';
 
         fetch(url, {
             method: 'GET',
@@ -490,43 +490,43 @@ document.addEventListener('DOMContentLoaded', (e) => {
         return salarioNumerico;
     }
 });
-// function consultarBuscarIdVaga() {
-//     const token = localStorage.getItem('token');
-//     const url = `https://empregototalsenai.netlify.app/curriculos_vagas`;
+function consultarBuscarIdVaga() {
+    const token = localStorage.getItem('token');
+    const url = `https://empregototal.onrender.com/curriculos_vagas`;
 
 
-//     fetch(url, {
-//         method: 'GET',
-//         headers: {
-//             'Authorization': `Bearer ${token}`,
-//             'Content-Type': 'application/json'
-//         }
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             const erro = data.erro;
-//             const mensagem = data.mensagem;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const erro = data.erro;
+            const mensagem = data.mensagem;
 
-//             if (erro) {
-//                 return window.alert(erro);
-//             }
-//             if (mensagem) {
-//                 return window.alert(mensagem);
-//             }
+            if (erro) {
+                return window.alert(erro);
+            }
+            if (mensagem) {
+                return window.alert(mensagem);
+            }
 
-//             data.forEach((dados) => {
-//                 vagasConcorrendoCurriculos.push(dados.vaga_id);
-//             });
-
-
-//         })
-//         .catch(erro => {
-//             console.log(erro);
-
-//         })
+            data.forEach((dados) => {
+                vagasConcorrendoCurriculos.push(dados.vaga_id);
+            });
 
 
-// }
+        })
+        .catch(erro => {
+            console.log(erro);
+
+        })
+
+
+}
 
 const token = localStorage.getItem('token');
 

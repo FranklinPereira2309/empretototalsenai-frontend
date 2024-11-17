@@ -23,7 +23,7 @@ const id_usuario = localStorage.getItem('id');
 let dadosApi;
 
 if (token) {
-    const url = 'https://empregototalsenai.netlify.app/curriculos';
+    const url = 'https://empregototal.onrender.com/curriculos';
     fetch(url, {
         method: 'GET',
         headers: {
@@ -237,7 +237,7 @@ function editarCurriculo() {
 
 
 
-    const url = `https://empregototalsenai.netlify.app/curriculo`;
+    const url = `https://empregototal.onrender.com/curriculo`;
 
     let tipo = tipoCurriculo;
 
@@ -317,7 +317,7 @@ function deletarCurriculo() {
     const id = localStorage.getItem('id');
     const token = localStorage.getItem('token');
 
-    const url = `https://empregototalsenai.netlify.app/curriculo/${id}/${tipo}`;
+    const url = `https://empregototal.onrender.com/curriculo/${id}/${tipo}`;
 
 
 

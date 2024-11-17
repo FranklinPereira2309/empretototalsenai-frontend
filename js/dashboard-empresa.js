@@ -160,7 +160,7 @@ function visualizarVagaSelecionada() {
     idVaga = localStorage.getItem('idVagaSelecionada');
     
 
-    const url = `https://empregototalsenai.netlify.app/vaga/${idVaga}`;
+    const url = `https://empregototal.onrender.com/vaga/${idVaga}`;
     const token = localStorage.getItem('token');
 
     fetch(url, {
@@ -195,7 +195,7 @@ function visualizarVagaSelecionada() {
 function visualizarVagas() {
     const token = localStorage.getItem('token');
 
-    const url = 'https://empregototalsenai.netlify.app/vagas';
+    const url = 'https://empregototal.onrender.com/vagas';
 
     fetch(url, {
         method: 'GET',
@@ -448,7 +448,7 @@ function salvarEditarVaga() {
 
     const token = localStorage.getItem('token');
     const idVaga = localStorage.getItem('idVagaSelecionada');
-    const url = `https://empregototalsenai.netlify.app/vagas/${idVaga}`;
+    const url = `https://empregototal.onrender.com/vagas/${idVaga}`;
 
     if (token) {
         fetch(url, {
@@ -511,7 +511,7 @@ function toggleAtivarCurriculo() {
                 visualizar_curriculo: visualizar_curriculo === true? false : true
             }
             
-            const url = `https://empregototalsenai.netlify.app/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
+            const url = `https://empregototal.onrender.com/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
 
             fetch(url, {
                 method: 'PATCH',
@@ -572,7 +572,7 @@ function toggleDesativarCurriculo() {
 
         if (window.confirm('Confirma a Ação para o  Curriculo Atual?')) {
             
-            const url = `https://empregototalsenai.netlify.app/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
+            const url = `https://empregototal.onrender.com/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
             
             fetch(url, {
                 method: 'PATCH',
@@ -625,7 +625,7 @@ function deletarCurriculoSelecionado() {
         
         if (window.confirm('Deletar Definitivamente o Curriculo Atual?')) {
             const curriculo_id = localStorage.getItem('idDeletarCurriculo');
-            const url = `https://empregototalsenai.netlify.app/curriculo_selecionado/${curriculo_id}`;
+            const url = `https://empregototal.onrender.com/curriculo_selecionado/${curriculo_id}`;
             
             fetch(url, {
                 method: 'DELETE',
@@ -679,7 +679,7 @@ function selecionarCurriculo() {
         
         if (window.confirm('Confirma a Ação para o  Curriculo Atual?')) {
             const curriculo_id = localStorage.getItem('idIncluirCurriculo');
-            const url = `https://empregototalsenai.netlify.app/curriculo_selecionado`;
+            const url = `https://empregototal.onrender.com/curriculo_selecionado`;
             const token = localStorage.getItem('token');
 
             const inclusao = {
@@ -736,7 +736,7 @@ function deletarVagaCadastrada() {
 
     idVaga = localStorage.getItem('idVagaSelecionada');
 
-    const url = `https://empregototalsenai.netlify.app/vagas/${idVaga}`;
+    const url = `https://empregototal.onrender.com/vagas/${idVaga}`;
 
     fetch(url, {
         method: 'DELETE',
@@ -776,7 +776,7 @@ function cadastrarCandidato() {
     const visualizar_curriculo = true;
     const token = localStorage.getItem('token');
 
-    const url = `https://empregototalsenai.netlify.app/curriculo_selecionado`;
+    const url = `https://empregototal.onrender.com/curriculo_selecionado`;
 
     const curriculo = {
         curriculo_id,
@@ -848,7 +848,7 @@ function fecharModalNovaVaga() {
 
 function visualizarCurriculoTipoParams() {
     const tipo = localStorage.getItem('tipoCurriculoSelecionado');
-    const url = `https://empregototalsenai.netlify.app/curriculos_tipo_params/${tipo}`;
+    const url = `https://empregototal.onrender.com/curriculos_tipo_params/${tipo}`;
 
     if (tipo === '') {
         return window.alert('O Tipo de Curriculo não foi selecionado!');
@@ -931,7 +931,7 @@ function exibirCurriculoTipoParams(curriculos) {
 }
 
 function consultarTodosCurriculosSelecionados() {
-    const url = `https://empregototalsenai.netlify.app/curriculos_geral_selecionados`;
+    const url = `https://empregototal.onrender.com/curriculos_geral_selecionados`;
     const token = localStorage.getItem('token');
 
     fetch(url, {
@@ -1117,7 +1117,7 @@ function selecionarTipoCurriculo() {
 function visualizarTodosUsuariosCurriculos() {
     localStorage.setItem('idIncluirCurriculo', '');
     document.querySelector('.filters').style.display = 'none';
-    const url = `https://empregototalsenai.netlify.app/vagas_usuarios_curriculos`;
+    const url = `https://empregototal.onrender.com/vagas_usuarios_curriculos`;
 
     const token = localStorage.getItem('token');
 

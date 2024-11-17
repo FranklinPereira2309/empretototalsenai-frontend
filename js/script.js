@@ -79,7 +79,7 @@ function login() {
     let password = document.querySelector('#passwordLogin').value;
     let cpf = document.querySelector('#cpfLogin').value;
 
-    const url = "https://empregototalsenai.netlify.app/login";
+    const url = "https://empregototal.onrender.com/login";
 
 
     const login = {
@@ -138,7 +138,7 @@ function loginEmpresa() {
     let password = document.querySelector('#passwordLogin').value;
     let cnpj = document.querySelector('#cnpjLogin').value;
 
-    const url = "https://empregototalsenai.netlify.app/loginEmpresa";
+    const url = "https://empregototal.onrender.com/loginEmpresa";
 
 
     const login = {
@@ -255,7 +255,7 @@ function cadastrarLogin() {
         senha: senhaConfirmada
     };
 
-    const url = 'https://empregototalsenai.netlify.app/usuario';
+    const url = 'https://empregototal.onrender.com/usuario';
 
     fetch(url, {
         method: 'POST',
@@ -323,7 +323,7 @@ function cadastrarLoginEmpresa() {
         senha: senhaConfirmada
     };
 
-    const url = 'https://empregototalsenai.netlify.app/empresa';
+    const url = 'https://empregototal.onrender.com/empresa';
 
     fetch(url, {
         method: 'POST',
