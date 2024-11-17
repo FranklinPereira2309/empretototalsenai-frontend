@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
     function buscarTodasAsVagas() {
-        const url = `https://empretototalsenai.netlify.app/todas_as_vagas`;
+        const url = 'https://empretototalsenai.netlify.app/todas_as_vagas';
 
         fetch(url, {
             method: 'GET',
