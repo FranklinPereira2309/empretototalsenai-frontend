@@ -33,7 +33,7 @@ function alterarNovaSenha() {
     const reNovaSenha = document.querySelector('#re-novaSenha');
 
     const token = localStorage.getItem('token');
-    const url = 'http://localhost:3003/empresa_alterar_senha';
+    const url = 'https://empretototalsenai.netlify.app/empresa_alterar_senha';
 
     if (!senhaAtual.value || !novaSenha.value || !reNovaSenha.value) {
         return window.alert('Prencha todos os dados!');

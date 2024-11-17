@@ -79,7 +79,7 @@ function login() {
     let password = document.querySelector('#passwordLogin').value;
     let cpf = document.querySelector('#cpfLogin').value;
 
-    const url = "http://localhost:3003/login";
+    const url = "https://empretototalsenai.netlify.app/login";
 
 
     const login = {
@@ -138,7 +138,7 @@ function loginEmpresa() {
     let password = document.querySelector('#passwordLogin').value;
     let cnpj = document.querySelector('#cnpjLogin').value;
 
-    const url = "http://localhost:3003/loginEmpresa";
+    const url = "https://empretototalsenai.netlify.app/loginEmpresa";
 
 
     const login = {
@@ -255,7 +255,7 @@ function cadastrarLogin() {
         senha: senhaConfirmada
     };
 
-    const url = 'http://localhost:3003/usuario';
+    const url = 'https://empretototalsenai.netlify.app/usuario';
 
     fetch(url, {
         method: 'POST',
@@ -323,7 +323,7 @@ function cadastrarLoginEmpresa() {
         senha: senhaConfirmada
     };
 
-    const url = 'http://localhost:3003/empresa';
+    const url = 'https://empretototalsenai.netlify.app/empresa';
 
     fetch(url, {
         method: 'POST',
