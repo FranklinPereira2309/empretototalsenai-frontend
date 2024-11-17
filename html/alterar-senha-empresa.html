@@ -66,41 +66,36 @@
         <aside class="sidebar">
             <h2 id="tipoCurriculo">Menu de Opções</h2>
             <nav>
-                <ul>
-                    <li><a href="/html/dashboard-usuario.html">Dashboard</a></li>
+                <ul>                    
+                    <li><a  href="/html/dashboard-empresa.html">Dashboard</a></li>                    
                 </ul>
             </nav>
         </aside>
 
         <main>
-            <section id="login">
-                <h1>Alteração de Senha - Usuário</h1>
+            <section id="login">            
+                <h1>Alteração de Senha - Empresa</h1>
                 <div class="area-form">
                     <div class="content-senha">
-                        <input type="password" placeholder="Digite a senha atual" id="senhaAtual">
-                        <img class="olho1" src="../assets/olho-fechado.svg" onclick="mudarVisibilidadeSenhaAtual()"
-                            alt="olho fechado">
+                        <input type="password" placeholder="Digite a senha atual" id="senhaAtual"> 
+                        <img class="olho1" src="../assets/olho-fechado.svg" onclick="mudarVisibilidadeSenhaAtual()" alt="olho fechado">
                     </div>
                     <div class="content-senha">
-                        <input type="password" oninput="corrigirInputs()" placeholder="Digite a nova senha"
-                            id="novaSenha">
-                        <img class="olho2" src="../assets/olho-fechado.svg" onclick="mudarVisibilidadeNovaSenha()"
-                            alt="olho fechado">
+                        <input type="password" oninput="corrigirInputs()" placeholder="Digite a nova senha" id="novaSenha"> 
+                        <img class="olho2" src="../assets/olho-fechado.svg"  onclick="mudarVisibilidadeNovaSenha()" alt="olho fechado">
                     </div>
                     <div class="content-senha">
-                        <input type="password" oninput="corrigirInputs()" placeholder="Repita a nova senha"
-                            id="re-novaSenha">
-                        <img class="olho3" src="../assets/olho-fechado.svg" onclick="mudarVisibilidadeReNovaSenha()"
-                            alt="olho fechado">
+                        <input type="password" oninput="corrigirInputs()" placeholder="Repita a nova senha" id="re-novaSenha">
+                        <img class="olho3" src="../assets/olho-fechado.svg"  onclick="mudarVisibilidadeReNovaSenha()" alt="olho fechado">
                     </div>
                     <span id="erroSenhaAtualizar" style="display: none;">As senha digitadas Não são iguais!</span>
                     <button class="alterar" onclick="alterarNovaSenha()">Alterar</button>
-                    <button class="cancelar" onclick="window.location.href = '/html/dashboard-usuario.html'">Cancelar</button>
-                </div>
+                    <button class="cancelar" onclick="window.location.href = '/html/dashboard-empresa.html'">Cancelar</button>
+                </div>                
             </section>
         </main>
-    </div>
-    <script src="/js/alterar-senha-usuario.js"></script>
+    </div>    
+    <script src="/js/alterar-senha-empresa.js"></script>
 </body>
 
 </html>
