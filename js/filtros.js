@@ -240,6 +240,7 @@ function buscarTodasAsVagas() {
         .then(response => {
             if (response.status === 404) {
                 vagasContainer.innerHTML = '';
+                vagasContainer.classList.add('card');
                 vagasContainer.innerHTML = '<h3><strong>Não há Vagas Cadastradas no Momento!</strong></h3>';
             }
             return response.json()
