@@ -32,7 +32,10 @@
                 <span>Ou</span>
                 <input type="text" placeholder="Ex: 55.550.527/0001-22" oninput="mascaraCNPJ(event)" maxlength="18"  id="cnpjLogin">
                 <span>E</span>
-                <input type="password" placeholder="Digite aqui sua senha" id="passwordLogin">
+                <div class="content-senha">
+                    <input type="password" placeholder="Digite aqui sua senha" id="passwordLogin">
+                    <img class="olho" src="../assets/olho-fechado.svg" onclick="mudarVisibilidadeSenha()" alt="olho fechado">
+                </div>
                 <button onclick="loginEmpresa()">Login</button>
             </div>
             <div id="cadastro">

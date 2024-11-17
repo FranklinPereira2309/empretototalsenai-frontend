@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
     <link rel="icon" href="/imagens/logo-icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="/css/register.css">
 </head>
 
 <body>
@@ -30,8 +30,14 @@
                     <input type="text" id="nome" placeholder="Nome" >
                     <input type="email" id="email" placeholder="E-mail" >
                     <input type="text" id="cpf" placeholder="Ex: 903.001.515-20" oninput="mascaraCPF(event)" maxlength="14" >
-                    <input type="password" id="senha" oninput="omitirSpan()" placeholder="Senha" >
-                    <input type="password" id="re-senha" oninput="omitirSpan()" placeholder="Repita a Senha" >
+                    <div class="content-senha">
+                        <input type="password" id="senha" oninput="omitirSpan()" placeholder="Senha" >
+                        <img src="../assets/olho-fechado.svg" alt="olho" onclick="mudarVisibilidadeSenhaCad()" class="olho1">
+                    </div>
+                    <div class="content-senha">
+                        <input type="password" id="re-senha" oninput="omitirSpan()" placeholder="Repetir a Senha" >
+                        <img src="../assets/olho-fechado.svg" alt="olho" onclick="mudarVisibilidadeReSenhaCad()" class="olho2">
+                    </div>
                     <span id="erroConfirmaSenha" style="display: none;">A senha digitada não é a mesma!</span>
                     <button onclick="cadastrarLogin()" class="cadastrar">Cadastrar</button>     
                     <button class="cancelar"
