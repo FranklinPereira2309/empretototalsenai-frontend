@@ -289,14 +289,10 @@ function exibirDadosApi(dados) {
 
 function consultarCepApi() {
     let cep = document.querySelector('#cep').value;
-    let novoCep = cep.replace(/\D/g, '');
-
-    if (window.confirm('Consultar Cep?')) {
-        viaCepApi(novoCep);
-
-    } else {
-        return
-    }
+    let novoCep = cep.replace(/\D/g, '');    
+    
+    viaCepApi(novoCep);
+   
 }
 
 
