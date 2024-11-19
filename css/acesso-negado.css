@@ -24,6 +24,8 @@ header {
 }
 
 .container-acesso-negado img {
+    width: 900px;
+    height: 900px;
     mix-blend-mode: darken;
 }
 
