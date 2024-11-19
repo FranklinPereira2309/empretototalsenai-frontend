@@ -1,4 +1,6 @@
-
+const openModalButton = document.getElementById('openModal');
+const modal = document.getElementById('modal');
+const closeModalButton = document.getElementById('closeModal');
 const span = document.querySelector('#erroSenhaAtualizar');
 
 
@@ -36,12 +38,12 @@ function recupearLoginUsuario() {
     if (novaSenha !== reNovaSenha) {
         document.querySelector('#novaSenha').style.border = '1px solid red';
         document.querySelector('#re-novaSenha').style.border = '1px solid red'
-        
+
         return span.style.display = 'block'
     }
 
     const dados = {
-        email,
+        email: email.toLowerCase(),
         cpf: cpf.replace(/\D/g, ''),
         novaSenha
     }
@@ -55,7 +57,8 @@ function recupearLoginUsuario() {
     })
         .then(response => {
             if (response.status === 201) {
-                window.alert('Senha Cadastrada com Sucesso!');
+                // window.alert('Senha Cadastrada com Sucesso!');
+                modal.style.display = 'flex'; 
             }
             return response.json();
         })
@@ -69,7 +72,7 @@ function recupearLoginUsuario() {
             if (mensagem) {
                 return window.alert(mensagem);
             }
-            
+
             document.querySelector('#email').value = '';
             document.querySelector('#cpf').value = '';
             document.querySelector('#novaSenha').value = '';
@@ -182,3 +185,15 @@ function mascaraCPF(event) {
     const campo = event.target;
     campo.value = aplicarMascara(campo.value, '###.###.###-##');
 }
+
+closeModalButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+    
+});
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+       
+    }
+});

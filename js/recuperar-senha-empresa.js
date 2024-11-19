@@ -1,4 +1,6 @@
-
+const openModalButton = document.getElementById('openModal');
+const modal = document.getElementById('modal');
+const closeModalButton = document.getElementById('closeModal');
 const span = document.querySelector('#erroSenhaAtualizar');
 
 
@@ -41,10 +43,11 @@ function recuperarLoginEmpresa() {
     }
 
     const dados = {
-        email,
+        email: email.toLowerCase(),
         cnpj: cnpj.replace(/\D/g, ''),
         novaSenha
     }
+ 
 
     fetch(url, {
         method: 'PUT',
@@ -55,7 +58,8 @@ function recuperarLoginEmpresa() {
     })
         .then(response => {
             if (response.status === 201) {
-                window.alert('Senha Cadastrada com Sucesso!');
+                // window.alert('Senha Cadastrada com Sucesso!');
+                modal.style.display = 'flex'; 
             }
             return response.json();
         })
@@ -182,3 +186,15 @@ function mascaraCNPJ(event) {
     const campo = event.target;
     campo.value = aplicarMascara(campo.value, '##.###.###/####-##');
 }
+
+closeModalButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+    
+});
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+       
+    }
+});
