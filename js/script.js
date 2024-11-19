@@ -1,3 +1,10 @@
+const modal = document.querySelector('.container-modal');
+    const closeModalButton = document.querySelector('#closeModal');
+
+closeModalButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+})
+
 function mostrarMenu() {
     const btnMenu = document.querySelector('.botao-menu');
     const menu = document.querySelector('#menu');
@@ -151,7 +158,7 @@ function loginEmpresa() {
         },
         body: JSON.stringify(login)
     })
-        .then(response => response.json())
+        .then(response =>  response.json())
         .then(data => {
             const mensagem = data.mensagem;
             const erro = data.erro;
@@ -261,7 +268,13 @@ function cadastrarLogin() {
         },
         body: JSON.stringify(novoLogin)
     })
-        .then(response => response.json())
+        .then(response => {
+            if (response.status === 201) {
+                modal.style.display = 'flex';
+            }
+            return response.json()
+        }
+        )
         .then(data => {
             const mensagem = data.mensagem;
             const erro = data.erro;
@@ -278,7 +291,7 @@ function cadastrarLogin() {
             document.querySelector('#senha').value = '';
             document.querySelector('#re-senha').value = '';
 
-            window.alert('Usuário registrado com sucesso!');
+            // window.alert('Usuário registrado com sucesso!');
 
         })
         .catch((error) => {
@@ -329,7 +342,12 @@ function cadastrarLoginEmpresa() {
         },
         body: JSON.stringify(novoLogin)
     })
-        .then(response => response.json())
+        .then(response => {
+            if(response.status === 201) {
+                modal.style.display = 'flex';
+            }
+            return response.json();
+        } )
         .then(data => {
             const mensagem = data.mensagem;
             const erro = data.erro;
@@ -346,7 +364,7 @@ function cadastrarLoginEmpresa() {
             document.querySelector('#senha').value = '';
             document.querySelector('#re-senha').value = '';
 
-            window.alert('Usuário registrado com sucesso!');
+            // window.alert('Usuário registrado com sucesso!');
         })
         .catch((error) => {
             console.error('Erro:', error);
@@ -420,8 +438,11 @@ function mascaraCNPJ(event) {
 }
 
 document.addEventListener('DOMContentLoaded', (e) => {
+    
     e.preventDefault();
     const identificacao = localStorage.getItem('identificacao');
+
+   
 
 
     function timeStorage() {

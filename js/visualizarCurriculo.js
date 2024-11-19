@@ -416,7 +416,21 @@ function formatarCelularPraExibir(celular) {
     return aplicarMascara(celular, '(##) #####-####');
 }
 
+function aplicarMascara(valor, mascara) {
+    let i = 0;
+    const valorFormatado = valor.replace(/\D/g, '');
+    return mascara.replace(/#/g, _ => valorFormatado[i++] || '');
+}
 
+
+function mascaraTelefone(event) {
+    const campo = event.target;
+    campo.value = aplicarMascara(campo.value, '(##) #####-####');
+}
+
+function formatarCelularPraExibir(celular) {
+    return aplicarMascara(celular, '(##) #####-####');
+}
 
     
 //     const identificacao = localStorage.getItem('identificacao');
