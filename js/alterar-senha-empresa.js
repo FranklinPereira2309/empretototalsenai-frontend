@@ -1,6 +1,14 @@
-
+const modal = document.getElementById('modal');
 const span = document.querySelector('#erroSenhaAtualizar');
 
+modal.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        deslogarImediatamente();
+    }
+    
+});
 
 function mudarVisibilidadeSenhaAtual() {
     let olho = document.querySelector('.olho1');
@@ -43,8 +51,6 @@ function alterarNovaSenha() {
         document.querySelector('#novaSenha').style.border = '1px solid red';
         document.querySelector('#re-novaSenha').style.border = '1px solid red'
 
-        console.log('não confere!');
-
         return span.style.display = 'block'
     }
 
@@ -63,25 +69,27 @@ function alterarNovaSenha() {
     })
         .then(response => {
             if (response.status === 201) {
-                window.alert('Senha Alterada com Sucesso!');
-                deslogarImediatamente();
+                // window.alert('Senha Alterada com Sucesso!');
+                modal.style.display = 'flex';
             }
             return response.json();
         })
         .then(data => {
             const mensagem = data.mensagem;
             const erro = data.erro;
-
+            
             if (erro) {
                 return window.alert(erro);
             }
             if (mensagem) {
                 return window.alert(mensagem);
             }
-
+            
             document.querySelector('#senhaAtual').value = '';
             document.querySelector('#novaSenha').value = '';
             document.querySelector('#re-novaSenha').value = '';
+            
+            
         })
         .catch(erro => {
             console.log(erro);
@@ -96,7 +104,7 @@ function mostrarMenu() {
     const menu = document.querySelector('#menu');
     const menuUsuario = document.getElementById('menu-usuario');
 
-    const identificacao = localStorage.getItem('identificacao');
+    
 
     window.onclick = function (event) {
         if (event.target === btnMenu) {
@@ -123,7 +131,7 @@ function mostrarMenuUsuario() {
     const btnMenuUsuario = document.querySelector('.botao-menu-usuario');
     const menu = document.querySelector('#menu');
 
-    const identificacao = localStorage.getItem('identificacao');
+    
 
 
     window.onclick = function (event) {
@@ -176,6 +184,12 @@ function mostrarMenuUsuario() {
 function deslogarImediatamente() {
     localStorage.clear();
 
-    return window.location.href = '../index.html';
+    return window.location.href = '/index.html';
 
 }
+
+function closeModal() {
+    modal.style.display = 'none';   
+    deslogarImediatamente();       
+}
+

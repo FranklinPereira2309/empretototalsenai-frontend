@@ -1,5 +1,14 @@
-
+const modal = document.getElementById('modal');
 const span = document.querySelector('#erroSenhaAtualizar');
+
+modal.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        deslogarImediatamente();
+    }
+    
+});
 
 
 function mudarVisibilidadeSenhaAtual() {
@@ -43,8 +52,6 @@ function alterarNovaSenha() {
         document.querySelector('#novaSenha').style.border = '1px solid red';
         document.querySelector('#re-novaSenha').style.border = '1px solid red'
 
-        console.log('não confere!');
-
         return span.style.display = 'block'
     }
 
@@ -63,8 +70,8 @@ function alterarNovaSenha() {
     })
         .then(response => {
             if (response.status === 201) {
-                window.alert('Senha Alterada com Sucesso!');
-                deslogarImediatamente();
+                // window.alert('Senha Alterada com Sucesso!');
+                modal.style.display = 'flex';
             }
             return response.json();
         })
@@ -176,6 +183,11 @@ function mostrarMenuUsuario() {
 function deslogarImediatamente() {
     localStorage.clear();
 
-    return window.location.href = '../index.html';
+    return window.location.href = '/index.html';
 
+}
+
+function closeModal() {
+    modal.style.display = 'none';   
+    deslogarImediatamente();       
 }
