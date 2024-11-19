@@ -1,22 +1,33 @@
 const modal = document.getElementById('modal');
 const closeModalButton = document.getElementById('closeModal');
 let dadosApi;
+let cadastrar = false;
+let atualizar = false;
+let imagem = document.querySelector('#img-dados-pessoais');
+const areaModal = document.querySelector('.modal-content-senha');
+
 
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         modal.style.display = 'none';
-       
+        window.location.href = '/html/cad-dados-pessoais.html';
+
     }
 });
 
 closeModalButton.addEventListener('click', () => {
     modal.style.display = 'none';
-    
+    window.location.href = '/html/cad-dados-pessoais.html';
+
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     const identificacao = localStorage.getItem('identificacao');
+    const nome = localStorage.getItem('nome');
+    const titulo = document.querySelector('#titulo_dash_usuario');
+    cadastrar = false;
+    atualizar = false;
 
     if (!token) {
         return window.location.href = '/html/acesso-negado.html';
@@ -24,10 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (Number(identificacao.length) === 11) {
 
-        nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
+        nome ? titulo.textContent = `Workspace - ${nome}` : 'Workspace';
     } else {
         return window.location.href = '/html/acesso-negado-empresa.html';
     }
+
+    consultarUsuariosCompletos();
 })
 
 function consultarUsuariosCompletos() {
@@ -116,9 +129,8 @@ function cadastrarUsuario() {
     }
 
     const token = localStorage.getItem('token');
-    const _email = localStorage.getItem('email');
     const id_usuario = localStorage.getItem('id');
-    const expiracaoToken = localStorage.getItem('expiracaoToken');
+
 
     const novoUsuario = {
         nome_completo: nome_completo.charAt(0).toUpperCase() + nome_completo.slice(1).toLowerCase(),
@@ -148,9 +160,11 @@ function cadastrarUsuario() {
             body: JSON.stringify(novoUsuario)
         })
             .then(response => {
-                if(response.status === 201) {
+                if (response.status === 201) {
+                    imagem.src = '../assets/cad-sucess.svg';
                     // window.alert('Usuário registrado com sucesso!');
-                    modal.style.display = 'flex';                }
+                    modal.style.display = 'flex';
+                }
                 return response.json();
             })
             .then(data => {
@@ -165,10 +179,6 @@ function cadastrarUsuario() {
                     return window.alert(mensagem);
                 }
 
-                
-
-
-                window.location.href = '/html/cad-dados-pessoais.html';
             })
             .catch((error) => {
                 console.error('Erro:', error);
@@ -246,13 +256,16 @@ function atualizarUsuario() {
                 body: JSON.stringify(usuarioAtualizado)
             })
                 .then(response => {
-                    if(response.status === 201 ) {
-                        window.location.href = '/html/cad-dados-pessoais.html';
-                        return window.alert('Usuário atualizado com Sucesso!');
+                    if (response.status === 201) {
+                        // window.location.href = '/html/cad-dados-pessoais.html';
+                        // return window.alert('Usuário atualizado com Sucesso!');
+                        imagem.src = '../assets/change-sucess.svg';
+                        areaModal.classList.add('fundo-branco');
+                        modal.style.display = 'flex';
                     }
                     return response.json();
-                        
-                } )
+
+                })
                 .then(data => {
 
                     const erro = data.erro;
@@ -264,7 +277,7 @@ function atualizarUsuario() {
                     }
                     if (mensagem) {
                         return window.alert(mensagem);
-                    }                    
+                    }
 
                 })
                 .catch((error) => {
@@ -308,10 +321,10 @@ function exibirDadosApi(dados) {
 
 function consultarCepApi() {
     let cep = document.querySelector('#cep').value;
-    let novoCep = cep.replace(/\D/g, '');    
-    
+    let novoCep = cep.replace(/\D/g, '');
+
     viaCepApi(novoCep);
-   
+
 }
 
 
@@ -326,17 +339,17 @@ function viaCepApi(cep) {
 
     })
         .then(resp => {
-            if(resp.status === 500) {
+            if (resp.status === 500) {
                 return window.alert('Erro ao digitar o Cep, verifique o CEP digitado!');
             }
-            if(resp.status === 404) {
+            if (resp.status === 404) {
                 return window.alert('Cep NÃO encontrado!');
             }
-            if(resp.status === 400) {
+            if (resp.status === 400) {
                 return window.alert('Cep errado, verifique o CEP digitado!');
             }
 
-            return  resp.json();
+            return resp.json();
         })
         .then(data => {
             // const erro = data.erro;
@@ -423,4 +436,3 @@ function mascaraCNPJ(event) {
 }
 
 
-consultarUsuariosCompletos();

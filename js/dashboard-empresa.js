@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (Number(identificacao.length) === 14) {
 
-        nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
+        nome ? titulo.textContent = `Workspace - ${nome}` : 'Workspace';
     } else {
         window.alert('Aréa Restrita para Empresas!');
         return window.location.href = '/html/dashboard-usuario.html';
