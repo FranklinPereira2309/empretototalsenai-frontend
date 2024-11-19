@@ -1,5 +1,5 @@
-const modal = document.getElementById('modal');
-const closeModalButton = document.getElementById('closeModal');
+const modal = document.querySelector('.container-modal');
+const closeModalButton = document.querySelector('#closeModal');
 const span = document.querySelector('#erroSenhaAtualizar');
 
 

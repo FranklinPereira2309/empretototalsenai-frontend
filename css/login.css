@@ -181,37 +181,41 @@ p a {
 
 }
 
-.modal {   
+.container-modal {
     display: none;
-    position: absolute;
+}
+.modal {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
     top: 0;
-    left: 0;   
+    left: 0;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);    
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
 
 .modal-content-senha {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    width: 40%;
-    height: 80%;
-    border-radius: 10px;
-    overflow: hidden;
     position: relative;
-    right: 100;
-    top:100;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 640px;
+    width: 100%;
+    /* Para se ajustar em telas pequenas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 1.5em;
+.content-span {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px;
+    padding-bottom: 5px;
     cursor: pointer;
+    
 }
