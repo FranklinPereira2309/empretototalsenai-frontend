@@ -8,6 +8,7 @@ let editarModalProfissional;
 let tipoCurriculo = {};
 
 
+
 function closeButtonModal() {
     modalDialog.close();
 }
@@ -258,10 +259,11 @@ function editarCurriculo() {
         return window.alert("Preencha todos os Dados!");
     }
 
+    let novoNome = capitalizePalavas(nome);
 
     const dadosAtualizados = {
 
-        nome: nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase(),
+        nome: novoNome,
         email: email.toLowerCase(),
         telefone: telefone.replace(/\D/g, ''),
         endereco,
@@ -286,7 +288,14 @@ function editarCurriculo() {
             },
             body: JSON.stringify(dadosAtualizados)
         })
-            .then(response => response.json())
+            .then(response => {
+                if(response.status === 201) {
+                    window.alert('Curriculo Editado com Sucesso!');
+                    window.location.href = '/html/curriculos.html';
+                }
+                
+                return response.json()
+            } )
             .then(data => {
                 const mensagem = data.mensagem;
                 const error = data.erro;
@@ -299,9 +308,7 @@ function editarCurriculo() {
 
                 }
 
-                modalDialog.close();
-
-                window.location.href = '/html/curriculos.html';
+                // window.location.href = '/html/curriculos.html';
             })
             .catch(error => {
                 console.log('Erro: ', error);
@@ -409,7 +416,9 @@ function formatarCelularPraExibir(celular) {
     return aplicarMascara(celular, '(##) #####-####');
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
+
+
+    
 //     const identificacao = localStorage.getItem('identificacao');
 //     if (!token) {
 //         return window.location.href = '/html/acesso-negado.html';
@@ -423,5 +432,3 @@ function formatarCelularPraExibir(celular) {
 //         window.alert('Aréa Restrita para Candidatos!');
 //         return window.location.href = '/html/dashboard-empresa.html';
 //     }
-
-// })

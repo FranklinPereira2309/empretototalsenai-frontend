@@ -1,5 +1,3 @@
-const modal = document.querySelector('.container-modal');
-const closeModalButton = document.querySelector('#closeModal');
 let dadosApi;
 
 function consultarApi() {
@@ -114,8 +112,8 @@ function cadastrarCurriculo() {
             })
                 .then(response => {
                     if(response.status === 201) {
-                        // imagem.src = '../assets/cad-sucess.svg';
-                        modal.style.display = 'flex';
+                        window.alert('Curriculo Cadastrado com Sucesso!');
+                        window.location.href = '/html/cad-curriculos.html'
                     }
                     return response.json();
                 })
@@ -356,21 +354,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     const identificacao = localStorage.getItem('identificacao');
     const titulo = document.querySelector('#titulo_dash_usuario');
-    let nome = localStorage.getItem('nome');
-
-    closeModalButton.addEventListener('click', () => {
-        modal.style.display = 'none';
-        window.location.href = '/html/cad-curriculo.html';
-        
-    });
+    let nome = localStorage.getItem('nome');      
     
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-            window.location.href = '/html/cad-curriculo.html';
-           
-        }
-    });
 
     if (!token) {
         return window.location.href = '/html/acesso-negado.html';

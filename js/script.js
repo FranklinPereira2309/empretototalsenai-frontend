@@ -457,10 +457,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-            document.getElementById('time-remaining')
-                .innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            // document.getElementById('time-remaining')
+            //     .innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
-            document.getElementById('time-remaining').textContent = `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+            // document.getElementById('time-remaining').textContent = `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
         }, 1000);
     }
     window.onload = startSessionTimer;

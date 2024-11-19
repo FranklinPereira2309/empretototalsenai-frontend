@@ -104,12 +104,12 @@ dialog {
     height: 45%;
     border: 1px solid lightgray;
 }
-/* .close {
+.close {
     color: red;
     float: right;
     font-size: 28px;
     cursor: pointer;
-} */
+}
 
 #jobs-container  {
     position: relative;
