@@ -1,4 +1,3 @@
-const openModalButton = document.getElementById('openModal');
 const modal = document.getElementById('modal');
 const closeModalButton = document.getElementById('closeModal');
 const span = document.querySelector('#erroSenhaAtualizar');

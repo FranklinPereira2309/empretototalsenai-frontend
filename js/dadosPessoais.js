@@ -1,4 +1,18 @@
+const modal = document.getElementById('modal');
+const closeModalButton = document.getElementById('closeModal');
 let dadosApi;
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+       
+    }
+});
+
+closeModalButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+    
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
@@ -133,20 +147,25 @@ function cadastrarUsuario() {
             },
             body: JSON.stringify(novoUsuario)
         })
-            .then(response => response.json())
+            .then(response => {
+                if(response.status === 201) {
+                    // window.alert('Usuário registrado com sucesso!');
+                    modal.style.display = 'flex';                }
+                return response.json();
+            })
             .then(data => {
 
                 const erro = data.erro;
                 const mensagem = data.mensagem;
 
                 if (erro) {
-                    return window.alert(mensagemErro);
+                    return window.alert(erro);
                 }
                 if (mensagem) {
                     return window.alert(mensagem);
                 }
 
-                window.alert('Usuário registrado com sucesso!');
+                
 
 
                 window.location.href = '/html/cad-dados-pessoais.html';
@@ -402,8 +421,6 @@ function mascaraCNPJ(event) {
         areaPesquisa.style.display = 'none';
     }
 }
-
-
 
 
 consultarUsuariosCompletos();
