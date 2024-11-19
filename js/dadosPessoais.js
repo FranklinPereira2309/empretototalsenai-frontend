@@ -1,8 +1,6 @@
 const modal = document.getElementById('modal');
 const closeModalButton = document.getElementById('closeModal');
 let dadosApi;
-let cadastrar = false;
-let atualizar = false;
 let imagem = document.querySelector('#img-dados-pessoais');
 const areaModal = document.querySelector('.modal-content-senha');
 
@@ -26,9 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const identificacao = localStorage.getItem('identificacao');
     const nome = localStorage.getItem('nome');
     const titulo = document.querySelector('#titulo_dash_usuario');
-    cadastrar = false;
-    atualizar = false;
-
+    
     if (!token) {
         return window.location.href = '/html/acesso-negado.html';
 

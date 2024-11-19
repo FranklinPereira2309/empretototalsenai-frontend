@@ -1,4 +1,3 @@
-
 function mostrarMenu() {
     const btnMenu = document.querySelector('.botao-menu');
     const menu = document.querySelector('#menu');
@@ -53,8 +52,6 @@ function mostrarMenuUsuario() {
 
 
 }
-
-
 
 function deslogarImediatamente() {
     localStorage.clear();

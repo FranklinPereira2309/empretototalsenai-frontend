@@ -1,3 +1,5 @@
+const modal = document.querySelector('.container-modal');
+const closeModalButton = document.querySelector('#closeModal');
 let dadosApi;
 
 function consultarApi() {
@@ -31,8 +33,6 @@ function consultarApi() {
 verificarExistenciaCurriculo();
 
 
-
-
 function exibirDadosApi(dados) {
     document.querySelector('#nome').value = dados.nome;
     document.querySelector('#email').value = dados.email;
@@ -61,6 +61,7 @@ function cadastrarCurriculo() {
     let tipo = document.querySelector('#tipo-formacao').value;
 
     let valorTipo;
+    let novoNome = capitalizePalavas(nome)
 
     document.getElementById('formCurriculo').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -87,7 +88,7 @@ function cadastrarCurriculo() {
         const id_usuario = localStorage.getItem('id');
         const expiracaoToken = localStorage.getItem('expiracaoToken');
         const novoCurriculo = {
-            nome: nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase(),
+            nome: novoNome,
             email: email.toLowerCase(),
             telefone: telefone.replace(/\D/g, ''),
             endereco,
@@ -111,7 +112,13 @@ function cadastrarCurriculo() {
                 },
                 body: JSON.stringify(novoCurriculo)
             })
-                .then(response => response.json())
+                .then(response => {
+                    if(response.status === 201) {
+                        // imagem.src = '../assets/cad-sucess.svg';
+                        modal.style.display = 'flex';
+                    }
+                    return response.json();
+                })
                 .then(data => {
 
                     const erro = data.erro;
@@ -138,8 +145,8 @@ function cadastrarCurriculo() {
                     document.querySelector('#referencias').value = '';
                     document.querySelector('#tipo-formacao').value = '';
 
-                    window.location.href = '/html/cad-curriculo.html';
-                    window.alert('Curriculo registrado com sucesso!');
+                    
+                    // window.alert('Curriculo registrado com sucesso!');
                 })
                 .catch((error) => {
                     console.error('Erro:', error);
@@ -298,11 +305,23 @@ function mascaraCPF(event) {
     campo.value = aplicarMascara(campo.value, '###.###.###-##');
 }
 
+function mascaraCelular(event) {
+    const campo = event.target;
+    campo.value = aplicarMascara(campo.value, '(##) #####-####');    
+}
+
 
 function mascaraCNPJ(event) {
     const campo = event.target;
     campo.value = aplicarMascara(campo.value, '##.###.###/####-##');
 }
+
+function capitalizePalavas(str) {
+    return str.split(' ').map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
+}
+
 
 
 {
@@ -336,6 +355,22 @@ function mascaraCNPJ(event) {
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     const identificacao = localStorage.getItem('identificacao');
+    const titulo = document.querySelector('#titulo_dash_usuario');
+    let nome = localStorage.getItem('nome');
+
+    closeModalButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+        window.location.href = '/html/cad-curriculo.html';
+        
+    });
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            window.location.href = '/html/cad-curriculo.html';
+           
+        }
+    });
 
     if (!token) {
         return window.location.href = '/html/acesso-negado.html';
@@ -343,8 +378,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (Number(identificacao.length) === 11) {
 
-        nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
+        nome ? titulo.textContent = `Workspace - ${nome}` : 'Workspace';
     } else {
         return window.location.href = '/html/acesso-negado-empresa.html';
     }
-})
+});
+
+
+
+ 
+

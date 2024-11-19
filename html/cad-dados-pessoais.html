@@ -69,9 +69,9 @@
         <aside class="sidebar">
             <h2 id="tipoCurriculo">Menu de Opções</h2>
             <nav>
-                <ul>                    
-                    <li><a  href="/html/dashboard-usuario.html">Dashboard</a></li>
-                    <li><a  href="/html/alterar-senha-usuario.html">Alterar Senha</a></li>
+                <ul>
+                    <li><a href="/html/dashboard-usuario.html">Dashboard</a></li>
+                    <li><a href="/html/alterar-senha-usuario.html">Alterar Senha</a></li>
                 </ul>
             </nav>
         </aside>
@@ -79,10 +79,10 @@
         <main>
             <div id="modal" class="modal">
                 <div class="modal-content-senha">
-                <span id="closeModal" class="close">X</span>
-                <img id="img-dados-pessoais" src="/assets/cad-sucess.svg" alt="sucesso alteração">
+                    <span id="closeModal" class="close">X</span>
+                    <img id="img-dados-pessoais" src="/assets/cad-sucess.svg" alt="sucesso alteração">
                 </div>
-                </div>
+            </div>
             <section id="novaVaga">
                 <dialog id="dialogNovaVaga">
                     <div class="modal-content">
@@ -108,42 +108,44 @@
                         <label for="">Nome completo</label>
                         <input type="text" id="nome_completo" name="nomeCompleto">
                     </div>
-    
+
                     <div class="form">
                         <label for="">E-mail</label>
                         <input type="email" name="email" id="email">
                     </div>
-    
+
                     <div class="form">
                         <label for="">Número do Celular</label>
-                        <input type="text" name="telefone" id="telefone" oninput="mascaraTelefone(event) "maxlength="15">
+                        <input type="text" name="telefone" id="telefone" oninput="mascaraTelefone(event) "
+                            maxlength="15">
                     </div>
-    
+
                     <div class="form">
                         <label for="">CEP</label>
-                        <input onblur="consultarCepApi()" type="text" name="cep" id="cep" oninput="mascaraCEP(event)" maxlength="10">
+                        <input onblur="consultarCepApi()" type="text" name="cep" id="cep" oninput="mascaraCEP(event)"
+                            maxlength="10">
                     </div>
-    
+
                     <div class="form">
                         <label for="">Logradouro</label>
                         <input type="text" name="logradouro" id="logradouro">
                     </div>
-    
+
                     <div class="endereco">
                         <label for="">Número</label>
                         <input type="number" name="numero" id="numero">
                     </div>
-    
+
                     <div class="endereco">
                         <label for="">Bairro</label>
                         <input type="text" name="bairro" id="bairro">
                     </div>
-    
+
                     <div class="form">
                         <label for="">Complemento</label>
                         <input type="text" name="complemento" id="complemento">
                     </div>
-    
+
                     <div class="form">
                         <label for="">Cidade</label>
                         <input type="text" name="cidade" id="cidade">
@@ -152,24 +154,25 @@
                         <label for="">Estado</label>
                         <input type="text" name="estado" id="estado">
                     </div>
-    
+
                     <div class="form">
                         <label for="data_nascimento">Data de nascimento</label>
                         <input type="date" name="data_nascimento" id="data_nascimento">
                     </div>
-    
+
                     <div class="form">
                         <label for="genero">Gênero</label>
-                        <select id="genero">                            
+                        <select id="genero">
                             <option hidden value="">Selecionar Gênero</option>
                             <option value="masculino">Masculino</option>
                             <option value="feminino">Feminino</option>
                         </select>
                     </div>
-    
+
                     <div class="form">
                         <button id="salvarDadosPessoais" type="submit" onclick="cadastrarUsuario()">Salvar</button>
-                        <button style="display: none;" id="atualizarDadosPessoais" type="submit" onclick="atualizarUsuario()">Editar</button>
+                        <button style="display: none;" id="atualizarDadosPessoais" type="submit"
+                            onclick="atualizarUsuario()">Editar</button>
                     </div>
                 </form>
             </section>

@@ -20,7 +20,7 @@
                 <h4>O seu portal de oportunidades</h4>
             </div>
         </div>
-        
+
         <nav>
             <div id="area-menu">
                 <ul>
@@ -75,13 +75,31 @@
             <h2 id="tipoCurriculo">Menu de Opções</h2>
             <nav>
                 <ul>
-                   <li><a href="/html/dashboard-usuario.html">Dashboard</a></li>
+                    <li><a href="/html/dashboard-usuario.html">Dashboard</a></li>
                 </ul>
             </nav>
         </aside>
-    
+
 
         <main>
+            <div id="content-titulo">
+                <section class="content">
+                    <h1 style="text-align: center;" id="titulo_dash_usuario"></h1>
+                </section>
+
+            </div>
+            <div class="container-modal">
+                <div id="modal" class="modal">
+                    <div class="modal-content-senha">
+                        <div class="content-span">
+                            <span id="closeModal" class="close">X</span>
+                        </div>
+                        <img id="img-dados-pessoais" src="/assets/cad-sucess.svg" alt="sucesso alteração">
+                    </div>
+                </div>
+
+            </div>
+
             <div class="form-container">
                 <h1>Formulário de Currículo</h1>
                 <form id="formCurriculo">
@@ -97,7 +115,8 @@
 
                     <div class="form-group">
                         <label for="telefone">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone" placeholder="EX.: 11 955558888">
+                        <input type="tel" id="telefone" name="telefone" placeholder="EX.: (11) 95555-8888"
+                            oninput="mascaraCelular(event)" maxlength="15">
                     </div>
 
                     <div class="form-group">
@@ -109,7 +128,7 @@
                         <label for="formacao">Formação Acadêmica</label>
                         <textarea id="formacao" name="formacao" rows="4"></textarea>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="formacao">Objetivo</label>
                         <textarea id="objetivo" name="objetivo" rows="4"></textarea>
@@ -127,12 +146,13 @@
 
                     <div class="form-group">
                         <label for="idiomas">Idiomas</label>
-                        <textarea name="idiomas" id="idiomas" rows="3" placeholder="EX.: Inglês intermediário, Italiano básico"></textarea>
+                        <textarea name="idiomas" id="idiomas" rows="3"
+                            placeholder="EX.: Inglês intermediário, Italiano básico"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="referencias">Referências</label>
-                        <textarea name="referencias" id="referencias" rows="4" ></textarea>
+                        <textarea name="referencias" id="referencias" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -149,7 +169,7 @@
                     </div>
                 </form>
             </div>
-            
+
         </main>
     </div>
 

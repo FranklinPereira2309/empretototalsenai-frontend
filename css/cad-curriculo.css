@@ -18,21 +18,28 @@ main {
     justify-content: center;
 }
 
+#content-titulo {
+    width: 970px;
+
+}
+
 h1 {
     margin-bottom: 10px;
 }
 
 .form-container {
-    width: 700px;
+    width: 970px;
     background-color: #fff;
     padding: 20px;
     margin: 20px 0;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .form-group {
     margin-bottom: 15px;
 }
+
 .form-group label {
     display: block;
     margin-bottom: 5px;
@@ -40,6 +47,7 @@ h1 {
     font-weight: 600;
     font-size: 0.9em;
 }
+
 .form-group input,
 .form-group textarea,
 .form-group select {
@@ -48,9 +56,11 @@ h1 {
     font-size: 0.9em;
     box-sizing: border-box;
 }
+
 .form-group textarea {
     resize: vertical;
 }
+
 .form-group button {
     width: 100%;
     background-color: #007bff;
@@ -62,6 +72,7 @@ h1 {
     cursor: pointer;
     transition: background 0.2s ease;
 }
+
 .form-group button:hover {
     background-color: #0056b3;
 }
@@ -90,6 +101,10 @@ footer {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     min-height: 100vh;
     flex: 1;
@@ -101,6 +116,13 @@ main {
     height: auto;
 }
 
+.content h1,
+h2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 6px;
+}
+
 #vagas-container {
     max-width: 800px;
     margin: 0 auto;
@@ -109,6 +131,7 @@ main {
 #vagas-container h2 {
     margin-top: 20px;
 }
+
 .sidebar {
     height: auto;
     width: 250px;
@@ -149,5 +172,53 @@ main {
     border-radius: 10px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-modal {
+    display: none;
+}
+.modal {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content-senha {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 640px;
+    width: 100%;
+    /* Para se ajustar em telas pequenas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.content-span {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px;
+    padding-bottom: 5px;
     
+}
+
+.close {    
+      
+    font-size: 2em;
+    cursor: pointer;
+    color:red ;
+}
+
+.fundo-branco {
+    background-color: white;
 }
