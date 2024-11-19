@@ -1,8 +1,7 @@
-const modal = document.getElementById('modal');
-const closeModalButton = document.getElementById('closeModal');
+const modal = document.querySelector('.container-modal');
+const closeModalButton = document.querySelector('#closeModal');
 let dadosApi;
-let imagem = document.querySelector('#img-dados-pessoais');
-const areaModal = document.querySelector('.modal-content-senha');
+const imagem = document.querySelector('#img-dados-pessoais');
 
 
 modal.addEventListener('click', (e) => {
@@ -127,9 +126,10 @@ function cadastrarUsuario() {
     const token = localStorage.getItem('token');
     const id_usuario = localStorage.getItem('id');
 
+    let novoNomeCompleto = capitalizePalavas(nome_completo);
 
     const novoUsuario = {
-        nome_completo: nome_completo.charAt(0).toUpperCase() + nome_completo.slice(1).toLowerCase(),
+        nome_completo: novoNomeCompleto,
         email: email.toLowerCase(),
         telefone: telefone.replace(/\D/g, ''),
         cep: cep.replace(/\D/g, '',),
@@ -157,7 +157,6 @@ function cadastrarUsuario() {
         })
             .then(response => {
                 if (response.status === 201) {
-                    imagem.src = '../assets/cad-sucess.svg';
                     // window.alert('Usuário registrado com sucesso!');
                     modal.style.display = 'flex';
                 }
@@ -226,8 +225,10 @@ function atualizarUsuario() {
 
         const token = localStorage.getItem('token');
 
+        let novoNomeCompleto = capitalizePalavas(nome_completo);
+
         const usuarioAtualizado = {
-            nome_completo: nome_completo.charAt(0).toUpperCase() + nome_completo.slice(1).toLowerCase(),
+            nome_completo: novoNomeCompleto,
             email: email.toLowerCase(),
             telefone: telefone.replace(/\D/g, ''),
             cep: cep.replace(/\D/g, '',),
@@ -256,7 +257,6 @@ function atualizarUsuario() {
                         // window.location.href = '/html/cad-dados-pessoais.html';
                         // return window.alert('Usuário atualizado com Sucesso!');
                         imagem.src = '../assets/change-sucess.svg';
-                        areaModal.classList.add('fundo-branco');
                         modal.style.display = 'flex';
                     }
                     return response.json();
@@ -401,6 +401,12 @@ function mascaraCEP(event) {
 function mascaraCNPJ(event) {
     const campo = event.target;
     campo.value = aplicarMascara(campo.value, '##.###.###/####-##');
+}
+
+function capitalizePalavas(str) {
+    return str.split(' ').map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
 }
 
 {
