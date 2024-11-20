@@ -1,5 +1,5 @@
 const modal = document.querySelector('.container-modal');
-    const closeModalButton = document.querySelector('#closeModal');
+const closeModalButton = document.querySelector('#closeModal');
 
 closeModalButton.addEventListener('click', () => {
     modal.style.display = 'none';
@@ -10,7 +10,6 @@ function mostrarMenu() {
     const menu = document.querySelector('#menu');
     const menuUsuario = document.getElementById('menu-usuario');
 
-    const identificacao = localStorage.getItem('identificacao');
 
     window.onclick = function (event) {
         if (event.target === btnMenu) {
@@ -37,8 +36,6 @@ function mostrarMenuUsuario() {
     const btnMenuUsuario = document.querySelector('.botao-menu-usuario');
     const menu = document.querySelector('#menu');
 
-    const identificacao = localStorage.getItem('identificacao');
-
 
     window.onclick = function (event) {
         if (event.target === btnMenuUsuario) {
@@ -61,6 +58,7 @@ function mostrarMenuUsuario() {
 }
 
 function deslogarImediatamente() {
+    
     localStorage.clear();
 
     return window.location.href = '../index.html';
@@ -158,7 +156,7 @@ function loginEmpresa() {
         },
         body: JSON.stringify(login)
     })
-        .then(response =>  response.json())
+        .then(response => response.json())
         .then(data => {
             const mensagem = data.mensagem;
             const erro = data.erro;
@@ -343,11 +341,11 @@ function cadastrarLoginEmpresa() {
         body: JSON.stringify(novoLogin)
     })
         .then(response => {
-            if(response.status === 201) {
+            if (response.status === 201) {
                 modal.style.display = 'flex';
             }
             return response.json();
-        } )
+        })
         .then(data => {
             const mensagem = data.mensagem;
             const erro = data.erro;
@@ -371,33 +369,7 @@ function cadastrarLoginEmpresa() {
         });
 }
 
-{
-    let divUsuarioLogado = document.querySelector('#usuarioLogado');
-    let textoUsuarioLogado = document.querySelector('#emailLogado');
-    let loginButton = document.querySelector('#area-menu');
-    let areaPesquisa = document.querySelector('.area-pesquisa');
-    let linksLogado = document.querySelectorAll('.link-logado');
 
-    linksLogado.forEach(link => {
-        link.style.display = 'none';
-    });
-
-    divUsuarioLogado.style.display = 'none';
-
-    const _email = localStorage.getItem('email');
-    const id_usuario = localStorage.getItem('id');
-
-    if (id_usuario) {
-        divUsuarioLogado.style.display = 'flex';
-        textoUsuarioLogado.innerHTML = _email;
-        linksLogado.forEach(link => {
-            link.style.display = 'block';
-        });
-        loginButton.style.display = 'none';
-    } else {
-        areaPesquisa.style.display = 'none';
-    }
-}
 
 function tokenValido() {
     const token = localStorage.getItem('token');
@@ -438,12 +410,35 @@ function mascaraCNPJ(event) {
 }
 
 document.addEventListener('DOMContentLoaded', (e) => {
-    
     e.preventDefault();
+    const token = localStorage.getItem('token');
     const identificacao = localStorage.getItem('identificacao');
+    let divUsuarioLogado = document.querySelector('#usuarioLogado');
+    let textoUsuarioLogado = document.querySelector('#emailLogado');
+    let loginButton = document.querySelector('#area-menu');
+    let areaPesquisa = document.querySelector('.area-pesquisa');
+    let linksLogado = document.querySelectorAll('.link-logado');
 
-   
+    linksLogado.forEach(link => {
+        link.style.display = 'none';
+    });
 
+    divUsuarioLogado.style.display = 'none';
+
+    const _email = localStorage.getItem('email');
+    
+
+    if (token) {
+        divUsuarioLogado.style.display = 'flex';
+        textoUsuarioLogado.innerHTML = _email;
+        linksLogado.forEach(link => {
+            link.style.display = 'block';
+        });
+        loginButton.style.display = 'none';
+    } else {
+        areaPesquisa.style.display = 'none';
+        
+    }
 
     function timeStorage() {
         if (Number(identificacao.length) === 14) {

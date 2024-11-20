@@ -140,7 +140,7 @@ dialog {
     border: none;
     border-radius: 25px;
     width: 30%;
-    height: 65%;
+    height: 45%;
 }
 
 .modal-content {
@@ -292,4 +292,19 @@ dialog {
     padding: 3px;
     resize: none;
     font-size: 1.2em;
+}
+
+
+
+#modal-container-visualizar-curriculo select {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+#modal-content-vagas, h1, h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 6px;
 }

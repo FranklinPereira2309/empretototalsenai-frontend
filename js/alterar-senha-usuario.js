@@ -1,5 +1,23 @@
-const modal = document.getElementById('modal');
+const modal = document.querySelector('.container-modal');
+const closeModalButton = document.querySelector('#closeModal');
 const span = document.querySelector('#erroSenhaAtualizar');
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        return window.location.href = '/html/acesso-negado.html';
+
+    }    
+
+});
+
+
+closeModalButton.addEventListener('click', ()=> {
+    modal.style.display = 'none';
+    deslogarImediatamente();
+})
 
 modal.addEventListener('click', (e) => {
     e.preventDefault();
@@ -71,7 +89,7 @@ function alterarNovaSenha() {
         .then(response => {
             if (response.status === 201) {
                 // window.alert('Senha Alterada com Sucesso!');
-                modal.style.display = 'flex';
+                modal.style.display = 'block';
             }
             return response.json();
         })
@@ -181,6 +199,7 @@ function mostrarMenuUsuario() {
 }
 
 function deslogarImediatamente() {
+    
     localStorage.clear();
 
     return window.location.href = '/index.html';

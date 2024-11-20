@@ -316,8 +316,8 @@ function exibirVagasEmpresaParaEditar(vagas) {
                     <textarea rows=${1} cols=${40} id="salarioVagaEditar" name="salario">${formatarParaReal(vaga.salario)}</textarea>
                 </div>
                 <div class="input-area">
-                    <label for="nome_empresa">Nome da Empresa:</label>
-                    <textarea rows=${1} cols=${40} id="nome_empresa" name="nome_empresa">${vaga.nome_empresa}</textarea>
+                    <label for="nomeVagaEditar">Nome da Empresa:</label>
+                    <textarea rows=${1} cols=${40} id="nomeVagaEditar" name="nomeVagaEditar">${vaga.nome_empresa}</textarea>
                 </div>
                 <div class="input-area">
                     <label for="setor">Área de Atuação:</label>

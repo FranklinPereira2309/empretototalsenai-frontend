@@ -168,6 +168,7 @@ function mostrarMenuUsuario() {
 }
 
 function deslogarImediatamente() {
+    
     localStorage.clear();
 
     return window.location.href = '../index.html';
