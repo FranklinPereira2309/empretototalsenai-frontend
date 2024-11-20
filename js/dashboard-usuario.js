@@ -140,8 +140,6 @@ function salvarCurriculoVaga() {
         .catch(erro => { console.log('Erro: ', erro); });
 }
 
-
-
 function telaConfirmacaoCadCurriculo(curriculo) {
     const modalContainer = document.querySelector("#modal-container-usuario");
     const dados = document.createElement('div');
@@ -481,5 +479,33 @@ function consultarBuscarIdVaga() {
 
         })
     
+}
+
+{
+    let divUsuarioLogado = document.querySelector('#usuarioLogado');
+    let textoUsuarioLogado = document.querySelector('#emailLogado');
+    let loginButton = document.querySelector('#area-menu');
+    let areaPesquisa = document.querySelector('.area-pesquisa');
+    let linksLogado = document.querySelectorAll('.link-logado');
+
+    linksLogado.forEach(link => {
+        link.style.display = 'none';
+    });
+
+    divUsuarioLogado.style.display = 'none';
+
+    const _email = localStorage.getItem('email');
+    const id_usuario = localStorage.getItem('id');
+
+    if (id_usuario) {
+        divUsuarioLogado.style.display = 'flex';
+        textoUsuarioLogado.innerHTML = _email;
+        linksLogado.forEach(link => {
+            link.style.display = 'block';
+        });
+        loginButton.style.display = 'none';
+    } else {
+        areaPesquisa.style.display = 'none';
+    }
 }
 

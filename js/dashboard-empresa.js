@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let titulo = document.querySelector('#titulo_dash_empresa');
     const nome = localStorage.getItem('nome');
     const token = localStorage.getItem('token');
-    
+
     if (!token) {
         return window.location.href = '/html/acesso-negado.html';
 
@@ -107,35 +107,35 @@ vagasContainer.addEventListener('click', (e) => {
         localStorage.setItem('idCurriculoAlterarSelecionado', elementoSpanDois);
         localStorage.setItem('visualizar_curriculo', elementoSpanTres);
 
-    }else if (e.target.classList.contains('btnIncluirSelecionar')) {
+    } else if (e.target.classList.contains('btnIncluirSelecionar')) {
         const elementoPai = e.target.closest('.item');
 
         elementoSpanIdIncluirCurriculo = elementoPai.querySelectorAll('span');
 
         if (elementoSpanIdIncluirCurriculo) {
             elementoSpanIncluir = elementoSpanIdIncluirCurriculo[1].textContent;
-            
-                    
+
+
 
         }
         selecionarCurriculo();
-        localStorage.setItem('idIncluirCurriculo', elementoSpanIncluir )
-        
+        localStorage.setItem('idIncluirCurriculo', elementoSpanIncluir)
 
-    }else if (e.target.classList.contains('btnDeletarVaga')) {
+
+    } else if (e.target.classList.contains('btnDeletarVaga')) {
         const elementoPai = e.target.closest('.item2');
 
         elementoSpanIdDeletarCurriculo = elementoPai.querySelectorAll('span');
 
         if (elementoSpanIdDeletarCurriculo) {
             elementoSpanIdDeletarCurriculo = elementoSpanIdDeletarCurriculo[0].textContent;
-            
-                    
+
+
 
         }
         //deletarCurriculoSelecionado();
-        localStorage.setItem('idDeletarCurriculo', elementoSpanIdDeletarCurriculo )
-        
+        localStorage.setItem('idDeletarCurriculo', elementoSpanIdDeletarCurriculo)
+
 
     } else {
         return;
@@ -158,7 +158,7 @@ function visualizarVagaSelecionada() {
     let dadosEditarVagas;
 
     idVaga = localStorage.getItem('idVagaSelecionada');
-    
+
 
     const url = `https://empregototal.onrender.com/vaga/${idVaga}`;
     const token = localStorage.getItem('token');
@@ -229,7 +229,7 @@ function exibirVagasEmpresa(vagas) {
 
     if (vagas.length === 0) {
         filters.style.display = 'none';
-        
+
         vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma Vaga encontrada!</h1>';
         return;
     }
@@ -313,11 +313,11 @@ function exibirVagasEmpresaParaEditar(vagas) {
                 </div>
                 <div class="input-area">
                     <label for="salario">Salário:</label>
-                    <textarea rows=${1} cols=${40} id="salarioVagaEditar" name="salario">${vaga.salario}</textarea>
+                    <textarea rows=${1} cols=${40} id="salarioVagaEditar" name="salario">${formatarParaReal(vaga.salario)}</textarea>
                 </div>
                 <div class="input-area">
-                    <label for="nome">Nome da Empresa:</label>
-                    <textarea rows=${1} cols=${40} id="nomeVagaEditar" name="nome">${vaga.nome_empresa}</textarea> 
+                    <label for="nome_empresa">Nome da Empresa:</label>
+                    <textarea rows=${1} cols=${40} id="nome_empresa" name="nome_empresa">${vaga.nome_empresa}</textarea>
                 </div>
                 <div class="input-area">
                     <label for="setor">Área de Atuação:</label>
@@ -435,10 +435,10 @@ function salvarEditarVaga() {
         formacao,
         localizacao,
         modalidade,
-        salario,
+        salario: salario.replace(/\D/g, ''),
         nome_empresa,
         setor_atuacao,
-        email,
+        email: email.toLowerCase(),
         cargo,
         tipo_contrato,
         horario,
@@ -503,14 +503,14 @@ function excluirVaga() {
 
 function toggleAtivarCurriculo() {
     const visualizar_curriculo = localStorage.getItem('visualizar_curriculo');
-    
+
     let intervalo = setInterval(() => {
-        
+
         if (window.confirm('Confirma a Ação para o  Curriculo Atual?')) {
             const alteracao = {
-                visualizar_curriculo: visualizar_curriculo === true? false : true
+                visualizar_curriculo: visualizar_curriculo === true ? false : true
             }
-            
+
             const url = `https://empregototal.onrender.com/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
 
             fetch(url, {
@@ -553,17 +553,17 @@ function toggleAtivarCurriculo() {
         }
 
     }, 0);
-    
-    
+
+
 }
 function toggleDesativarCurriculo() {
     const visualizar_curriculo = localStorage.getItem('visualizar_curriculo');
     let valor = '';
 
     let intervalo = setInterval(() => {
-        if(visualizar_curriculo === true) {
+        if (visualizar_curriculo === true) {
             valor = true;
-        }else {
+        } else {
             valor = false;
         }
         const alteracao = {
@@ -571,9 +571,9 @@ function toggleDesativarCurriculo() {
         }
 
         if (window.confirm('Confirma a Ação para o  Curriculo Atual?')) {
-            
+
             const url = `https://empregototal.onrender.com/curriculo/${localStorage.getItem('idCurriculoAlterarSelecionado')}`;
-            
+
             fetch(url, {
                 method: 'PATCH',
                 headers: {
@@ -615,25 +615,25 @@ function toggleDesativarCurriculo() {
 
     }, 0);
 
-    
+
 }
 
 function deletarCurriculoSelecionado() {
     const token = localStorage.getItem('token');
-    
+
     let intervalo = setInterval(() => {
-        
+
         if (window.confirm('Deletar Definitivamente o Curriculo Atual?')) {
             const curriculo_id = localStorage.getItem('idDeletarCurriculo');
             const url = `https://empregototal.onrender.com/curriculo_selecionado/${curriculo_id}`;
-            
+
             fetch(url, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
-                
+
             })
                 .then(response => {
                     if (response.status === 201) {
@@ -674,9 +674,9 @@ function deletarCurriculoSelecionado() {
 }
 
 function selecionarCurriculo() {
-    
+
     let intervalo = setInterval(() => {
-        
+
         if (window.confirm('Confirma a Ação para o  Curriculo Atual?')) {
             const curriculo_id = localStorage.getItem('idIncluirCurriculo');
             const url = `https://empregototal.onrender.com/curriculo_selecionado`;
@@ -686,7 +686,7 @@ function selecionarCurriculo() {
                 curriculo_id,
                 visualizar_curriculo: true
             }
-            
+
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -843,8 +843,6 @@ function fecharModalNovaVaga() {
 
     dialogModalNovaVaga.close();
 }
-
-
 
 function visualizarCurriculoTipoParams() {
     const tipo = localStorage.getItem('tipoCurriculoSelecionado');
@@ -1159,18 +1157,18 @@ function visualizarTodosUsuariosCurriculos() {
 function exibirTodosUsuariosCurriculos(curriculos) {
 
     localStorage.setItem('idDeletarCurriculo', '');
-    
-    
+
+
     if (curriculos.length === 0 || !curriculos) {
-        
+
         vagasContainer.innerHTML = `<h3 class="jobs" style="text-align:center">Nenhuma Informação Disponível!</h3>`
         return;
-        
+
     }
-    
-    
+
+
     vagasContainer.innerHTML = '';
-    
+
     curriculos.forEach((curriculo) => {
         const vagaDiv = document.createElement('div');
         const btnSelecionar = document.createElement('button');
@@ -1421,4 +1419,32 @@ function formatarCpf(cpf) {
         return 'null';
     }
 
+}
+
+{
+    let divUsuarioLogado = document.querySelector('#usuarioLogado');
+    let textoUsuarioLogado = document.querySelector('#emailLogado');
+    let loginButton = document.querySelector('#area-menu');
+    let areaPesquisa = document.querySelector('.area-pesquisa');
+    let linksLogado = document.querySelectorAll('.link-logado');
+
+    linksLogado.forEach(link => {
+        link.style.display = 'none';
+    });
+
+    divUsuarioLogado.style.display = 'none';
+
+    const _email = localStorage.getItem('email');
+    const id_usuario = localStorage.getItem('id');
+
+    if (id_usuario) {
+        divUsuarioLogado.style.display = 'flex';
+        textoUsuarioLogado.innerHTML = _email;
+        linksLogado.forEach(link => {
+            link.style.display = 'block';
+        });
+        loginButton.style.display = 'none';
+    } else {
+        areaPesquisa.style.display = 'none';
+    }
 }

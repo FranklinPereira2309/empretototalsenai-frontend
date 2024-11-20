@@ -275,5 +275,21 @@ dialog {
     height: 50px;
 }
 
+.input-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 5px;
+}
 
-    
+.input-area label {
+    display: inline-block;
+    width: 30%;
+}
+
+.input-area textarea {
+    width: 60%;
+    padding: 3px;
+    resize: none;
+    font-size: 1.2em;
+}
