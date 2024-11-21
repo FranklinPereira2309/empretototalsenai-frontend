@@ -185,37 +185,6 @@ function loginEmpresa() {
         });
 }
 
-
-
-function adicionarLocalStorage(data, tempo) {
-    if (data.usuario) {
-        const { id, email, cpf, nome } = data.usuario;
-        const { token } = data;
-        const agora = new Date();
-        const expiracaoToken = agora.getTime() + tempo * 60 * 1000;
-        localStorage.setItem('id', id);
-        localStorage.setItem('nome', nome);
-        localStorage.setItem('email', email);
-        localStorage.setItem('token', token);
-        localStorage.setItem('expiracaoToken', expiracaoToken);
-        localStorage.setItem('identificacao', cpf);
-
-    } else if (data.empresa) {
-        const { id, email, cnpj, nome } = data.empresa;
-        const { token } = data;
-        const agora = new Date();
-        const expiracaoToken = agora.getTime() + tempo * 60 * 1000;
-        localStorage.setItem('id', id);
-        localStorage.setItem('nome', nome);
-        localStorage.setItem('email', email);
-        localStorage.setItem('token', token);
-        localStorage.setItem('expiracaoToken', expiracaoToken);
-        localStorage.setItem('identificacao', cnpj);
-    }
-
-}
-
-
 function omitirSpan() {
     const erroConfirmaSenha = document.querySelector('#erroConfirmaSenha')
     document.querySelector('#senha').style.border = 'none';
@@ -427,6 +396,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     const _email = localStorage.getItem('email');
     
+    
 
     if (token) {
         divUsuarioLogado.style.display = 'flex';
@@ -435,6 +405,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
             link.style.display = 'block';
         });
         loginButton.style.display = 'none';
+
+        
     } else {
         areaPesquisa.style.display = 'none';
         

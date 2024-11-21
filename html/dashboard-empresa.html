@@ -22,13 +22,24 @@
             </div>
         </div>
         
-        <nav>            
+        <nav>
             <div id="btn-area">
                 <div class="area-pesquisa">
                     <form action="#">
                         <!-- <input type="search" placeholder="Buscar por profissional"> -->
                     </form>
-                </div>                
+                </div>
+                <div>
+                    <button onclick="mostrarMenu()" class="botao-menu">Menu</button>
+                    <div class="menu" id="menu">
+                        <ul>
+                            <li><a href="/index.html">Home</a></li>
+                            <li><a href="/html/cursos.html">Planos</a></li>
+                            <li><a href="#">Meu Dados</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
             </div>
         </nav>
 
@@ -37,10 +48,12 @@
                 <h5>Área do Usuário:</h5>
                 <span id="emailLogado"></span>
             </div>
-            <button onclick="mostrarMenuUsuario()" class="botao-menu-usuario">Deslogar</button>
+            <button onclick="mostrarMenuUsuario()" class="botao-menu-usuario">Perfil</button>
             <div class="menu-usuario" id="menu-usuario">
-                
+                <!-- <div id="session-timer">Tempo restante da sessão: <span id="time-remaining">--:--</span></div> -->
                 <ul>
+                     <li><a href="#">Cancelar assinatura</a></li>
+                    <li><a href="#">Cadastro e assinatura</a></li>
                     <li><a href="#" id="sair" onclick="deslogarImediatamente()">Sair</a></li>
                 </ul>
             </div>
