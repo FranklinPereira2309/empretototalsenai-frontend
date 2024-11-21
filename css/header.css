@@ -70,7 +70,8 @@ nav a:hover {
 }
 
 .anuncio {
-    border: 2px solid #0000ff;
+    /* border: 1px solid #fff; */
+    background-color: #0cc0ea;
     border-radius: 5px;
 }
 .anuncio:hover {
@@ -78,14 +79,14 @@ nav a:hover {
     color: #6b70cc;
 }
 
-.cadastro-cv {
-    border: 1px solid #c13535;
-    background-color: #eb8787;
+.gratis {
+    /* border: 1px solid #c13535; */
+    background-color: #de0059;
     border-radius: 5px;
 }
-.cadastro-cv:hover {
-    background-color: #C80036;
-    color: #ff9bb6;
+.gratis:hover {
+    background-color: #9e003f;
+    color: #fff;
 }
 
 #btn-area {
