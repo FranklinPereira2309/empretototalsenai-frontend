@@ -101,7 +101,7 @@ function exibirDadosCurriculo(dados) {
     let tipo = dados.tipo;
     let apelido = dados.apelido;
     let novoTipo = '';
-    
+
     tipo === 'médio' ? novoTipo = `${apelido}` : '';
     tipo === 'técnico' ? novoTipo = `${apelido}` : '';
     tipo === 'profissional' ? novoTipo = `${apelido}` : '';
@@ -259,7 +259,7 @@ function editarCurriculo() {
         !experiencia ||
         !habilidades ||
         !idiomas ||
-        !referencias,
+        !referencias ||
         !apelido) {
         return window.alert("Preencha todos os Dados!");
     }
@@ -278,6 +278,7 @@ function editarCurriculo() {
         habilidades,
         idiomas,
         referencias,
+        apelido,
         tipo,
 
 
