@@ -115,7 +115,6 @@ function cadastrarCurriculo() {
             })
                 .then(response => {
                     if (response.status === 201) {
-                        window.alert('Curriculo Cadastrado com Sucesso!');
                         document.querySelector('#nome').value = '';
                         document.querySelector('#email').value = '';
                         document.querySelector('#telefone').value = '';
@@ -128,6 +127,8 @@ function cadastrarCurriculo() {
                         document.querySelector('#referencias').value = '';
                         document.querySelector('#apelido').value = '';
                         document.querySelector('#tipo-formacao').value = '';
+                        
+                        window.alert('Curriculo Cadastrado com Sucesso!');
                         return window.location.href = '/html/cad-curriculos.html'
                     }
                     return response.json();
@@ -137,15 +138,13 @@ function cadastrarCurriculo() {
                     const erro = data.erro;
                     const mensagem = data.mensagem;
 
+                    if (erro) {
+                        return window.alert(mensagem);
+                    }
                     if (mensagem) {
 
                         return window.alert(mensagem);
                     }
-
-                    if (erro) {
-                        return window.alert(mensagem);
-                    }
-
                 })
                 .catch((error) => {
                     console.error('Erro:', error);
