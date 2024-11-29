@@ -129,7 +129,7 @@ function cadastrarCurriculo() {
                         document.querySelector('#tipo-formacao').value = '';
                         
                         window.alert('Curriculo Cadastrado com Sucesso!');
-                        return window.location.href = '/html/cad-curriculos.html'
+                        return window.location.href = '/html/cad-curriculo.html';
                     }
                     return response.json();
                 })
