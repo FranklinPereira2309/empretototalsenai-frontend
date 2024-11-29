@@ -99,10 +99,12 @@ function exibirDadosCurriculo(dados) {
     const aProfissional = document.querySelector('#profissional');
 
     let tipo = dados.tipo;
+    let apelido = dados.apelido;
     let novoTipo = '';
-    tipo === 'medio' ? novoTipo = 'Médio' : '';
-    tipo === 'tecnico' ? novoTipo = 'Técnico' : '';
-    tipo === 'profissional' ? novoTipo = 'Profissional' : '';
+    
+    tipo === 'médio' ? novoTipo = `${apelido}` : '';
+    tipo === 'técnico' ? novoTipo = `${apelido}` : '';
+    tipo === 'profissional' ? novoTipo = `${apelido}` : '';
 
     document.querySelector('.imprimir').style.display = 'block';
     document.querySelector('.editar').style.display = 'block';
@@ -125,6 +127,7 @@ function exibirDadosCurriculo(dados) {
         habilidades: 'Habilidades',
         idiomas: 'Idiomas',
         referencias: 'Referências',
+        apelido: 'Apelido',
         tipo: 'Tipo',
         usuario_id: 'ID do Usuário'
     };
@@ -235,6 +238,7 @@ function editarCurriculo() {
     const habilidades = document.querySelector('#habilidades').value;
     const idiomas = document.querySelector('#idiomas').value;
     const referencias = document.querySelector('#referencias').value;
+    const apelido = document.querySelector('#apelido').value;
 
 
 
@@ -255,7 +259,8 @@ function editarCurriculo() {
         !experiencia ||
         !habilidades ||
         !idiomas ||
-        !referencias) {
+        !referencias,
+        !apelido) {
         return window.alert("Preencha todos os Dados!");
     }
 
@@ -406,6 +411,10 @@ function editarModalCurriculo(dados) {
         <div class="input-area">
             <label for="referencia">Referência:</label>
             <textarea  rows=${1} cols=${40} id="referencias">${dados.referencias}</textarea>
+        </div>
+        <div class="input-area">
+            <label for="apelido">Apelido:</label>
+            <textarea  rows=${1} cols=${40} id="apelido">${dados.apelido}</textarea>
         </div>
     `
     modalContainer.appendChild(div);

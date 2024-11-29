@@ -56,6 +56,7 @@ function cadastrarCurriculo() {
     let habilidades = document.querySelector('#habilidades').value;
     let idiomas = document.querySelector('#idiomas').value;
     let referencias = document.querySelector('#referencias').value;
+    let apelido = document.querySelector('#apelido').value;
     let tipo = document.querySelector('#tipo-formacao').value;
 
     let valorTipo;
@@ -75,6 +76,7 @@ function cadastrarCurriculo() {
             !habilidades ||
             !idiomas ||
             !referencias ||
+            !apelido ||
             !tipo) {
             return window.alert("Preencha todos os Dados!");
         } else {
@@ -96,6 +98,7 @@ function cadastrarCurriculo() {
             habilidades,
             idiomas,
             referencias,
+            apelido,
             tipo: valorTipo,
             usuario_id: id_usuario
         };
@@ -111,9 +114,21 @@ function cadastrarCurriculo() {
                 body: JSON.stringify(novoCurriculo)
             })
                 .then(response => {
-                    if(response.status === 201) {
+                    if (response.status === 201) {
                         window.alert('Curriculo Cadastrado com Sucesso!');
-                        window.location.href = '/html/cad-curriculos.html'
+                        document.querySelector('#nome').value = '';
+                        document.querySelector('#email').value = '';
+                        document.querySelector('#telefone').value = '';
+                        document.querySelector('#endereco').value = '';
+                        document.querySelector('#formacao').value = '';
+                        document.querySelector('#objetivo').value = '';
+                        document.querySelector('#experiencia').value = '';
+                        document.querySelector('#habilidades').value = '';
+                        document.querySelector('#idiomas').value = '';
+                        document.querySelector('#referencias').value = '';
+                        document.querySelector('#apelido').value = '';
+                        document.querySelector('#tipo-formacao').value = '';
+                        return window.location.href = '/html/cad-curriculos.html'
                     }
                     return response.json();
                 })
@@ -123,7 +138,7 @@ function cadastrarCurriculo() {
                     const mensagem = data.mensagem;
 
                     if (mensagem) {
-                        window.location.href = '/html/cad-curriculo.html';
+
                         return window.alert(mensagem);
                     }
 
@@ -131,20 +146,6 @@ function cadastrarCurriculo() {
                         return window.alert(mensagem);
                     }
 
-                    document.querySelector('#nome').value = '';
-                    document.querySelector('#email').value = '';
-                    document.querySelector('#telefone').value = '';
-                    document.querySelector('#endereco').value = '';
-                    document.querySelector('#formacao').value = '';
-                    document.querySelector('#objetivo').value = '';
-                    document.querySelector('#experiencia').value = '';
-                    document.querySelector('#habilidades').value = '';
-                    document.querySelector('#idiomas').value = '';
-                    document.querySelector('#referencias').value = '';
-                    document.querySelector('#tipo-formacao').value = '';
-
-                    
-                    // window.alert('Curriculo registrado com sucesso!');
                 })
                 .catch((error) => {
                     console.error('Erro:', error);
@@ -156,7 +157,7 @@ function cadastrarCurriculo() {
 
 function verificarExistenciaCurriculo() {
     const token = localStorage.getItem('token');
-    
+
     let dadosApi;
 
     if (token) {
@@ -176,7 +177,7 @@ function verificarExistenciaCurriculo() {
                 let mensagem = data.mensagem;
 
                 if (mensagem) {
-                    
+
                     // return window.alert(mensagem);
 
                 }
@@ -194,7 +195,7 @@ function verificarExistenciaCurriculo() {
 }
 
 function validandoLinksCamposCurriculos(dados) {
-    
+
     const { cMedio, cTecnico, cProfissional } = dados;
 
     if (cMedio && cTecnico && cProfissional) {
@@ -217,7 +218,7 @@ function validandoLinksCamposCurriculos(dados) {
         window.location.href = '/html/dashboard-usuario.html';
 
     }
-    
+
 }
 
 
@@ -276,10 +277,8 @@ function mostrarMenuUsuario() {
 
 }
 
-
-
 function deslogarImediatamente() {
-    
+
     localStorage.clear();
 
     return window.location.href = '../index.html';
@@ -306,7 +305,7 @@ function mascaraCPF(event) {
 
 function mascaraCelular(event) {
     const campo = event.target;
-    campo.value = aplicarMascara(campo.value, '(##) #####-####');    
+    campo.value = aplicarMascara(campo.value, '(##) #####-####');
 }
 
 
@@ -355,8 +354,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     const identificacao = localStorage.getItem('identificacao');
     const titulo = document.querySelector('#titulo_dash_usuario');
-    let nome = localStorage.getItem('nome');      
-    
+    let nome = localStorage.getItem('nome');
+
 
     if (!token) {
         return window.location.href = '/html/acesso-negado.html';
@@ -372,5 +371,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
- 
+
 
