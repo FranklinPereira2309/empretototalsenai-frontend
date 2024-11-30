@@ -415,7 +415,7 @@ function editarModalCurriculo(dados) {
         </div>
         <div class="input-area">
             <label for="apelido">Apelido:</label>
-            <textarea  rows=${1} cols=${40} id="apelido">${dados.apelido}</textarea>
+            <textarea  rows=${1} cols=${40} id="apelido" maxlength=${30}>${dados.apelido}</textarea>
         </div>
     `
     modalContainer.appendChild(div);
