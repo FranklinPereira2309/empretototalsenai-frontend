@@ -537,7 +537,6 @@ const token = localStorage.getItem('token');
 // }
 
 
-
 function formatarParaReal(valor) {
 
     let [inteiro, decimal] = valor.split('.');

@@ -58,7 +58,7 @@ function mostrarMenuUsuario() {
 }
 
 function deslogarImediatamente() {
-    
+
     localStorage.clear();
 
     return window.location.href = '../index.html';
@@ -395,8 +395,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
     divUsuarioLogado.style.display = 'none';
 
     const _email = localStorage.getItem('email');
-    
-    
+
+
 
     if (token) {
         divUsuarioLogado.style.display = 'flex';
@@ -406,10 +406,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
         });
         loginButton.style.display = 'none';
 
-        
+
     } else {
         areaPesquisa.style.display = 'none';
-        
+
     }
 
     function timeStorage() {
@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             return;
         }
 
-        const expirationDate = new Date(parseInt(expirationTime, 10));
+        const expirationDate = new Date(parseInt(expirationTime,720));
         const intervalId = setInterval(() => {
             const now = new Date();
             const timeRemaining = expirationDate - now;

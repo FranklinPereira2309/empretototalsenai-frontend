@@ -109,63 +109,63 @@
                 <h1>Dados pessoais</h1>
                 <form id="dadosForm">
                     <div class="form">
-                        <label for="">Nome completo</label>
+                        <label for="">Nome completo*</label>
                         <input type="text" id="nome_completo" name="nomeCompleto">
                     </div>
 
                     <div class="form">
-                        <label for="">E-mail</label>
+                        <label for="">E-mail*</label>
                         <input type="email" name="email" id="email">
                     </div>
 
                     <div class="form">
-                        <label for="">Número do Celular</label>
+                        <label for="">Número do Celular*</label>
                         <input type="text" name="telefone" id="telefone" oninput="mascaraTelefone(event) "
                             maxlength="15">
                     </div>
 
                     <div class="form">
-                        <label for="">CEP</label>
+                        <label for="">CEP*</label>
                         <input onblur="consultarCepApi()" type="text" name="cep" id="cep" oninput="mascaraCEP(event)"
                             maxlength="10">
                     </div>
 
                     <div class="form">
-                        <label for="">Logradouro</label>
+                        <label for="">Logradouro*</label>
                         <input type="text" name="logradouro" id="logradouro">
                     </div>
 
                     <div class="endereco">
-                        <label for="">Número</label>
+                        <label for="">Número*</label>
                         <input type="number" name="numero" id="numero">
                     </div>
 
                     <div class="endereco">
-                        <label for="">Bairro</label>
+                        <label for="">Bairro*</label>
                         <input type="text" name="bairro" id="bairro">
                     </div>
 
                     <div class="form">
-                        <label for="">Complemento</label>
+                        <label for="">Complemento*</label>
                         <input type="text" name="complemento" id="complemento">
                     </div>
 
                     <div class="form">
-                        <label for="">Cidade</label>
+                        <label for="">Cidade*</label>
                         <input type="text" name="cidade" id="cidade">
                     </div>
                     <div class="form">
-                        <label for="">Estado</label>
+                        <label for="">Estado*</label>
                         <input type="text" name="estado" id="estado">
                     </div>
 
                     <div class="form">
-                        <label for="data_nascimento">Data de nascimento</label>
+                        <label for="data_nascimento">Data de nascimento*</label>
                         <input type="date" name="data_nascimento" id="data_nascimento">
                     </div>
 
                     <div class="form">
-                        <label for="genero">Gênero</label>
+                        <label for="genero">Gênero*</label>
                         <select id="genero">
                             <option hidden value="">Selecionar Gênero</option>
                             <option value="masculino">Masculino</option>
@@ -178,6 +178,7 @@
                         <button style="display: none;" id="atualizarDadosPessoais" type="submit"
                             onclick="atualizarUsuario()">Editar</button>
                     </div>
+                    <h6 style="color: red;">*Obrigatório</h6>
                 </form>
             </section>
 

@@ -297,9 +297,7 @@ function formarCampoData(data) {
 }
 
 function exibirDadosApi(dados) {
-    let dataFormata = formarCampoData(dados);
-
-
+    let dataFormata = formarCampoData(dados.data_nascimento);
 
     document.querySelector('#nome_completo').value = dados.nome_completo;
     document.querySelector('#email').value = dados.email;

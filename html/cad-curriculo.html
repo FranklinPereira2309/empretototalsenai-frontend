@@ -93,59 +93,59 @@
                 <h1>Formulário de Currículo</h1>
                 <form id="formCurriculo">
                     <div class="form-group">
-                        <label for="nome">Nome Completo</label>
+                        <label for="nome">Nome Completo*</label>
                         <input type="text" id="nome" name="nome" placeholder="EX.: João Silva">
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email*</label>
                         <input type="email" id="email" name="email" placeholder="EX.: email@email.com.br">
                     </div>
 
                     <div class="form-group">
-                        <label for="telefone">Telefone</label>
+                        <label for="telefone">Telefone*</label>
                         <input type="tel" id="telefone" name="telefone" placeholder="EX.: (11) 95555-8888"
                             oninput="mascaraCelular(event)" maxlength="15">
                     </div>
 
                     <div class="form-group">
-                        <label for="endereco">Endereço</label>
+                        <label for="endereco">Endereço*</label>
                         <input type="text" id="endereco" name="endereco" placeholder="EX.: Avenida Ipiranga">
                     </div>
 
                     <div class="form-group">
-                        <label for="formacao">Formação Acadêmica</label>
+                        <label for="formacao">Formação Acadêmica*</label>
                         <textarea id="formacao" name="formacao" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="formacao">Objetivo</label>
+                        <label for="formacao">Objetivo*</label>
                         <textarea id="objetivo" name="objetivo" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="experiencia">Experiência Profissional</label>
+                        <label for="experiencia">Experiência Profissional*</label>
                         <textarea id="experiencia" name="experiencia" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="habilidades">Habilidades</label>
+                        <label for="habilidades">Habilidades*</label>
                         <textarea id="habilidades" name="habilidades" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="idiomas">Idiomas</label>
+                        <label for="idiomas">Idiomas*</label>
                         <textarea name="idiomas" id="idiomas" rows="3"
                             placeholder="EX.: Inglês intermediário, Italiano básico"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="referencias">Referências</label>
+                        <label for="referencias">Referências*</label>
                         <textarea name="referencias" id="referencias" rows="4"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="tipo-formacao">Curriculo</label>
+                        <label for="tipo-formacao">Curriculo*</label>
                         <select id="tipo-formacao">
                             <option hidden value="">Tipo Curriculo</option>
                             <option value="médio">Curriculo_1</option>
@@ -160,6 +160,7 @@
                     <div class="form-group">
                         <button type="button" id="btnCurriculo" onclick="cadastrarCurriculo()">Enviar Currículo</button>
                     </div>
+                    <h6 style="color: red;">*Obrigatório</h6>
                 </form>
             </div>
 
