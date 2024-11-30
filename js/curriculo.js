@@ -1,4 +1,12 @@
 let dadosApi;
+let valorTipo;
+
+document.querySelector('#tipo-formacao').addEventListener('change', (e) => {
+    valorTipo = e.target.value;
+
+    console.log(valorTipo);
+    
+});
 
 function consultarApi() {
     const token = localStorage.getItem('token');
@@ -59,98 +67,98 @@ function cadastrarCurriculo() {
     let apelido = document.querySelector('#apelido').value;
     let tipo = document.querySelector('#tipo-formacao').value;
 
-    let valorTipo;
+    
     let novoNome = capitalizePalavas(nome)
 
-    document.getElementById('formCurriculo').addEventListener('submit', function (event) {
-        event.preventDefault();
+    if (
+        !nome ||
+        !email ||
+        !telefone ||
+        !endereco ||
+        !formacao ||
+        !objetivo ||
+        !experiencia ||
+        !habilidades ||
+        !idiomas ||
+        !referencias ||
+        !apelido ||
+        !tipo) {
+        return window.alert("Preencha todos os Dados!");
+    } 
+    
 
-        if (
-            !nome ||
-            !email ||
-            !telefone ||
-            !endereco ||
-            !formacao ||
-            !objetivo ||
-            !experiencia ||
-            !habilidades ||
-            !idiomas ||
-            !referencias ||
-            !apelido ||
-            !tipo) {
-            return window.alert("Preencha todos os Dados!");
-        } else {
-            valorTipo = tipo;
-        }
+    const token = localStorage.getItem('token');
+    const _email = localStorage.getItem('email');
+    const id_usuario = localStorage.getItem('id');
+    const expiracaoToken = localStorage.getItem('expiracaoToken');
 
-        const token = localStorage.getItem('token');
-        const _email = localStorage.getItem('email');
-        const id_usuario = localStorage.getItem('id');
-        const expiracaoToken = localStorage.getItem('expiracaoToken');
-        const novoCurriculo = {
-            nome: novoNome,
-            email: email.toLowerCase(),
-            telefone: telefone.replace(/\D/g, ''),
-            endereco,
-            formacao,
-            objetivo,
-            experiencia,
-            habilidades,
-            idiomas,
-            referencias,
-            apelido,
-            tipo: valorTipo,
-            usuario_id: id_usuario
-        };
+    const novoCurriculo = {
+        nome: novoNome,
+        email: email.toLowerCase(),
+        telefone: telefone.replace(/\D/g, ''),
+        endereco,
+        formacao,
+        objetivo,
+        experiencia,
+        habilidades,
+        idiomas,
+        referencias,
+        apelido,
+        tipo: valorTipo,
+        usuario_id: id_usuario
+    };
 
-        if (token) {
-            const url = 'https://empregototal.onrender.com/curriculo';
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(novoCurriculo)
+    if (token) {
+        const url = 'https://empregototal.onrender.com/curriculo';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(novoCurriculo)
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    document.querySelector('#nome').value = '';
+                    document.querySelector('#email').value = '';
+                    document.querySelector('#telefone').value = '';
+                    document.querySelector('#endereco').value = '';
+                    document.querySelector('#formacao').value = '';
+                    document.querySelector('#objetivo').value = '';
+                    document.querySelector('#experiencia').value = '';
+                    document.querySelector('#habilidades').value = '';
+                    document.querySelector('#idiomas').value = '';
+                    document.querySelector('#referencias').value = '';
+                    document.querySelector('#apelido').value = '';
+                    document.querySelector('#tipo-formacao').value = '';
+
+                    window.alert('Curriculo Cadastrado com Sucesso!');
+                    return window.location.href = '/html/cad-curriculo.html';
+                }
+                return response.json();
             })
-                .then(response => {
-                    if (response.status === 201) {
-                        document.querySelector('#nome').value = '';
-                        document.querySelector('#email').value = '';
-                        document.querySelector('#telefone').value = '';
-                        document.querySelector('#endereco').value = '';
-                        document.querySelector('#formacao').value = '';
-                        document.querySelector('#objetivo').value = '';
-                        document.querySelector('#experiencia').value = '';
-                        document.querySelector('#habilidades').value = '';
-                        document.querySelector('#idiomas').value = '';
-                        document.querySelector('#referencias').value = '';
-                        document.querySelector('#apelido').value = '';
-                        document.querySelector('#tipo-formacao').value = '';
-                        
-                        window.alert('Curriculo Cadastrado com Sucesso!');
-                        return window.location.href = '/html/cad-curriculo.html';
-                    }
-                    return response.json();
-                })
-                .then(data => {
+            .then(data => {
 
-                    const erro = data.erro;
-                    const mensagem = data.mensagem;
+                const erro = data.erro;
+                const mensagem = data.mensagem;
 
-                    if (erro) {
-                        return window.alert(mensagem);
-                    }
-                    if (mensagem) {
+                if (erro) {
+                    return window.alert(mensagem);
+                }
+                if (mensagem) {
 
-                        return window.alert(mensagem);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Erro:', error);
-                });
-        }
-    });
+                    window.alert(mensagem);
+                }
+            })
+            .catch((error) => {
+                console.error('Erro:', error);
+            });
+    }
+
+    console.log(novoCurriculo);
+    
+
 }
 
 
