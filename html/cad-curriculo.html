@@ -148,13 +148,17 @@
                         <label for="tipo-formacao">Curriculo</label>
                         <select id="tipo-formacao">
                             <option hidden value="">Tipo Curriculo</option>
-                            <option value="medio">Médio</option>
-                            <option value="tecnico">Técnico</option>
-                            <option value="profissional">Profissional</option>
+                            <option value="médio">Curriculo 1</option>
+                            <option value="técnico">Curriculo 2</option>
+                            <option value="profissional">Curriculo 3</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="submit" id="btnCurriculo" onclick="cadastrarCurriculo()">Enviar Currículo</button>
+                        <label for="apelido">Apelido</label>
+                        <input type="text" name="apelido" id="apelido" placeholder="Digite um apelido para seu curriculo">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="btnCurriculo" onclick="cadastrarCurriculo()">Enviar Currículo</button>
                     </div>
                 </form>
             </div>

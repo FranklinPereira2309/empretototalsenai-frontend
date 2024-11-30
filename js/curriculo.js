@@ -1,4 +1,12 @@
 let dadosApi;
+let valorTipo;
+
+document.querySelector('#tipo-formacao').addEventListener('change', (e) => {
+    valorTipo = e.target.value;
+
+    console.log(valorTipo);
+    
+});
 
 function consultarApi() {
     const token = localStorage.getItem('token');
@@ -56,81 +64,62 @@ function cadastrarCurriculo() {
     let habilidades = document.querySelector('#habilidades').value;
     let idiomas = document.querySelector('#idiomas').value;
     let referencias = document.querySelector('#referencias').value;
+    let apelido = document.querySelector('#apelido').value;
     let tipo = document.querySelector('#tipo-formacao').value;
 
-    let valorTipo;
+    
     let novoNome = capitalizePalavas(nome)
 
-    document.getElementById('formCurriculo').addEventListener('submit', function (event) {
-        event.preventDefault();
+    if (
+        !nome ||
+        !email ||
+        !telefone ||
+        !endereco ||
+        !formacao ||
+        !objetivo ||
+        !experiencia ||
+        !habilidades ||
+        !idiomas ||
+        !referencias ||
+        !apelido ||
+        !tipo) {
+        return window.alert("Preencha todos os Dados!");
+    } 
+    
 
-        if (
-            !nome ||
-            !email ||
-            !telefone ||
-            !endereco ||
-            !formacao ||
-            !objetivo ||
-            !experiencia ||
-            !habilidades ||
-            !idiomas ||
-            !referencias ||
-            !tipo) {
-            return window.alert("Preencha todos os Dados!");
-        } else {
-            valorTipo = tipo;
-        }
+    const token = localStorage.getItem('token');
+    const _email = localStorage.getItem('email');
+    const id_usuario = localStorage.getItem('id');
+    const expiracaoToken = localStorage.getItem('expiracaoToken');
 
-        const token = localStorage.getItem('token');
-        const _email = localStorage.getItem('email');
-        const id_usuario = localStorage.getItem('id');
-        const expiracaoToken = localStorage.getItem('expiracaoToken');
-        const novoCurriculo = {
-            nome: novoNome,
-            email: email.toLowerCase(),
-            telefone: telefone.replace(/\D/g, ''),
-            endereco,
-            formacao,
-            objetivo,
-            experiencia,
-            habilidades,
-            idiomas,
-            referencias,
-            tipo: valorTipo,
-            usuario_id: id_usuario
-        };
+    const novoCurriculo = {
+        nome: novoNome,
+        email: email.toLowerCase(),
+        telefone: telefone.replace(/\D/g, ''),
+        endereco,
+        formacao,
+        objetivo,
+        experiencia,
+        habilidades,
+        idiomas,
+        referencias,
+        apelido,
+        tipo: valorTipo,
+        usuario_id: id_usuario
+    };
 
-        if (token) {
-            const url = 'https://empregototal.onrender.com/curriculo';
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(novoCurriculo)
-            })
-                .then(response => {
-                    if(response.status === 201) {
-                        window.alert('Curriculo Cadastrado com Sucesso!');
-                        window.location.href = '/html/cad-curriculos.html'
-                    }
-                    return response.json();
-                })
-                .then(data => {
-
-                    const erro = data.erro;
-                    const mensagem = data.mensagem;
-
-                    if (mensagem) {
-                        window.location.href = '/html/cad-curriculo.html';
-                        return window.alert(mensagem);
-                    }
-
-                    if (erro) {
-                        return window.alert(mensagem);
-                    }
-
+    if (token) {
+        const url = 'https://empregototal.onrender.com/curriculo';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(novoCurriculo)
+        })
+            .then(response => {
+                if (response.status === 201) {
                     document.querySelector('#nome').value = '';
                     document.querySelector('#email').value = '';
                     document.querySelector('#telefone').value = '';
@@ -141,22 +130,41 @@ function cadastrarCurriculo() {
                     document.querySelector('#habilidades').value = '';
                     document.querySelector('#idiomas').value = '';
                     document.querySelector('#referencias').value = '';
+                    document.querySelector('#apelido').value = '';
                     document.querySelector('#tipo-formacao').value = '';
 
-                    
-                    // window.alert('Curriculo registrado com sucesso!');
-                })
-                .catch((error) => {
-                    console.error('Erro:', error);
-                });
-        }
-    });
+                    window.alert('Curriculo Cadastrado com Sucesso!');
+                    return window.location.href = '/html/cad-curriculo.html';
+                }
+                return response.json();
+            })
+            .then(data => {
+
+                const erro = data.erro;
+                const mensagem = data.mensagem;
+
+                if (erro) {
+                    return window.alert(mensagem);
+                }
+                if (mensagem) {
+
+                    window.alert(mensagem);
+                }
+            })
+            .catch((error) => {
+                console.error('Erro:', error);
+            });
+    }
+
+    console.log(novoCurriculo);
+    
+
 }
 
 
 function verificarExistenciaCurriculo() {
     const token = localStorage.getItem('token');
-    
+
     let dadosApi;
 
     if (token) {
@@ -176,7 +184,7 @@ function verificarExistenciaCurriculo() {
                 let mensagem = data.mensagem;
 
                 if (mensagem) {
-                    
+
                     // return window.alert(mensagem);
 
                 }
@@ -194,7 +202,7 @@ function verificarExistenciaCurriculo() {
 }
 
 function validandoLinksCamposCurriculos(dados) {
-    
+
     const { cMedio, cTecnico, cProfissional } = dados;
 
     if (cMedio && cTecnico && cProfissional) {
@@ -217,7 +225,7 @@ function validandoLinksCamposCurriculos(dados) {
         window.location.href = '/html/dashboard-usuario.html';
 
     }
-    
+
 }
 
 
@@ -276,10 +284,8 @@ function mostrarMenuUsuario() {
 
 }
 
-
-
 function deslogarImediatamente() {
-    
+
     localStorage.clear();
 
     return window.location.href = '../index.html';
@@ -306,7 +312,7 @@ function mascaraCPF(event) {
 
 function mascaraCelular(event) {
     const campo = event.target;
-    campo.value = aplicarMascara(campo.value, '(##) #####-####');    
+    campo.value = aplicarMascara(campo.value, '(##) #####-####');
 }
 
 
@@ -355,8 +361,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     const identificacao = localStorage.getItem('identificacao');
     const titulo = document.querySelector('#titulo_dash_usuario');
-    let nome = localStorage.getItem('nome');      
-    
+    let nome = localStorage.getItem('nome');
+
 
     if (!token) {
         return window.location.href = '/html/acesso-negado.html';
@@ -372,5 +378,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
- 
+
 
