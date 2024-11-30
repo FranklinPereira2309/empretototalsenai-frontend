@@ -65,9 +65,11 @@ function cadastrarCurriculo() {
     let referencias = document.querySelector('#referencias').value;
     let apelido = document.querySelector('#apelido').value;
     let tipo = document.querySelector('#tipo-formacao').value;
+    
 
     
-    let novoNome = capitalizePalavas(nome)
+    let novoNome = capitalizePalavas(nome);
+    let noApelido = apelido? apelido : `Curriculo ${capitalizePalavas(tipo)}`; 
 
     if (
         !nome ||
@@ -80,7 +82,6 @@ function cadastrarCurriculo() {
         !habilidades ||
         !idiomas ||
         !referencias ||
-        !apelido ||
         !tipo) {
         return window.alert("Preencha todos os Dados!");
     } 
@@ -102,7 +103,7 @@ function cadastrarCurriculo() {
         habilidades,
         idiomas,
         referencias,
-        apelido,
+        apelido: noApelido,
         tipo: valorTipo,
         usuario_id: id_usuario
     };

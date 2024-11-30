@@ -90,10 +90,15 @@ function validandoLinksCurriculos(dados) {
     
     cMedio ? aMedio.style.display = 'block' : false;
     cMedio ? aMedio.textContent = `${cMedio.apelido}`: 'Curriculo1';
+    aMedio.classList.add('ocultar-text');    
+
     cTecnico ? aTecnico.style.display = 'block' : false;
     cTecnico ? aTecnico.textContent = `${cTecnico.apelido}`: 'Curriculo2';
+    aTecnico.classList.add('ocultar-texto');
+    
     cProfissional ? aProfissional.style.display = 'block' : false;
     cProfissional ? aProfissional.textContent = `${cProfissional.apelido}` : 'Curriculo3';
+    aProfissional.classList.add('ocultar-texto');
 }
 
 function exibirDadosCurriculo(dados) {
