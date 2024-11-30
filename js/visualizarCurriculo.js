@@ -81,16 +81,19 @@ function validandoLinksCurriculos(dados) {
     const aMedio = document.querySelector('#medio')
     const aTecnico = document.querySelector('#tecnico');
     const aProfissional = document.querySelector('#profissional');
-
-    aMedio.style.display = 'none';
-    aTecnico.style.display = 'none';
-    aProfissional.style.display = 'none';
-
     const { cMedio, cTecnico, cProfissional } = dados;
 
+    
+    aMedio.style.display = 'none';    
+    aTecnico.style.display = 'none';    
+    aProfissional.style.display = 'none';
+    
     cMedio ? aMedio.style.display = 'block' : false;
+    cMedio ? aMedio.textContent = `${cMedio.apelido}`: 'Curriculo1';
     cTecnico ? aTecnico.style.display = 'block' : false;
+    cTecnico ? aTecnico.textContent = `${cTecnico.apelido}`: 'Curriculo2';
     cProfissional ? aProfissional.style.display = 'block' : false;
+    cProfissional ? aProfissional.textContent = `${cProfissional.apelido}` : 'Curriculo3';
 }
 
 function exibirDadosCurriculo(dados) {
@@ -280,9 +283,6 @@ function editarCurriculo() {
         referencias,
         apelido,
         tipo,
-
-
-
     }
 
     if (token) {

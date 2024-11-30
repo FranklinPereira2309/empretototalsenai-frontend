@@ -4,8 +4,7 @@ let valorTipo;
 document.querySelector('#tipo-formacao').addEventListener('change', (e) => {
     valorTipo = e.target.value;
 
-    console.log(valorTipo);
-    
+       
 });
 
 function consultarApi() {
@@ -156,8 +155,7 @@ function cadastrarCurriculo() {
             });
     }
 
-    console.log(novoCurriculo);
-    
+       
 
 }
 
@@ -216,6 +214,7 @@ function validandoLinksCamposCurriculos(dados) {
         document.querySelector('#habilidades').disabled = true;
         document.querySelector('#idiomas').disabled = true;
         document.querySelector('#referencias').disabled = true;
+        document.querySelector('#apelido').disabled = true;
         document.querySelector('#tipo-formacao').disabled = true;
         document.querySelector('#btnCurriculo').disabled = true;
         document.querySelector('#btnCurriculo').style.backgroundColor = 'lightgray';
