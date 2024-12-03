@@ -1,10 +1,15 @@
 let dadosApi;
 let valorTipo;
+let dadosApiCurriculo;
+
+const select = document.querySelector('#tipo-formacao');
+let tipoCurriculo;
 
 document.querySelector('#tipo-formacao').addEventListener('change', (e) => {
     valorTipo = e.target.value;
 
-       
+    
+
 });
 
 function consultarApi() {
@@ -21,6 +26,12 @@ function consultarApi() {
     })
         .then(response => response.json())
         .then(data => {
+
+            let erro = data.erro;
+
+            if (erro) {
+                return window.alert(erro);
+            }
 
             let mensagem = data.mensagem;
 
@@ -39,6 +50,7 @@ verificarExistenciaCurriculo();
 
 
 function exibirDadosApi(dados) {
+   
     document.querySelector('#nome').value = dados.nome;
     document.querySelector('#email').value = dados.email;
     document.querySelector('#telefone').value = dados.telefone;
@@ -65,11 +77,11 @@ function cadastrarCurriculo() {
     let referencias = document.querySelector('#referencias').value;
     let apelido = document.querySelector('#apelido').value;
     let tipo = document.querySelector('#tipo-formacao').value;
-    
 
-    
+
+
     let novoNome = capitalizePalavas(nome);
-    let noApelido = apelido? apelido : `Curriculo ${capitalizePalavas(tipo)}`; 
+    let noApelido = apelido ? apelido : `Curriculo ${capitalizePalavas(tipo)}`;
 
     if (
         !nome ||
@@ -84,8 +96,8 @@ function cadastrarCurriculo() {
         !referencias ||
         !tipo) {
         return window.alert("Preencha todos os Dados!");
-    } 
-    
+    }
+
 
     const token = localStorage.getItem('token');
     const _email = localStorage.getItem('email');
@@ -156,7 +168,7 @@ function cadastrarCurriculo() {
             });
     }
 
-       
+
 
 }
 
@@ -204,6 +216,7 @@ function validandoLinksCamposCurriculos(dados) {
 
     const { cMedio, cTecnico, cProfissional } = dados;
 
+    
     if (cMedio && cTecnico && cProfissional) {
         document.querySelector('#nome').disabled = true;
         document.querySelector('#email').disabled = true;
@@ -362,6 +375,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const identificacao = localStorage.getItem('identificacao');
     const titulo = document.querySelector('#titulo_dash_usuario');
     let nome = localStorage.getItem('nome');
+
+
+
+    const select = document.querySelector('#tipo-formacao');
+    const opcoes = select.options;
+    const { cMedio, cTecnico, cProfissional } = dadosApiCurriculo;
+
+
+    if (cMedio && opcoes.value === 'médio') {
+        opcoes.disabled = true;
+    }
+    if (cTecnico && opcoes.value === 'técnico') {
+        opcoes.disabled = true;
+    }
+    if (cProfissional && opcoes.value == 'profissional') {
+        opcoes.disabled = true;
+    }
 
 
     if (!token) {

@@ -1,6 +1,7 @@
 const dialogModalNovaVaga = document.querySelector('#dialogNovaVaga');
 const vagasContainer = document.querySelector('#vagas-usuarios-container');
 const vagasConcorrendoCurriculos = [];
+let tipoCurriculo;
 
 document.addEventListener('DOMContentLoaded', () => {
     let titulo = document.querySelector('#titulo_dash_usuario');
