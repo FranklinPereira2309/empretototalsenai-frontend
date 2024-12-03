@@ -84,3 +84,10 @@ function adicionarLocalStorage(data, tempo) {
     }
 
 }
+
+function mudarVisibilidadeSenha() {
+    let olho = document.querySelector('.olho');
+    let inputSenha = document.querySelector('#passwordLogin');
+    inputSenha.type = inputSenha.type === 'password' ? 'text' : 'password';
+    olho.src = inputSenha.type === 'text' ? '../assets/olho-aberto.svg' : '../assets/olho-fechado.svg'
+}
