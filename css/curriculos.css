@@ -196,14 +196,14 @@ dialog {
     color: #000;
 }
 
-#medio,
-#tecnico,
+#médio,
+#técnico,
 #profissional {
     background-color: #4A81E0;
 }
 
-#medio:hover,
-#tecnico:hover,
+#médio:hover,
+#técnico:hover,
 #profissional:hover {
     background-color: #ccc;
     color: #000;
