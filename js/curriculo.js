@@ -1,14 +1,9 @@
-let dadosApi;
 let valorTipo;
-let dadosApiCurriculo;
 
 const select = document.querySelector('#tipo-formacao');
-let tipoCurriculo;
 
 document.querySelector('#tipo-formacao').addEventListener('change', (e) => {
-    valorTipo = e.target.value;
-
-    
+    valorTipo = e.target.value;    
 
 });
 
@@ -46,9 +41,6 @@ function consultarApi() {
         })
 }
 
-verificarExistenciaCurriculo();
-
-
 function exibirDadosApi(dados) {
    
     document.querySelector('#nome').value = dados.nome;
@@ -81,8 +73,7 @@ function cadastrarCurriculo() {
 
 
     let novoNome = capitalizePalavas(nome);
-    let noApelido = apelido ? apelido : `Curriculo ${capitalizePalavas(tipo)}`;
-
+    
     if (
         !nome ||
         !email ||
@@ -115,7 +106,7 @@ function cadastrarCurriculo() {
         habilidades,
         idiomas,
         referencias,
-        apelido: noApelido,
+        apelido,
         tipo: valorTipo,
         usuario_id: id_usuario
     };
@@ -176,8 +167,6 @@ function cadastrarCurriculo() {
 function verificarExistenciaCurriculo() {
     const token = localStorage.getItem('token');
 
-    let dadosApi;
-
     if (token) {
 
         const url = 'https://empregototal.onrender.com/curriculos';
@@ -199,11 +188,10 @@ function verificarExistenciaCurriculo() {
                     // return window.alert(mensagem);
 
                 }
-                dadosApi = data;
-
-                if (dadosApi) {
-
-                    validandoLinksCamposCurriculos(dadosApi);
+                
+                if (data) {
+                    validandoCampoSelect(data);
+                    validandoLinksCamposCurriculos(data);
                 }
             })
             .catch((error) => {
@@ -239,6 +227,38 @@ function validandoLinksCamposCurriculos(dados) {
 
     }
 
+}
+
+function validandoCampoSelect(dados) {
+
+    const select = document.querySelector('#tipo-formacao');
+    const opcoes = select.options;
+    const {cMedio, cTecnico, cProfissional} = dados;
+
+    if (cMedio) {
+        for(let i = 0 ; i < opcoes.length ; i++ ) {
+            if(opcoes[i].value === 'médio') {
+                opcoes[i].disabled = true;
+            }
+        }       
+        
+    }
+    if (cTecnico) {
+        for(let i = 0 ; i < opcoes.length ; i++ ) {
+            if(opcoes[i].value === 'técnico') {
+                opcoes[i].disabled = true;
+            }
+        }  
+        
+    }
+    if (cProfissional) {
+        for(let i = 0 ; i < opcoes.length ; i++ ) {
+            if(opcoes[i].value === 'profissional') {
+                opcoes[i].disabled = true;
+            }
+        }  
+    }
+    
 }
 
 
@@ -375,24 +395,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const identificacao = localStorage.getItem('identificacao');
     const titulo = document.querySelector('#titulo_dash_usuario');
     let nome = localStorage.getItem('nome');
-
-
-
-    const select = document.querySelector('#tipo-formacao');
-    const opcoes = select.options;
-    const { cMedio, cTecnico, cProfissional } = dadosApiCurriculo;
-
-
-    if (cMedio && opcoes.value === 'médio') {
-        opcoes.disabled = true;
-    }
-    if (cTecnico && opcoes.value === 'técnico') {
-        opcoes.disabled = true;
-    }
-    if (cProfissional && opcoes.value == 'profissional') {
-        opcoes.disabled = true;
-    }
-
+    
+    verificarExistenciaCurriculo();  
 
     if (!token) {
         return window.location.href = '/html/acesso-negado.html';

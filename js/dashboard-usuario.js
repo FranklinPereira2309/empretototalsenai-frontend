@@ -349,9 +349,9 @@ function exibirCurriculosVagas(dados) {
         
         let tipo = dado.tipo;
         let novoTipo = '';
-        tipo === 'medio'?  novoTipo = 'Médio' : '';
-        tipo === 'tecnico'?  novoTipo ='Técnico' : '';
-        tipo === 'profissional'?  novoTipo = 'Profissional' : '';
+        tipo === 'médio'?  novoTipo = dado.apelido: '';
+        tipo === 'técnico'?  novoTipo = dado.apelido : '';
+        tipo === 'profissional'?  novoTipo = dado.apelido : '';
         
         const vagaHTML = `
         

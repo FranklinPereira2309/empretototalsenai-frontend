@@ -6,6 +6,7 @@ let editarModalMedio;
 let editarModalTecnico;
 let editarModalProfissional;
 let tipoCurriculo = {};
+let descricaoCurriculo;
 
 
 
@@ -37,8 +38,8 @@ if (token) {
             let mensagem = data.mensagem;
 
             if (mensagem) {
-                document.querySelector('#medio').style.display = 'none';
-                document.querySelector('#tecnico').style.display = 'none';
+                document.querySelector('#médio').style.display = 'none';
+                document.querySelector('#técnico').style.display = 'none';
                 document.querySelector('#profissional').style.display = 'none';
                 document.querySelector('#tipoCurriculo').textContent = 'Não Disponível';
                 document.querySelector('#resume-data').innerHTML = '';
@@ -78,8 +79,8 @@ function formarCampoData(dados) {
 }
 
 function validandoLinksCurriculos(dados) {
-    const aMedio = document.querySelector('#medio')
-    const aTecnico = document.querySelector('#tecnico');
+    const aMedio = document.querySelector('#médio')
+    const aTecnico = document.querySelector('#técnico');
     const aProfissional = document.querySelector('#profissional');
     const { cMedio, cTecnico, cProfissional } = dados;
 
@@ -87,32 +88,44 @@ function validandoLinksCurriculos(dados) {
     aMedio.style.display = 'none';    
     aTecnico.style.display = 'none';    
     aProfissional.style.display = 'none';
+
+    let textMedio = aMedio.textContent;
+    let textTecnico = aTecnico.textContent;
+    let textProfissional = aProfissional.textContent;
+    
+
     
     cMedio ? aMedio.style.display = 'block' : false;
-    cMedio ? aMedio.textContent = `${cMedio.apelido}`: 'Curriculo1';
-    aMedio.classList.add('ocultar-text');    
+    promoverDescricaoCurriculos(cMedio, aMedio, textMedio);
+           
+    aMedio.classList.add('ocultar-text');   
 
     cTecnico ? aTecnico.style.display = 'block' : false;
-    cTecnico ? aTecnico.textContent = `${cTecnico.apelido}`: 'Curriculo2';
-    aTecnico.classList.add('ocultar-texto');
+    promoverDescricaoCurriculos(cTecnico, aTecnico, textTecnico);
     
+    aTecnico.classList.add('ocultar-texto');
+
     cProfissional ? aProfissional.style.display = 'block' : false;
-    cProfissional ? aProfissional.textContent = `${cProfissional.apelido}` : 'Curriculo3';
+    promoverDescricaoCurriculos(cProfissional, aProfissional, textProfissional);
+    
     aProfissional.classList.add('ocultar-texto');
+    
+}
+
+function promoverDescricaoCurriculos(dados, campo, texto) {
+    let valor;
+    valor =  dados && dados.apelido != ''? campo.textContent = dados.apelido : campo.textContent = texto;
+    return valor; 
 }
 
 function exibirDadosCurriculo(dados) {
-    const aMedio = document.querySelector('#medio')
-    const aTecnico = document.querySelector('#tecnico');
-    const aProfissional = document.querySelector('#profissional');
 
     let tipo = dados.tipo;
     let apelido = dados.apelido;
-    let novoTipo = '';
-
-    tipo === 'médio' ? novoTipo = `${apelido}` : '';
-    tipo === 'técnico' ? novoTipo = `${apelido}` : '';
-    tipo === 'profissional' ? novoTipo = `${apelido}` : '';
+    let descCurriculo;
+    
+    descCurriculo = apelido != '' ? apelido :  document.querySelector(`#${tipo}`).textContent;
+    
 
     document.querySelector('.imprimir').style.display = 'block';
     document.querySelector('.editar').style.display = 'block';
@@ -146,7 +159,7 @@ function exibirDadosCurriculo(dados) {
 
 
     div.innerHTML = `
-                <h1>${dados.nome} - Tipo do Curriculo (${novoTipo})</h1>
+                <h1>${dados.nome} - Curriculo: ${descCurriculo}</h1>
                 <p><strong>Email:</strong> ${dados.email}</p>
                 <p><strong>Telefone:</strong> ${dados.telefone}</p>
                 <p><strong>Endereço:</strong> ${dados.endereco}</p>
