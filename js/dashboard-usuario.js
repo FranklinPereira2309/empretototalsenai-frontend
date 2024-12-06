@@ -1,14 +1,26 @@
 const dialogModalNovaVaga = document.querySelector('#dialogNovaVaga');
 const vagasContainer = document.querySelector('#vagas-usuarios-container');
 const vagasConcorrendoCurriculos = [];
+
+let dadosParaFiltrar;
+let vagasFiltradas;
 let tipoCurriculo;
+
+const area = document.querySelector('#profissional');
+const modelo = document.querySelector('#modelo');
+const data = document.querySelector('#data');
+const contrato = document.querySelector('#contrato');
+const pcd = document.querySelector('#pcd');
+const salario = document.querySelector('#salario');
+const filters = document.querySelector('.filters-usuario');
 
 document.addEventListener('DOMContentLoaded', () => {
     let titulo = document.querySelector('#titulo_dash_usuario');
     const nome = localStorage.getItem('nome');
     const token = localStorage.getItem('token');
 
-    
+
+
     if (!token) {
         return window.location.href = `/html/acesso-negado.html`;
     }
@@ -17,13 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (Number(identificacao.length) === 11) {
 
-        nome ? titulo.textContent = `Workspace - ${nome}` : 'Workspace';
+        nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
     } else {
         window.alert('Aréa Restrita para Candidatos!');
         return window.location.href = '/html/dashboard-empresa.html';
     }
 
-   buscarTodasAsVagasLogado();
+       buscarTodasAsVagasLogado();
 
 
 })
@@ -149,7 +161,7 @@ function telaConfirmacaoCadCurriculo(curriculo) {
     const select = document.createElement('select');
     const button = document.querySelector('#salvarCurriculo');
     const p = document.querySelector('#alertaCadastrado');
-    
+
     let descCurriculo;
     let apelido;
     let tipo;
@@ -200,11 +212,11 @@ function telaConfirmacaoCadCurriculo(curriculo) {
 
     const { cMedio, cTecnico, cProfissional } = curriculo;
 
-    
+
     if (vagasConcorrendoCurriculos.includes(Number(localStorage.getItem('idVaga')))) {
         p.style.color = 'red';
         p.textContent = `Um Curriculo seu já foi adicionado a está Vaga`;
-              
+
         apelido = cMedio.apelido;
         tipo = cMedio.tipo;
 
@@ -302,6 +314,7 @@ function buscarTodasAsVagasLogado() {
             if (mensagem) {
                 return window.alert(mensagem);
             } else {
+                dadosParaFiltrar = data;
                 exibirVagas(data);
                 consultarBuscarIdVaga();
 
@@ -343,6 +356,7 @@ function buscarTodasAsVagas() {
 }
 
 function consultarCurriculosVagas() {
+    filters.style.display = 'none';
     const token = localStorage.getItem('token');
     const url = `https://empregototal.onrender.com/curriculos_vagas`;
 
@@ -434,7 +448,7 @@ function exibirCurriculosVagas(dados) {
     });
 }
 
-function fecharDialogModal() {     
+function fecharDialogModal() {
     window.location.href = '/html/dashboard-usuario.html';
     dialogModalNovaVaga.close();
 }
@@ -444,12 +458,17 @@ function exibirModalUsuario() {
 }
 
 function exibirVagas(vagas) {
+
     vagasContainer.innerHTML = '';
+    filters.style.display = 'block';
 
     if (vagas.length === 0) {
-        vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma vaga encontrada!</h1>';
+
+        vagasContainer.innerHTML = '<p class="jobs" style="text-align:center">Nenhuma vaga encontrada!</p>';
         return;
     }
+
+    vagasContainer.innerHTML = '';
 
     vagas.forEach((vaga) => {
         const vagaDiv = document.createElement('div');
@@ -534,31 +553,193 @@ function consultarBuscarIdVaga() {
 
 }
 
-{
-    let divUsuarioLogado = document.querySelector('#usuarioLogado');
-    let textoUsuarioLogado = document.querySelector('#emailLogado');
-    let loginButton = document.querySelector('#area-menu');
-    let areaPesquisa = document.querySelector('.area-pesquisa');
-    let linksLogado = document.querySelectorAll('.link-logado');
 
-    linksLogado.forEach(link => {
-        link.style.display = 'none';
+// areaUsuario.addEventListener('change', (e) => {
+//     console.log('Area: ', e.target.value);
+
+//     let opcao = area.value.toLowerCase();
+//     let vagasFiltradasArea = filtrarArea(dadosParaFiltrar, opcao);
+
+//     exibirVagas(vagasFiltradasArea);
+// });
+{
+    area.addEventListener('change', () => {
+        let opcao = area.value.toLowerCase();
+        let vagasFiltradasModelo;
+    
+        vagasFiltradasModelo = filtrarArea(dadosParaFiltrar, opcao);
+        exibirVagas(vagasFiltradasModelo);
+    
+        if (vagasFiltradas) {
+            vagasFiltradasModelo = filtrarArea(dadosParaFiltrar, opcao);
+            exibirVagas(vagasFiltradasModelo);
+        } 
+    })
+
+    modelo.addEventListener('change', () => {
+        let opcao = modelo.value.toLowerCase();
+        let vagasFiltradasModelo;
+
+        vagasFiltradasModelo = filtrarModelo(dadosParaFiltrar, opcao);
+        exibirVagas(vagasFiltradasModelo);
+
+        if (vagasFiltradas) {
+            vagasFiltradasModelo = filtrarModelo(dadosParaFiltrar, opcao);
+            exibirVagas(vagasFiltradasModelo);
+        }
     });
 
-    divUsuarioLogado.style.display = 'none';
+    data.addEventListener('change', () => {
+        let opcao = data.value.toLowerCase();
+        let vagasFiltradasData;
 
-    const _email = localStorage.getItem('email');
-    const id_usuario = localStorage.getItem('id');
+        vagasFiltradasData = filtrarData(dadosParaFiltrar, opcao);
+        exibirVagas(vagasFiltradasData);
 
-    if (id_usuario) {
-        divUsuarioLogado.style.display = 'flex';
-        textoUsuarioLogado.innerHTML = _email;
-        linksLogado.forEach(link => {
-            link.style.display = 'block';
-        });
-        loginButton.style.display = 'none';
-    } else {
-        areaPesquisa.style.display = 'none';
+        if (vagasFiltradas) {
+            vagasFiltradasData = filtrarData(dadosParaFiltrar, opcao);
+            exibirVagas(vagasFiltradasData);
+        }
+    });
+
+    contrato.addEventListener('change', () => {
+        let opcao = contrato.value.toLowerCase();
+        let vagasFiltradasContrato;
+
+        vagasFiltradasContrato = filtrarContrato(dadosParaFiltrar, opcao);
+        exibirVagas(vagasFiltradasContrato);
+
+        if (vagasFiltradas) {
+            vagasFiltradasContrato = filtrarContrato(dadosParaFiltrar, opcao);
+            exibirVagas(vagasFiltradasContrato);
+        }
+    });
+
+    pcd.addEventListener('change', () => {
+        let opcao = pcd.value.toLowerCase();
+        let vagasFiltradasPcd;
+
+        vagasFiltradasPcd = filtrarPcd(dadosParaFiltrar, opcao);
+        exibirVagas(vagasFiltradasPcd);
+
+        if (vagasFiltradas) {
+            vagasFiltradasPcd = filtrarPcd(dadosParaFiltrar, opcao);
+
+            exibirVagas(vagasFiltradasPcd);
+        }
+    });
+
+    salario.addEventListener('change', () => {
+        let opcao = salario.value.toLowerCase();
+        let vagasFiltradasSalario;
+
+        vagasFiltradasSalario = filtrarSalario(dadosParaFiltrar, opcao);
+        exibirVagas(vagasFiltradasSalario);
+
+        if (vagasFiltradas) {
+            vagasFiltradasSalario = filtrarSalario(dadosParaFiltrar, opcao);
+            exibirVagas(vagasFiltradasSalario);
+        }
+    });
+
+
+    function filtrarArea(vagas, opcao) {
+        vagasFiltradas = vagas.filter((vaga) => vaga.setor_atuacao.toLowerCase() === opcao);
+
+        if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+            area.selectedIndex = 0;
+        }
+
+        return vagasFiltradas;
+    }
+
+    function filtrarModelo(vagas, opcao) {
+        vagasFiltradas = vagas.filter((vaga) => vaga.modalidade.toLowerCase() === opcao);
+
+        if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+
+            modelo.selectedIndex = 0;
+        }
+
+        return vagasFiltradas;
+    }
+
+    function filtrarData(vagas, opcao) {
+        let dataAtual = new Date()
+        let vagasAtualizadasData = [];
+
+        if (opcao === "semana") {
+            const ultimaSemana = new Date();
+            ultimaSemana.setDate(dataAtual.getDate() - 7);
+            vagasAtualizadasData = vagas.filter(vaga => new Date(vaga.data) <= ultimaSemana);
+        }
+        if (opcao === "mes") {
+            const ultimoMes = new Date();
+            ultimoMes.setMonth(dataAtual.getMonth() - 1);
+            vagasAtualizadasData = vagas.filter(vaga => new Date(vaga.data) <= ultimoMes);
+        }
+        if (opcao === "todos") {
+            vagasAtualizadasData = vagas;
+            data.selectedIndex = 0;
+        }
+        return vagasAtualizadasData;
+    }
+
+    function filtrarContrato(vagas, opcao) {
+        vagasFiltradas = vagas.filter((vaga) => vaga.tipo_contrato === opcao);
+
+        if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+            contrato.selectedIndex = 0;
+        }
+
+        return vagasFiltradas;
+    }
+
+    function filtrarPcd(vagas, opcao) {
+        let opcaoBoolean = opcao === 'sim' ? true : false;
+        vagasFiltradas = vagas.filter((vaga) => vaga.pcd === opcaoBoolean);
+
+        if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+            pcd.selectedIndex = 0;
+        }
+
+        return vagasFiltradas;
+    }
+
+    function filtrarSalario(vagas, opcao) {
+        if (opcao === 'mil') {
+            vagasFiltradas = vagas.filter((vaga) => {
+                const salarioNumerico = extrairSalarioNumerico(vaga.salario);
+                return salarioNumerico <= 100000;
+            });
+        } else if (opcao === 'miladois') {
+            vagasFiltradas = vagas.filter((vaga) => {
+                const salarioNumerico = extrairSalarioNumerico(vaga.salario);
+                return salarioNumerico >= 100100 && salarioNumerico <= 200100;
+            });
+        } else if (opcao === 'acimadois') {
+            vagasFiltradas = vagas.filter((vaga) => {
+                const salarioNumerico = extrairSalarioNumerico(vaga.salario);
+                return salarioNumerico > 200000;
+            });
+        } else if (opcao === 'todos') {
+            vagasFiltradas = vagas;
+            salario.selectedIndex = 0;
+        }
+
+        return vagasFiltradas;
     }
 }
 
+function extrairSalarioNumerico(salario) {
+    const salarioLimpo = salario.replace(/[^\d,-]/g, '').replace(',', '.');
+
+
+    const salarioNumerico = parseFloat(salarioLimpo);
+
+    return salarioNumerico;
+}

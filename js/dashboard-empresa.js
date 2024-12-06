@@ -10,6 +10,7 @@ const pcd = document.querySelector('#pcd');
 const salario = document.querySelector('#salario');
 const filters = document.querySelector('.filters');
 let dadosParaFiltrar;
+let vagasFiltradas;
 let idVaga;
 const dialogVisualizarCurriculo = document.querySelector('#dialogVisualizarCurriculo');
 
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (Number(identificacao.length) === 14) {
 
-        nome ? titulo.textContent = `Workspace - ${nome}` : 'Workspace';
+        nome ? titulo.textContent = `Dashboard - ${nome}` : 'Dashboard';
     } else {
         window.alert('Aréa Restrita para Empresas!');
         return window.location.href = '/html/dashboard-usuario.html';
@@ -228,9 +229,8 @@ function exibirVagasEmpresa(vagas) {
     filters.style.display = 'block';
 
     if (vagas.length === 0) {
-        filters.style.display = 'none';
-
-        vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma Vaga encontrada!</h1>';
+        
+        vagasContainer.innerHTML = '<p class="jobs" style="text-align:center">Nenhuma Vaga encontrada!</p>';
         return;
     }
     vagasContainer.innerHTML = '';

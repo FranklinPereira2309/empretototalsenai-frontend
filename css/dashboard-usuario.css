@@ -12,6 +12,31 @@ body {
     color: #333;
 }
 
+.container-filters-usuario {     
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;  
+}
+
+.container-filters-usuario select {
+    margin-right: 10px;
+}
+
+.filters-usuario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filters-usuario select {
+    padding: 8px;
+    border: 2px solid #0000ff;
+    border-radius: 4px;
+    outline: none;
+}
+
 .container {
     display: flex;
 }

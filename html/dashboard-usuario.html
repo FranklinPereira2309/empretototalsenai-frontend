@@ -104,6 +104,54 @@
                     <button class="excluir" style="display:none;" onclick="deletarCurriculo()">Excluir
                         Curriculo</button>
                 </div>
+                <div class="container-filters-usuario">
+                    <div class="filters-usuario" style="display: none;">
+                        <select id="profissional">
+                            <option value="area" hidden>Área</option>
+                            <option value="tecnologia">Tecnologia</option>
+                            <option value="saude">Saúde</option>
+                            <option value="educacao">Educação</option>
+                            <option value="comercio">Comercio</option>
+                            <option value="industria">Indústria</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="modelo">
+                            <option value="trabalho" hidden>Trabalho</option>
+                            <option value="presencial">Presencial</option>
+                            <option value="remoto">Remoto</option>
+                            <option value="hibrido">Híbrido</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="data">
+                            <option value="publicacao" hidden>Publicação</option>
+                            <option value="semana">Última semana</option>
+                            <option value="mes">Último mês</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="contrato">
+                            <option value="contrato" hidden>Contrato</option>
+                            <option value="clt">CLT</option>
+                            <option value="pj">PJ</option>
+                            <option value="estagio">Estágio</option>
+                            <option value="temporario">Temporário</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="pcd">
+                            <option value="pcd" hidden>PCD</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                            <option value="todos">Todos</option>
+                        </select>
+                        <select id="salario">
+                            <option value="salario" hidden>Salário</option>
+                            <option value="mil">Até R$ 1.000</option>
+                            <option value="miladois">R$ 1.000 - R$ 2.000</option>
+                            <option value="acimadois">Acima de R$ 2.000</option>
+                            <option value="todos">Todos</option>
+                        </select>                   
+                        
+                    </div> 
+                </div>
                 <article id="vagas-usuarios-container" class="card">
                     Selecione uma opção para visualizar os dados.
                 </article>
@@ -114,8 +162,8 @@
 
 
 
-    <script src="/js/script.js"></script>
     <script src="/js/dashboard-usuario.js"></script>
+    <script src="/js/script.js"></script>
 
 
 
