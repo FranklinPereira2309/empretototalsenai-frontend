@@ -65,6 +65,15 @@ footer {
     padding: 20px 0;
 }
 
+
+#area-menu li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+        
+}
+
 #session-timer {
     /* position: fixed;
     top: 15px;
