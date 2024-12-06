@@ -886,7 +886,7 @@ function exibirCurriculoTipoParams(curriculos) {
 
 
     if (curriculos.length === 0) {
-        vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhum Curriculo encontrado!</h1>';
+        vagasContainer.innerHTML = '<p class="jobs" style="text-align:center">Nenhum Curriculo encontrado!</p>';
         return;
     }
 
@@ -966,7 +966,7 @@ function exibirTodosCurriculosSelecionados(curriculos) {
     localStorage.setItem('idVagaSelecionada', '');
 
     if (curriculos.length === 0) {
-        vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Não há uma lista de Curriculos Selecionados!<h1>';
+        vagasContainer.innerHTML = '<p class="jobs" style="text-align:center">Não há uma lista de Curriculos Selecionados!<p>';
 
         return;
     }
@@ -1129,7 +1129,7 @@ function visualizarTodosUsuariosCurriculos() {
         .then(response => {
             if (response.status === 404) {
                 reloadPage();
-                vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma Vaga cadastrada!</h1>';
+                vagasContainer.innerHTML = '<p class="jobs" style="text-align:center">Nenhuma Vaga cadastrada!</p>';
             }
             return response.json();
         })
@@ -1419,32 +1419,4 @@ function formatarCpf(cpf) {
         return 'null';
     }
 
-}
-
-{
-    let divUsuarioLogado = document.querySelector('#usuarioLogado');
-    let textoUsuarioLogado = document.querySelector('#emailLogado');
-    let loginButton = document.querySelector('#area-menu');
-    let areaPesquisa = document.querySelector('.area-pesquisa');
-    let linksLogado = document.querySelectorAll('.link-logado');
-
-    linksLogado.forEach(link => {
-        link.style.display = 'none';
-    });
-
-    divUsuarioLogado.style.display = 'none';
-
-    const _email = localStorage.getItem('email');
-    const id_usuario = localStorage.getItem('id');
-
-    if (id_usuario) {
-        divUsuarioLogado.style.display = 'flex';
-        textoUsuarioLogado.innerHTML = _email;
-        linksLogado.forEach(link => {
-            link.style.display = 'block';
-        });
-        loginButton.style.display = 'none';
-    } else {
-        areaPesquisa.style.display = 'none';
-    }
 }

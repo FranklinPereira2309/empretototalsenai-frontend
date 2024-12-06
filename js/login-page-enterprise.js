@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', (e) => {
     const identificacao = localStorage.getItem('identificacao');
 
-    if (Number(identificacao.length) === 14) {
+    if (identificacao && Number(identificacao.length) === 14) {
        return window.location.href = '/html/dashboard-empresa.html';    }
 
 })

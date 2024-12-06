@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', (e) => {
     
-    const identificacao = localStorage.getItem('identificacao');     
-        
+    const identificacao = localStorage.getItem('identificacao');      
+           
     
-    if(Number(identificacao.length) === 11) {
+    if(identificacao && Number(identificacao.length) === 11) {
         return irPara = window.location.href = '/html/dashboard-usuario.html';
     }
     

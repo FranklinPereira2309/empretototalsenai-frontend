@@ -394,7 +394,7 @@ function exibirCurriculosVagas(dados) {
 
 
     if (dados.length === 0 || !dados) {
-        vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma vaga encontrada!</h1>';
+        vagasContainer.innerHTML = '<p class="jobs" style="text-align:center">Nenhuma vaga encontrada!</p>';
         return;
     }
 
