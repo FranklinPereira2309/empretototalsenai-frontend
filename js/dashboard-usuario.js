@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let titulo = document.querySelector('#titulo_dash_usuario');
     const nome = localStorage.getItem('nome');
     const token = localStorage.getItem('token');
+
     
-    if(!token) {
+    if (!token) {
         return window.location.href = `/html/acesso-negado.html`;
     }
 
@@ -22,13 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return window.location.href = '/html/dashboard-empresa.html';
     }
 
-    
+
 
 })
 
 
-vagasContainer.addEventListener('click', (e) => {    
-   
+vagasContainer.addEventListener('click', (e) => {
+
 
     if (e.target.classList.contains('btn-cadastrar')) {
         const elementoPai = e.target.closest('.item');
@@ -40,12 +41,12 @@ vagasContainer.addEventListener('click', (e) => {
 
         }
 
-    }else {
+    } else {
         return;
     }
-    
-    
-    
+
+
+
 });
 
 function meCadastrarDash() {
@@ -70,7 +71,7 @@ function meCadastrarDash() {
 
 function verificarExistenciaCurriculo() {
     const token = localStorage.getItem('token');
-    
+
     if (token) {
 
         const url = 'https://empregototal.onrender.com/curriculos';
@@ -93,9 +94,9 @@ function verificarExistenciaCurriculo() {
 
                 }
                 dadosApi = data;
-                
+
                 telaConfirmacaoCadCurriculo(dadosApi);
-               
+
             })
             .catch((error) => {
                 console.error('Erro:', error);
@@ -147,24 +148,34 @@ function telaConfirmacaoCadCurriculo(curriculo) {
     const select = document.createElement('select');
     const button = document.querySelector('#salvarCurriculo');
     const p = document.querySelector('#alertaCadastrado');
-    let idVaga = localStorage.getItem('idVaga');
-       
+    
+    let descCurriculo;
+    let apelido;
+    let tipo;
+
+
+    const tipos = [
+        { tipo: 'médio', descricao: 'Nível Médio' },
+        { tipo: 'técnico', descricao: 'Nível Técnico' },
+        { tipo: 'profissional', descricao: 'Nível Superior' }
+    ];
+
 
     modalContainer.innerHTML = '';
 
     select.addEventListener('change', (e) => {
         e.stopPropagation();
-        
+
         tipoCurriculo = select.value;
-        
-        if (tipoCurriculo === 'medio') {
+
+        if (tipoCurriculo === 'médio') {
             localStorage.setItem('idCurriculo', dadosApi.cMedio.id);
-            
+
         }
 
-        if (tipoCurriculo === 'tecnico') {
+        if (tipoCurriculo === 'técnico') {
             localStorage.setItem('idCurriculo', dadosApi.cTecnico.id);
-            
+
         }
         if (tipoCurriculo === 'profissional') {
             localStorage.setItem('idCurriculo', dadosApi.cProfissional.id);
@@ -176,60 +187,92 @@ function telaConfirmacaoCadCurriculo(curriculo) {
         } else {
             button.disabled = true;
         }
-        
-        
+
+
     });
-    
-       
+
+
 
     select.innerHTML = `
         <option value="" hidden>Selecionar Curriculo</option>
     `;
 
     const { cMedio, cTecnico, cProfissional } = curriculo;
+
     
-    
-    
-    
-    
-    if (vagasConcorrendoCurriculos.includes(Number(idVaga))) {
+    if (vagasConcorrendoCurriculos.includes(Number(localStorage.getItem('idVaga')))) {
         p.style.color = 'red';
         p.textContent = `Um Curriculo seu já foi adicionado a está Vaga`;
+              
+        apelido = cMedio.apelido;
+        tipo = cMedio.tipo;
 
+        descCurriculo = apelido !== ''
+            ? apelido
+            : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
+        select.innerHTML += `
+            <option value="" disabled>${descCurriculo}</option>
+        `
+
+        apelido = cTecnico.apelido;
+        tipo = cTecnico.tipo;
+
+        descCurriculo = apelido !== ''
+            ? apelido
+            : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
+
+        select.innerHTML += `
+            <option value="" disabled>${descCurriculo}</option>
+        `
+
+        apelido = cProfissional.apelido;
+        tipo = cProfissional.tipo;
+
+        descCurriculo = apelido !== ''
+            ? apelido
+            : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
+        select.innerHTML += `
+            <option value="" disabled>${descCurriculo}</option>
+            `
+    } else if (!vagasConcorrendoCurriculos.includes(Number(localStorage.getItem('idVaga')))) {
+
+        if (cMedio) {
+            apelido = cMedio.apelido;
+            tipo = cMedio.tipo;
+
+            descCurriculo = apelido !== ''
+                ? apelido
+                : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
+
+            select.innerHTML += `
+                <option value="${cMedio.tipo}">${descCurriculo}</option>
+            `
+        }
+        if (cTecnico) {
+            apelido = cTecnico.apelido;
+            tipo = cTecnico.tipo;
+
+            descCurriculo = apelido !== ''
+                ? apelido
+                : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
+            select.innerHTML += `
+            <option value="${cTecnico.tipo}">${descCurriculo}</option>
+            `
+        }
+        if (cProfissional) {
+            apelido = cProfissional.apelido;
+            tipo = cProfissional.tipo;
+
+            descCurriculo = apelido !== ''
+                ? apelido
+                : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
+            select.innerHTML += `
+                <option value="${cProfissional.tipo}">${descCurriculo}</option>
+            `
+        }
     }
 
-    
-    
-    if (vagasConcorrendoCurriculos.includes(Number(idVaga))) {
-        select.innerHTML += `
-            <option value="" disabled>Médio</option>
-        `
-        select.innerHTML += `
-            <option value="" disabled>Técnico</option>
-        `
-        select.innerHTML += `
-            <option value="" disabled>Profissional</option>
-            `
-    }else if(!vagasConcorrendoCurriculos.includes(Number(idVaga))) {
-        
-        if(cMedio) {
-            select.innerHTML += `
-                <option value="${cMedio.tipo}">${cMedio.tipo}</option>
-            `
-        }
-        if(cTecnico) {
-            select.innerHTML += `
-            <option value="${cTecnico.tipo}">${cTecnico.tipo}</option>
-            `
-        }
-        if(cProfissional) {
-            select.innerHTML += `
-                <option value="${cProfissional.tipo}">${cProfissional.tipo}</option>
-            `
-        }
-    }
 
-    
 
 
     modalContainer.appendChild(select);
@@ -259,8 +302,8 @@ function buscarTodasAsVagasLogado() {
                 return window.alert(mensagem);
             } else {
                 exibirVagas(data);
-                consultarBuscarIdVaga(); 
-                                               
+                consultarBuscarIdVaga();
+
             }
 
         })
@@ -320,10 +363,10 @@ function consultarCurriculosVagas() {
             if (mensagem) {
                 return window.alert(mensagem);
             }
-                                  
+
             exibirCurriculosVagas(data);
-            
-            
+
+
         })
         .catch(erro => {
             console.log(erro);
@@ -333,7 +376,7 @@ function consultarCurriculosVagas() {
 
 function exibirCurriculosVagas(dados) {
     vagasContainer.innerHTML = '';
-    
+
 
     if (dados.length === 0 || !dados) {
         vagasContainer.innerHTML = '<h1 class="jobs" style="text-align:center">Nenhuma vaga encontrada!</h1>';
@@ -345,17 +388,25 @@ function exibirCurriculosVagas(dados) {
         let dataFormatada = formarCampoData(dado);
         const imagem = document.createElement('img');
         const div = document.createElement('div');
-        
-        
+
         let tipo = dado.tipo;
-        let novoTipo = '';
-        tipo === 'médio'?  novoTipo = dado.apelido: '';
-        tipo === 'técnico'?  novoTipo = dado.apelido : '';
-        tipo === 'profissional'?  novoTipo = dado.apelido : '';
-        
+        let apelido = dado.apelido;
+        let descCurriculo;
+
+        const tipos = [
+            { tipo: 'médio', descricao: 'Nível Médio' },
+            { tipo: 'técnico', descricao: 'Nível Técnico' },
+            { tipo: 'profissional', descricao: 'Nível Superior' }
+        ];
+
+        descCurriculo = apelido !== ''
+            ? apelido
+            : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
+
+
         const vagaHTML = `
         
-        <h2>${dado.titulo} - Curriculo ${novoTipo}</h2>
+        <h2>${dado.titulo} - Curriculo ( ${descCurriculo} )</h2>
         <p><strong>Nome da Empresa:</strong> ${dado.nome_empresa}</p>
         <p><strong>Descrição da Vaga:</strong> ${dado.descricao}</p>
         <p><strong>Setor Atuação:</strong> ${dado.setor_atuacao}</p>
@@ -368,23 +419,24 @@ function exibirCurriculosVagas(dados) {
         <p>Data Cadastro: ${dataFormatada}</p>
         
         `;
-        
+
         imagem.classList.add('img-pcd-usuario');
-        dado.pcd? imagem.src = '/assets/pcd1.jpeg': imagem.style.display = 'none'; 
+        dado.pcd ? imagem.src = '/assets/pcd1.jpeg' : imagem.style.display = 'none';
         vagaDiv.innerHTML = vagaHTML;
         div.classList.add('img-div-usuario');
         div.appendChild(imagem);
         vagaDiv.appendChild(div);
         vagasContainer.appendChild(vagaDiv);
-        
-        
-        
+
+
+
     });
 }
 
-function fecharDialogModal() {
-    window.location.href = window.location.href;
-    dialogModalNovaVaga.close();    
+function fecharDialogModal() {   
+    window.location.href = '/html/dashboard-usuario.html';
+    dialogModalNovaVaga.close();
+
 }
 
 function exibirModalUsuario() {
@@ -419,7 +471,7 @@ function exibirVagas(vagas) {
                     
                 `;
         imagem.classList.add('img-pcd-usuario');
-        vaga.pcd? imagem.src = '/assets/pcd1.jpeg': imagem.style.display = 'none';
+        vaga.pcd ? imagem.src = '/assets/pcd1.jpeg' : imagem.style.display = 'none';
         btnCadastrar.classList.add('btn-cadastrar');
         btnCadastrar.textContent = 'Me Candidatar';
         btnCadastrar.onclick = meCadastrarDash;
@@ -446,7 +498,7 @@ function formarCampoData(dados) {
 
 
 function consultarBuscarIdVaga() {
-    
+
     const token = localStorage.getItem('token');
     const url = `https://empregototal.onrender.com/curriculos_vagas`;
 
@@ -468,18 +520,18 @@ function consultarBuscarIdVaga() {
             if (mensagem) {
                 return window.alert(mensagem);
             }
-            
+
             data.forEach((dados) => {
-                    vagasConcorrendoCurriculos.push(dados.vaga_id);
+                vagasConcorrendoCurriculos.push(dados.vaga_id);
             });
 
-            
+
         })
         .catch(erro => {
             console.log(erro);
 
         })
-    
+
 }
 
 {
