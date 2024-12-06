@@ -22,6 +22,7 @@ function exibirModalIndex() {
 }
 function fecharModalIndex() {
     exibirCadastroDialogo.close();
+    window.location.href = '/index.html';
 }
 
 
@@ -136,38 +137,44 @@ function salvarCurriculoVaga() {
         .catch(erro => { console.log('Erro: ', erro); });
 }
 
-
-
 function telaConfirmacaoCadCurriculo(curriculo) {
     const modalContainer = document.querySelector("#modal-container-index");
+    const dados = document.createElement('div');
     const select = document.createElement('select');
     const button = document.querySelector('#salvarCurriculo');
     const p = document.querySelector('#alertaCadastradoIndex');
 
-    const { cMedio, cTecnico, cProfissional } = curriculo;
+    let descCurriculo;
+    let apelido;
+    let tipo;
+
+
+    const tipos = [
+        { tipo: 'médio', descricao: 'Nível Médio' },
+        { tipo: 'técnico', descricao: 'Nível Técnico' },
+        { tipo: 'profissional', descricao: 'Nível Superior' }
+    ];
+
 
     modalContainer.innerHTML = '';
-
 
     select.addEventListener('change', (e) => {
         e.stopPropagation();
 
         tipoCurriculo = select.value;
 
-
-        if (tipoCurriculo === 'medio') {
+        if (tipoCurriculo === 'médio') {
             localStorage.setItem('idCurriculo', dadosApi.cMedio.id);
 
         }
 
-        if (tipoCurriculo === 'tecnico') {
+        if (tipoCurriculo === 'técnico') {
             localStorage.setItem('idCurriculo', dadosApi.cTecnico.id);
 
         }
         if (tipoCurriculo === 'profissional') {
             localStorage.setItem('idCurriculo', dadosApi.cProfissional.id);
         }
-
 
 
         if (tipoCurriculo) {
@@ -177,50 +184,89 @@ function telaConfirmacaoCadCurriculo(curriculo) {
         }
 
 
-
     });
 
-    let idVaga = localStorage.getItem('idVaga');
 
 
-    if (vagasConcorrendoCurriculos.includes(Number(idVaga))) {
+    select.innerHTML = `
+        <option value="" hidden>Selecionar Curriculo</option>
+    `;
+
+    const { cMedio, cTecnico, cProfissional } = curriculo;
+
+    if (vagasConcorrendoCurriculos.includes(Number(localStorage.getItem('idVaga')))) {
         p.style.color = 'red';
         p.textContent = `Um Curriculo seu já foi adicionado a está Vaga`;
 
-    }
+        apelido = cMedio.apelido;
+        tipo = cMedio.tipo;
 
-    select.innerHTML = `
-        <option value="" hidden>Selecionar</option>    
-    `
-
-
-    if (vagasConcorrendoCurriculos.includes(Number(idVaga))) {
+        descCurriculo = apelido !== ''
+            ? apelido
+            : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
         select.innerHTML += `
-            <option value="" disabled>Médio</option>
+            <option value="" disabled>${descCurriculo}</option>
         `
+
+        apelido = cTecnico.apelido;
+        tipo = cTecnico.tipo;
+
+        descCurriculo = apelido !== ''
+            ? apelido
+            : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
+
         select.innerHTML += `
-            <option value="" disabled>Técnico</option>
+            <option value="" disabled>${descCurriculo}</option>
         `
+
+        apelido = cProfissional.apelido;
+        tipo = cProfissional.tipo;
+
+        descCurriculo = apelido !== ''
+            ? apelido
+            : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
         select.innerHTML += `
-            <option value="" disabled>Profissional</option>
+            <option value="" disabled>${descCurriculo}</option>
             `
-    } else if (!vagasConcorrendoCurriculos.includes(Number(idVaga))) {
+    } else if (!vagasConcorrendoCurriculos.includes(Number(localStorage.getItem('idVaga')))) {
+
         if (cMedio) {
+            apelido = cMedio.apelido;
+            tipo = cMedio.tipo;
+
+            descCurriculo = apelido !== ''
+                ? apelido
+                : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
+
             select.innerHTML += `
-                <option value="${cMedio.tipo}">${cMedio.tipo}</option>
+                <option value="${cMedio.tipo}">${descCurriculo}</option>
             `
         }
         if (cTecnico) {
+            apelido = cTecnico.apelido;
+            tipo = cTecnico.tipo;
+
+            descCurriculo = apelido !== ''
+                ? apelido
+                : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
             select.innerHTML += `
-            <option value="${cTecnico.tipo}">${cTecnico.tipo}</option>
+            <option value="${cTecnico.tipo}">${descCurriculo}</option>
             `
         }
         if (cProfissional) {
+            apelido = cProfissional.apelido;
+            tipo = cProfissional.tipo;
+
+            descCurriculo = apelido !== ''
+                ? apelido
+                : (tipos.find(t => t.tipo === tipo)?.descricao || 'Padrão');
             select.innerHTML += `
-                <option value="${cProfissional.tipo}">${cProfissional.tipo}</option>
+                <option value="${cProfissional.tipo}">${descCurriculo}</option>
             `
         }
     }
+
+
 
 
     modalContainer.appendChild(select);
@@ -260,6 +306,7 @@ function buscarTodasAsVagas() {
             }
             dadosFiltar = data;
             exibirVagas(data);
+            consultarBuscarIdVaga();
 
         })
         .catch(erro => {
