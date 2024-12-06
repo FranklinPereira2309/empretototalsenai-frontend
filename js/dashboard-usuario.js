@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return window.location.href = '/html/dashboard-empresa.html';
     }
 
+   buscarTodasAsVagasLogado();
 
 
 })
@@ -433,10 +434,9 @@ function exibirCurriculosVagas(dados) {
     });
 }
 
-function fecharDialogModal() {   
+function fecharDialogModal() {     
     window.location.href = '/html/dashboard-usuario.html';
     dialogModalNovaVaga.close();
-
 }
 
 function exibirModalUsuario() {
