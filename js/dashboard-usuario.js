@@ -292,7 +292,6 @@ function telaConfirmacaoCadCurriculo(curriculo) {
     exibirModalUsuario();
 }
 
-
 function buscarTodasAsVagasLogado() {
     const url = `https://empregototal.onrender.com/todas_as_vagas_logado`;
 
@@ -553,15 +552,6 @@ function consultarBuscarIdVaga() {
 
 }
 
-
-// areaUsuario.addEventListener('change', (e) => {
-//     console.log('Area: ', e.target.value);
-
-//     let opcao = area.value.toLowerCase();
-//     let vagasFiltradasArea = filtrarArea(dadosParaFiltrar, opcao);
-
-//     exibirVagas(vagasFiltradasArea);
-// });
 {
     area.addEventListener('change', () => {
         let opcao = area.value.toLowerCase();
