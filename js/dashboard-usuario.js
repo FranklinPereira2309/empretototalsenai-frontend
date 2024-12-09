@@ -14,6 +14,13 @@ const pcd = document.querySelector('#pcd');
 const salario = document.querySelector('#salario');
 const filters = document.querySelector('.filters-usuario');
 
+let divUsuarioLogado = document.querySelector('#usuarioLogado');
+let textoUsuarioLogado = document.querySelector('#emailLogado');
+let loginButton = document.querySelector('#area-menu');
+let areaPesquisa = document.querySelector('.area-pesquisa');
+let linksLogado = document.querySelectorAll('.link-logado');
+
+
 document.addEventListener('DOMContentLoaded', () => {
     let titulo = document.querySelector('#titulo_dash_usuario');
     const nome = localStorage.getItem('nome');
@@ -732,4 +739,94 @@ function extrairSalarioNumerico(salario) {
     const salarioNumerico = parseFloat(salarioLimpo);
 
     return salarioNumerico;
+}
+
+function deslogarImediatamente() {
+
+    localStorage.clear();
+
+    return window.location.href = '../index.html';
+
+}
+
+function mostrarMenu() {
+    const btnMenu = document.querySelector('.botao-menu');
+    const menu = document.querySelector('#menu');
+    const menuUsuario = document.getElementById('menu-usuario');
+
+
+    window.onclick = function (event) {
+        if (event.target === btnMenu) {
+            menuUsuario.style.display = 'none';
+            return;
+        }
+
+        menu.style.display = 'none';
+
+    }
+
+    if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'block';
+    }
+
+
+
+}
+
+function mostrarMenuUsuario() {
+    const menuUsuario = document.getElementById('menu-usuario');
+    const btnMenuUsuario = document.querySelector('.botao-menu-usuario');
+    const menu = document.querySelector('#menu');
+
+
+    window.onclick = function (event) {
+        if (event.target === btnMenuUsuario) {
+            menu.style.display = 'none';
+            return;
+        }
+
+        menuUsuario.style.display = 'none';
+    }
+
+
+    if (menuUsuario.style.display === 'block') {
+        menuUsuario.style.display = 'none';
+    } else {
+        menuUsuario.style.display = 'block';
+    }
+
+
+
+}
+
+{
+    linksLogado.forEach(link => {
+        link.style.display = 'none';
+    });
+
+    divUsuarioLogado.style.display = 'none';
+
+    const _email = localStorage.getItem('email');
+    const token = localStorage.getItem('token');
+
+
+
+    if (token) {
+        divUsuarioLogado.style.display = 'flex';
+        textoUsuarioLogado.innerHTML = _email;
+        linksLogado.forEach(link => {
+            link.style.display = 'block';
+        });
+        if(loginButton) {
+            loginButton.style.display = 'none';
+        }
+
+
+    } else {
+        areaPesquisa.style.display = 'none';
+
+    }
+
 }

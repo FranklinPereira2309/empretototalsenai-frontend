@@ -460,6 +460,66 @@ function formatarCelularPraExibir(celular) {
     return aplicarMascara(celular, '(##) #####-####');
 }
 
+function mostrarMenu() {
+    const btnMenu = document.querySelector('.botao-menu');
+    const menu = document.querySelector('#menu');
+    const menuUsuario = document.getElementById('menu-usuario');
+
+
+    window.onclick = function (event) {
+        if (event.target === btnMenu) {
+            menuUsuario.style.display = 'none';
+            return;
+        }
+
+        menu.style.display = 'none';
+
+    }
+
+    if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'block';
+    }
+
+
+
+}
+
+function mostrarMenuUsuario() {
+    const menuUsuario = document.getElementById('menu-usuario');
+    const btnMenuUsuario = document.querySelector('.botao-menu-usuario');
+    const menu = document.querySelector('#menu');
+
+
+    window.onclick = function (event) {
+        if (event.target === btnMenuUsuario) {
+            menu.style.display = 'none';
+            return;
+        }
+
+        menuUsuario.style.display = 'none';
+    }
+
+
+    if (menuUsuario.style.display === 'block') {
+        menuUsuario.style.display = 'none';
+    } else {
+        menuUsuario.style.display = 'block';
+    }
+
+
+
+}
+
+function deslogarImediatamente() {
+
+    localStorage.clear();
+
+    return window.location.href = '../index.html';
+
+}
+
     
 //     const identificacao = localStorage.getItem('identificacao');
 //     if (!token) {

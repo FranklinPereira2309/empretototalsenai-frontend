@@ -5,16 +5,13 @@ const modal = document.querySelector('.container-modal');
 //     modal.style.display = 'none';
 // })
 
-let divUsuarioLogado = document.querySelector('#usuarioLogado');
-let textoUsuarioLogado = document.querySelector('#emailLogado');
-let loginButton = document.querySelector('#area-menu');
-let areaPesquisa = document.querySelector('.area-pesquisa');
-let linksLogado = document.querySelectorAll('.link-logado');
+
 
 function mostrarMenu() {
     const btnMenu = document.querySelector('.botao-menu');
     const menu = document.querySelector('#menu');
     const menuUsuario = document.getElementById('menu-usuario');
+    
 
 
     window.onclick = function (event) {
@@ -387,6 +384,20 @@ document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     const identificacao = localStorage.getItem('identificacao');
+    let anuncioUsuario = document.querySelector('#anuncio-usuario');
+    let anuncioEmpresa = document.querySelector('#anuncio-empresa');
+    let linksLogado = document.querySelectorAll('.link-logado');
+    let divUsuarioLogado = document.querySelector('#usuarioLogado');
+    let textoUsuarioLogado = document.querySelector('#emailLogado');
+
+
+    if (identificacao && Number(identificacao.length) === 11) {
+        anuncioUsuario.textContent = 'Dashboard Usuário';
+    }
+
+    if (identificacao && Number(identificacao.length) === 14) {
+        anuncioEmpresa.textContent = 'Dashboard Empresa';
+    }
 
 
 
@@ -406,9 +417,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
         linksLogado.forEach(link => {
             link.style.display = 'block';
         });
-        if(loginButton) {
-            loginButton.style.display = 'none';
-        }
+        // if(loginButton) {
+        //     loginButton.style.display = 'none';
+        // }
 
 
     } else {
