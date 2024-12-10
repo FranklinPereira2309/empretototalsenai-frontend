@@ -346,6 +346,7 @@ function tokenValido() {
     const token = localStorage.getItem('token');
     const expiracaoToken = localStorage.getItem('expiracaoToken');
     const agora = new Date().getTime();
+    let areaPesquisa = document.querySelector('.area-pesquisa');
 
     if (agora > expiracaoToken) {
         localStorage.clear();
@@ -389,6 +390,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     let linksLogado = document.querySelectorAll('.link-logado');
     let divUsuarioLogado = document.querySelector('#usuarioLogado');
     let textoUsuarioLogado = document.querySelector('#emailLogado');
+    let areaPesquisa = document.querySelector('.area-pesquisa');
 
 
     if (identificacao && Number(identificacao.length) === 11) {
