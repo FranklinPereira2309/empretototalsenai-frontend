@@ -54,18 +54,18 @@ function corrigirInputs() {
 }
 
 function alterarNovaSenha() {
-    const senhaAtual = document.querySelector('#senhaAtual');
-    const novaSenha = document.querySelector('#novaSenha');
-    const reNovaSenha = document.querySelector('#re-novaSenha');
+    const senhaAtual = document.querySelector('#senhaAtual').value;
+    const novaSenha = document.querySelector('#novaSenha').value;
+    const reNovaSenha = document.querySelector('#re-novaSenha').value;
 
     const token = localStorage.getItem('token');
     const url = 'https://empregototal.onrender.com/empresa_alterar_senha';
 
-    if (!senhaAtual.value || !novaSenha.value || !reNovaSenha.value) {
+    if (!senhaAtual || !novaSenha || !reNovaSenha) {
         return window.alert('Prencha todos os dados!');
     }
 
-    if (novaSenha.value !== reNovaSenha.value) {
+    if (novaSenha !== reNovaSenha) {
         document.querySelector('#novaSenha').style.border = '1px solid red';
         document.querySelector('#re-novaSenha').style.border = '1px solid red'
 
@@ -73,8 +73,8 @@ function alterarNovaSenha() {
     }
 
     const senhas = {
-        senhaAtual: senhaAtual.value,
-        novaSenha: novaSenha.value
+        senhaAtual,
+        novaSenha
     }
 
     fetch(url, {
