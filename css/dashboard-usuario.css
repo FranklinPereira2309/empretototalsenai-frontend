@@ -228,6 +228,10 @@ dialog {
     cursor: pointer;
 }
 
+.close:hover {
+    color: rgb(0, 0, 0, 0.2);
+}
+
 
 
 .container-button {

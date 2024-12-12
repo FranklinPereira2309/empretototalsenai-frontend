@@ -134,6 +134,10 @@ dialog {
     cursor: pointer;
 }
 
+.close:hover {
+    color: rgb(0, 0, 0, 0.2);
+}
+
 #jobs-container  {
     position: relative;
 }

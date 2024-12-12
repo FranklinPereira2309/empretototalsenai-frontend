@@ -151,16 +151,13 @@ dialog {
 }
 
 .close {
-    color: red;
-    float: right;
     font-size: 28px;
     cursor: pointer;
 }
 
 .close:hover {
-    color: darkred;
+    color: rgb(0, 0, 0, 0.2);
 }
-
 .container-button {
     display: flex;
     justify-content: center;
