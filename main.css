@@ -114,7 +114,7 @@ dialog {
     border: 1px solid lightgray;
 }
 .close {
-    color: red;
+    
     float: right;
     font-size: 28px;
     cursor: pointer;

@@ -152,17 +152,32 @@ dialog {
     padding: 20px;
     border: none;
     border-radius: 25px;
-    width: 30%;
-    height: 65%;
+    width: 20%;
+    height: 35%;
 }
 
 .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    gap: 40px;
     margin-top: 20px;
     background-color: white;
+    /* width: 100%; */
+    
+}
+
+.buttons {
+    display: flex;
     width: 100%;
+    justify-content: space-evenly;   
+    
 }
 
 #modal-container-usuario {
+    
     margin-top: 15px;
 }
 
@@ -186,15 +201,14 @@ dialog {
 }
 
 .close {
-    color: red;
-    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
     font-size: 28px;
     cursor: pointer;
 }
 
-.close:hover {
-    color: darkred;
-}
+
 
 .container-button {
     display: flex;
