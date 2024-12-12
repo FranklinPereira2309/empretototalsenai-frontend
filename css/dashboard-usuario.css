@@ -152,8 +152,8 @@ dialog {
     padding: 20px;
     border: none;
     border-radius: 25px;
-    width: 20%;
-    height: 35%;
+    width: 30%;
+    height: 50%;
 }
 
 .modal-content {
@@ -164,8 +164,8 @@ dialog {
     position: relative;
     gap: 40px;
     margin-top: 20px;
-    background-color: white;
-    /* width: 100%; */
+    background-color: white;   
+    width: 100%; 
     
 }
 
@@ -176,9 +176,29 @@ dialog {
     
 }
 
+.buttons button {
+    background-color: #007BFF;
+    font-size: 1em;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.buttons button:hover {
+    background-color: #0056b3;
+}
+
 #modal-container-usuario {
     
     margin-top: 15px;
+}
+
+#modal-container-usuario select {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 1.1em;
 }
 
 .input-area {
@@ -203,7 +223,7 @@ dialog {
 .close {
     position: absolute;
     right: 0;
-    top: 0;
+    top: -20px;
     font-size: 28px;
     cursor: pointer;
 }
@@ -269,4 +289,8 @@ dialog {
     text-align: center;
     border: none;
     text-decoration: underline;
+}
+
+.reset-h1 {       
+    border: none;    
 }

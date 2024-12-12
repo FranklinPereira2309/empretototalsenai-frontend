@@ -118,7 +118,7 @@ dialog {
     border: none;
     border-radius: 25px;
     width: 30%;
-    height: 65%;
+    height: 80%;
 }
 
 .modal-content {
@@ -207,4 +207,7 @@ dialog {
 #profissional:hover {
     background-color: #ccc;
     color: #000;
+}
+.reset-h1 {       
+    border: none;    
 }
