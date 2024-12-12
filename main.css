@@ -110,7 +110,7 @@ dialog {
     border: none;
     border-radius: 25px;
     width: 30%;
-    height: 50%;
+    height: 65%;
     border: 1px solid lightgray;
 }
 
@@ -136,7 +136,7 @@ dialog {
 
 .close:hover {
     color: rgb(0, 0, 0, 0.2);
-}
+} 
 
 #jobs-container  {
     position: relative;
