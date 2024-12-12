@@ -227,6 +227,7 @@ function visualizarVagas() {
 function exibirVagasEmpresa(vagas) {
     localStorage.setItem('idVagaSelecionada', '');
     filters.style.display = 'block';
+    const h2 = document.createElement('h2');
 
     if (vagas.length === 0) {
         
@@ -235,10 +236,15 @@ function exibirVagasEmpresa(vagas) {
     }
     vagasContainer.innerHTML = '';
 
+    h2.textContent = 'Visualizar Vagas Cadastradas';
+    h2.classList.add('reset');
+    vagasContainer.appendChild(h2);
+
     vagas.forEach((vaga) => {
         const btnEditar = document.createElement('button');
         const btnExcluirVaga = document.createElement('button');
         const imagem = document.createElement('img');
+       
 
         const vagaDiv = document.createElement('div');
 
@@ -278,9 +284,10 @@ function exibirVagasEmpresa(vagas) {
 function exibirVagasEmpresaParaEditar(vagas) {
     const modalContainerVagas = document.querySelector('#modal-container-vagas');
     const div = document.createElement('div');
+        
     div.style.textAlign = 'left';
     modalContainerVagas.innerHTML = '';
-
+    
     vagas.forEach(vaga => {
 
 
@@ -882,8 +889,7 @@ function visualizarCurriculoTipoParams() {
 }
 
 function exibirCurriculoTipoParams(curriculos) {
-
-
+    const h2 = document.createElement('h2');
 
     if (curriculos.length === 0) {
         vagasContainer.innerHTML = '<p class="jobs" style="text-align:center">Nenhum Curriculo encontrado!</p>';
@@ -891,6 +897,11 @@ function exibirCurriculoTipoParams(curriculos) {
     }
 
     vagasContainer.innerHTML = '';
+
+    h2.textContent = 'Buscar Profissionais';
+    h2.classList.add('reset');
+
+    vagasContainer.appendChild(h2);
 
 
     curriculos.forEach((curriculo) => {
@@ -962,6 +973,7 @@ function consultarTodosCurriculosSelecionados() {
 }
 function exibirTodosCurriculosSelecionados(curriculos) {
     filters.style.display = 'none';
+    const h2 = document.createElement('h2');
 
     localStorage.setItem('idVagaSelecionada', '');
 
@@ -972,6 +984,11 @@ function exibirTodosCurriculosSelecionados(curriculos) {
     }
 
     vagasContainer.innerHTML = '';
+
+    h2.textContent = 'Candidatos Selecionados';
+    h2.classList.add('reset');
+
+    vagasContainer.appendChild(h2);
 
     curriculos.forEach((curriculo) => {
         const btnDescartar = document.createElement('button');
@@ -1093,11 +1110,11 @@ function selecionarTipoCurriculo() {
         <option value="" hidden>Tipo de Curriculo</option>
     `;
     selectSelecionarTipoCurriculo.innerHTML += `
-        <option value="medio">Médio</option>
+        <option value="médio">Médio</option>
         `
 
     selectSelecionarTipoCurriculo.innerHTML += `
-        <option value="tecnico">Técnico</option>
+        <option value="técnico">Técnico</option>
         `
 
     selectSelecionarTipoCurriculo.innerHTML += `
@@ -1155,7 +1172,7 @@ function visualizarTodosUsuariosCurriculos() {
 
 
 function exibirTodosUsuariosCurriculos(curriculos) {
-
+    const h2 = document.createElement('h2');
     localStorage.setItem('idDeletarCurriculo', '');
 
 
@@ -1168,6 +1185,10 @@ function exibirTodosUsuariosCurriculos(curriculos) {
 
 
     vagasContainer.innerHTML = '';
+    h2.textContent = 'Quem se Cadastrou em uma vaga';
+    h2.classList.add('reset');
+
+    vagasContainer.appendChild(h2);
 
     curriculos.forEach((curriculo) => {
         const vagaDiv = document.createElement('div');

@@ -383,11 +383,16 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
     if (identificacao && Number(identificacao.length) === 11) {
-        anuncioUsuario.textContent = 'Dashboard Usuário';
+        if(anuncioUsuario) {
+            anuncioUsuario.textContent = 'Dashboard Usuário';
+
+        }
     }
 
     if (identificacao && Number(identificacao.length) === 14) {
-        anuncioEmpresa.textContent = 'Dashboard Empresa';
+        if(anuncioEmpresa) {
+            anuncioEmpresa.textContent = 'Dashboard Empresa';
+        }
     }
 
 
