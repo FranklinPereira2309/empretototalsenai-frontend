@@ -1,18 +1,9 @@
 const modal = document.querySelector('.container-modal');
-// const closeModalButton = document.querySelector('#closeModal');
-
-// closeModalButton.addEventListener('click', () => {
-//     modal.style.display = 'none';
-// })
-
-
 
 function mostrarMenu() {
     const btnMenu = document.querySelector('.botao-menu');
     const menu = document.querySelector('#menu');
     const menuUsuario = document.getElementById('menu-usuario');
-    
-
 
     window.onclick = function (event) {
         if (event.target === btnMenu) {
@@ -340,8 +331,6 @@ function cadastrarLoginEmpresa() {
         });
 }
 
-
-
 function tokenValido() {
     const token = localStorage.getItem('token');
     const expiracaoToken = localStorage.getItem('expiracaoToken');
@@ -411,25 +400,18 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     const _email = localStorage.getItem('email');
 
-
-
     if (token) {
         divUsuarioLogado.style.display = 'flex';
         textoUsuarioLogado.innerHTML = _email;
         linksLogado.forEach(link => {
             link.style.display = 'block';
         });
-        // if(loginButton) {
-        //     loginButton.style.display = 'none';
-        // }
-
+        
 
     } else {
         areaPesquisa.style.display = 'none';
 
     }
-
-
 
 
     function timeStorage() {

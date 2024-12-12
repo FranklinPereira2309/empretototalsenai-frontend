@@ -25,7 +25,6 @@ function fecharModalIndex() {
     window.location.href = '/index.html';
 }
 
-
 vagasContainer.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-cadastrar')) {
         const elementoPai = e.target.closest('.item');
@@ -306,7 +305,9 @@ function buscarTodasAsVagas() {
             }
             dadosFiltar = data;
             exibirVagas(data);
-            consultarBuscarIdVaga();
+            if(token) {
+                consultarBuscarIdVaga();
+            }
 
         })
         .catch(erro => {
@@ -577,11 +578,6 @@ function consultarBuscarIdVaga() {
 }
 
 const token = localStorage.getItem('token');
-
-// if (token) {
-
-//     consultarBuscarIdVaga();
-// }
 
 
 function formatarParaReal(valor) {
