@@ -42,7 +42,7 @@ function consultarUsuariosCompletos() {
 
     const token = localStorage.getItem('token');
 
-    const url = 'https://empregototal.onrender.com/usuarios_completos'
+    const url = 'https://empregototal.onrender.com/usuarios_completos'    
 
     fetch(url, {
         method: 'GET',
@@ -289,12 +289,19 @@ function atualizarUsuario() {
 
 }
 
-function formarCampoData(data) {
-    const dataNascimento = new Date(data.data_nascimento);
-    const dataFormatada = dataNascimento.toISOString().split('T')[0];
 
-    return dataFormatada;
+function formarCampoData(data) { 
+    const dataNascimento = new Date(data); 
+    if (isNaN(dataNascimento)) { 
+        throw new Error('Data de nascimento inválida'); 
+    } 
+    const dia = String(dataNascimento.getDate()).padStart(2, '0'); 
+    const mes = String(dataNascimento.getMonth() + 1).padStart(2, '0'); 
+    const ano = dataNascimento.getFullYear(); 
+    const dataFormatada = `${ano}-${mes}-${dia}`; 
+    return dataFormatada
 }
+
 
 function exibirDadosApi(dados) {
     let dataFormata = formarCampoData(dados.data_nascimento);
@@ -426,7 +433,9 @@ function capitalizePalavas(str) {
         linksLogado.forEach(link => {
             link.style.display = 'block';
         });
-        loginButton.style.display = 'none';
+        if(loginButton) {
+            loginButton.style.display = 'none';
+        }
     } else {
         areaPesquisa.style.display = 'none';
     }
