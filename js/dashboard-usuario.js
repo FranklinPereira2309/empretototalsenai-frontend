@@ -396,6 +396,7 @@ function consultarCurriculosVagas() {
 }
 
 function exibirCurriculosVagas(dados) {
+    const h2 = document.createElement('h2');
     vagasContainer.innerHTML = '';
 
 
@@ -403,6 +404,10 @@ function exibirCurriculosVagas(dados) {
         vagasContainer.innerHTML = '<p class="jobs" style="text-align:center">Nenhuma vaga encontrada!</p>';
         return;
     }
+
+    h2.textContent = 'Vagas que estou concorrendo';
+    h2.classList.add('reset');
+    vagasContainer.appendChild(h2);
 
     dados.forEach((dado) => {
         const vagaDiv = document.createElement('div');
@@ -464,9 +469,10 @@ function exibirModalUsuario() {
 }
 
 function exibirVagas(vagas) {
-
     vagasContainer.innerHTML = '';
     filters.style.display = 'block';
+    const h2 = document.createElement('h2');
+       
 
     if (vagas.length === 0) {
 
@@ -476,15 +482,19 @@ function exibirVagas(vagas) {
 
     vagasContainer.innerHTML = '';
 
+    h2.textContent = 'Buscar Vagas';
+    h2.classList.add('reset');
+    vagasContainer.appendChild(h2);
+
     vagas.forEach((vaga) => {
         const vagaDiv = document.createElement('div');
         const btnCadastrar = document.createElement('button');
         const imagem = document.createElement('img');
         const div = document.createElement('div');
-
-
+        
+        
         const vagaHTML = `
-                    
+                    <br>
                     <h2>${vaga.titulo}</h2>
                     <p><strong>Empresa:</strong> ${vaga.nome_empresa}</p>
                     <p><strong>Localização:</strong> ${vaga.localizacao}</p>

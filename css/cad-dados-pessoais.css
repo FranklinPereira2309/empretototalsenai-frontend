@@ -212,3 +212,10 @@ h2 {
     cursor: pointer;
     
 }
+
+.reset {
+    /* padding-bottom: 20px; */
+    text-align: center;
+    border: none;
+    text-decoration: underline;
+}
